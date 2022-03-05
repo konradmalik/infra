@@ -138,7 +138,7 @@
           curl -o tv.deb -L https://github.com/alexhallam/tv/releases/download/{{ git_versions.tidy_viewer }}/tidy-viewer_{{ git_versions.tidy_viewer }}_amd64.deb
           dpkg -i tv.deb
           rm -rf tv.deb
-        creates: /usr/local/bin/tidy-viewer
+        creates: /usr/bin/tidy-viewer
 
     - name: install dsq from git (ubuntu amd64)
       become: yes

@@ -34,6 +34,8 @@ Vagrant.configure(API_VERSION) do |config|
     ansible.galaxy_role_file = REPO_PATH + "/ansible/requirements.yml"
     ansible.galaxy_command = "ansible-galaxy collection install -r " + REPO_PATH + "/ansible/requirements.yml --force"
     ansible.verbose = true
+    # disable private machine here
+    ansible.extra_vars  = { private_machine: false }
   end
 end
 
