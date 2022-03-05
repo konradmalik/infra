@@ -4,10 +4,11 @@
     path: ~/Code
     state: directory
     mode: "0755"
+    recurse: yes
     owner: "{{ target_user }}"
     group: "{{ target_user }}"
 
-- name: Check that dotfiles repo exists
+- name: Check if dotfiles repo exists
   stat:
     path: ~/Code/dotfiles
   register: dotfiles_stat_result
@@ -19,6 +20,7 @@
         dest: ~/Code/dotfiles
         version: main
         recursive: "no"
+      when: not private_machine
 
     - name: Ensure dotfiles repo exists (private)
       ansible.builtin.git:
