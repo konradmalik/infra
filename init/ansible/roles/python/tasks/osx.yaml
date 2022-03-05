@@ -1,0 +1,15 @@
+- name: install python compile-dependendies
+  community.general.homebrew:
+    name:
+      - openssl
+      - readline
+      - sqlite3
+      - xz
+      - zlib
+    update_homebrew: yes
+
+- name: install poetry
+  community.general.homebrew:
+    name:
+      - poetry
+    update_homebrew: yes

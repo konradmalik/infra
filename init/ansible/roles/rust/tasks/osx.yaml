@@ -1,0 +1,5 @@
+- name: install rustup and rust-analyzer from homebrew
+  community.general.homebrew:
+    name:
+      - rustup-init
+    update_homebrew: yes

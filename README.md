@@ -1,1 +1,16 @@
-# infra
+![Ubuntu Focal](https://github.com/konradmalik/infra/actions/workflows/focal.yaml/badge.svg)
+![Arch Linux](https://github.com/konradmalik/infra/actions/workflows/arch.yaml/badge.svg)
+
+# Personal infrastructure
+
+Works for:
+
+- Archlinux (amd64)
+- MacOS (amd64)
+- Ubuntu
+  - amd64
+  - aarch64
+
+ATTENTION: Installing wil override any existing and matching dotfiles in your home dir! Only proceed when you have proper backups or if you know what you are doing.
+
+To use, proceed with README in `init/ansible` dir.

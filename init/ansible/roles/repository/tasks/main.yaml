@@ -1,0 +1,23 @@
+- block:
+    - name: Ensure dotfiles repo exists (public)
+      ansible.builtin.git:
+        repo: https://github.com/konradmalik/dotfiles.git
+        dest: ~/Code/dotfiles
+        version: main
+        recursive: "no"
+        force: yes
+
+    - name: Ensure dotfiles repo exists (private)
+      ansible.builtin.git:
+        repo: git@github.com:konradmalik/dotfiles.git
+        dest: ~/Code/dotfiles
+        version: main
+        recursive: "yes"
+        force: yes
+      when: private_machine
+  when: inventory_hostname != "localhost" # do this only if *not* a local machine
+
+- name: Ensure repo exists without cloning
+  file:
+    path: ~/Code/dotfiles
+    state: directory
