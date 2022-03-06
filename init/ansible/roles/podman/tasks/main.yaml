@@ -8,17 +8,17 @@
   when: ansible_distribution == "Archlinux"
 
 - block:
-    - name: create fake docker command
-      copy:
-        content: |
-          #!/bin/sh
-          docker "$@"
-        dest: /usr/local/bin/docker
-
-    - name: make fake docker command executable
-      file:
-        dest: /usr/local/bin/docker
-        mode: a+x
+    # - name: create fake docker command
+    #   copy:
+    #     content: |
+    #       #!/bin/sh
+    #       podman "$@"
+    #     dest: /usr/local/bin/docker
+    #
+    # - name: make fake docker command executable
+    #   file:
+    #     dest: /usr/local/bin/docker
+    #     mode: a+x
 
     - name: create fake docker-compose command
       copy:
