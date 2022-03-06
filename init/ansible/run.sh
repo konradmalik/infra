@@ -11,7 +11,7 @@ TARGET_HOSTS="${TARGET_HOSTS:-SETME}"
 
 ansible-playbook \
     -i inventory.yaml \
-    -i ../private/ansible/inventory.yaml \
+    -i ../../private/init/ansible/inventory.yaml \
     ./playbook.yml \
     --extra-vars "variable_host=$TARGET_HOSTS" \
     --ask-become-pass
