@@ -17,6 +17,3 @@ vscode/User/sync
 .zsh_sessions
 .zcompcache
 zfunc
-
-#terraform
-.terraform

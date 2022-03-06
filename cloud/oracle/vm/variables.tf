@@ -1,7 +1,7 @@
 variable "ocpus" {
   description = "The number of OCPUs to assign to the instance. Must be between 1 and 4."
   type        = number
-  default     = 4
+  default     = 1
 
   validation {
     condition     = var.ocpus >= 1
@@ -16,7 +16,7 @@ variable "ocpus" {
 
 variable "memory_in_gbs" {
   description = "The amount of memory in GB to assign to the instance. Must be between 1 and 24."
-  default     = 24
+  default     = 1
 
   validation {
     condition     = var.memory_in_gbs >= 1
@@ -31,7 +31,7 @@ variable "memory_in_gbs" {
 
 variable "boot_volume_size_in_gbs" {
   description = "A custom size for the boot volume. Must be between 50 and 200. If not set, defaults to the size of the image which is around 46 GB."
-  default     = 200
+  default     = 50
 
   validation {
     condition     = var.boot_volume_size_in_gbs == null ? true : var.boot_volume_size_in_gbs >= 50
