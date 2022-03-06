@@ -13,7 +13,7 @@
   shell:
     chdir: /tmp
     cmd: |
-      curl -Lo tinygo.deb https://github.com/tinygo-org/tinygo/releases/download/v{{ git_versions.tinygo }}/tinygo_{{ git_versions.tinygo }}_amd64.deb
+      curl -Lo tinygo.deb https://github.com/tinygo-org/tinygo/releases/download/v{{ git_versions.tinygo }}/tinygo_{{ git_versions.tinygo }}_{{ arch_map[ansible_architecture] }}.deb
       dpkg -i tinygo.deb
     creates: "/usr/local/bin/tinygo"
   when: ansible_architecture == "x86_64"

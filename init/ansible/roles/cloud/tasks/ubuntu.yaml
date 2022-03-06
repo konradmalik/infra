@@ -1,24 +1,23 @@
-- name: add hashicorp apt key
-  become: yes
-  apt_key:
-    url: https://apt.releases.hashicorp.com/gpg
-    state: present
-  when: ansible_architecture == "x86_64"
+- block:
+  - name: add hashicorp apt key
+    become: yes
+    apt_key:
+      url: https://apt.releases.hashicorp.com/gpg
+      state: present
 
-- name: add hashicorp apt repo (amd64)
-  become: yes
-  apt_repository:
-    repo: "deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
-    state: present
-    update_cache: yes
-  when: ansible_architecture == "x86_64"
+  - name: add hashicorp apt repo (amd64)
+    become: yes
+    apt_repository:
+      repo: "deb [arch={{ arch_map[ansible_architecture] }}] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
+      state: present
+      update_cache: yes
 
-- name: install terraform
-  become: yes
-  apt:
-    pkg:
-      - terraform
-    state: present
+  - name: install terraform
+    become: yes
+    apt:
+      pkg:
+        - terraform
+      state: present
   when: ansible_architecture == "x86_64"
 
 - name: add microsoft apt key
@@ -34,18 +33,9 @@
 - name: add microsoft azure cli apt repo (amd64)
   become: yes
   apt_repository:
-    repo: "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ {{ ansible_distribution_release }} main"
+    repo: "deb [arch={{ arch_map[ansible_architecture] }}] https://packages.microsoft.com/repos/azure-cli/ {{ ansible_distribution_release }} main"
     state: present
     update_cache: yes
-  when: ansible_architecture == "x86_64"
-
-- name: add microsoft azure cli apt repo (arm64)
-  become: yes
-  apt_repository:
-    repo: "deb [arch=arm64] https://packages.microsoft.com/repos/azure-cli/ {{ ansible_distribution_release }} main"
-    state: present
-    update_cache: yes
-  when: ansible_architecture == "aarch64"
 
 - name: install azure cli
   become: yes

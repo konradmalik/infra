@@ -68,6 +68,35 @@
   pip:
     name: pipx
 
+- name: install duf from git releases
+  become: yes
+  shell:
+    chdir: /tmp
+    cmd: |
+      curl -o duf.deb -L https://github.com/muesli/duf/releases/download/v{{ git_versions.duf }}/duf_{{ git_versions.duf }}_linux_{{ arch_map[ansible_architecture] }}.deb
+      dpkg -i duf.deb
+      rm -rf duf.deb
+    creates: /usr/bin/duf
+
+- name: install gotop from github
+  become: yes
+  shell:
+    chdir: /tmp
+    cmd: |
+      curl -L https://github.com/xxxserxxx/gotop/releases/download/v{{ git_versions.gotop }}/gotop_v{{ git_versions.gotop }}_{{ ansible_system | lower }}_{{ arch_map[ansible_architecture] }}.tgz | tar xvfz -
+      mv gotop /usr/local/bin/gotop
+    creates: /usr/local/bin/gotop
+
+- name: install ngrok
+  become: yes
+  shell:
+    chdir: /tmp
+    cmd: |
+      curl -LO https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-{{ arch_map[ansible_architecture] }}.zip
+      unzip ngrok-stable-linux-{{ arch_map[ansible_architecture] }}.zip
+      mv ./ngrok /usr/local/bin/ngrok
+    creates: "/usr/local/bin/ngrok"
+
 - block:
     - name: install exa from github
       become: yes
@@ -91,15 +120,6 @@
           mv up /usr/local/bin/
         creates: /usr/local/bin/up
 
-    - name: install duf from git releases
-      become: yes
-      shell:
-        chdir: /tmp
-        cmd: |
-          curl -o duf.deb -L https://github.com/muesli/duf/releases/download/v{{ git_versions.duf }}/duf_{{ git_versions.duf }}_linux_amd64.deb
-          dpkg -i duf.deb
-          rm -rf duf.deb
-        creates: /usr/bin/duf
 
     - name: install viddy from github
       become: yes
@@ -111,24 +131,6 @@
           mv viddy /usr/local/bin/
         creates: /usr/local/bin/viddy
 
-    - name: install gotop amd64 from github
-      become: yes
-      shell:
-        chdir: /tmp
-        cmd: |
-          curl -L https://github.com/xxxserxxx/gotop/releases/download/v{{ git_versions.gotop }}/gotop_v{{ git_versions.gotop }}_{{ ansible_system | lower }}_amd64.tgz | tar xvfz -
-          mv gotop /usr/local/bin/gotop
-        creates: /usr/local/bin/gotop
-
-    - name: install ngrok amd64
-      become: yes
-      shell:
-        chdir: /tmp
-        cmd: |
-          curl -LO https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
-          unzip ngrok-stable-linux-amd64.zip
-          mv ./ngrok /usr/local/bin/ngrok
-        creates: "/usr/local/bin/ngrok"
 
     - name: install tidy-viewer from git (ubuntu amd64)
       become: yes
@@ -190,4 +192,5 @@
     cmd: |
       source ~/.cargo/env && \
       cargo install --locked ripgrep_all
+    creates: ~/.cargo/bin/rga
 

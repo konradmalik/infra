@@ -8,24 +8,12 @@
     autoclean: yes
     autoremove: yes
 
-- name: install delta from github amd
+- name: install delta from github
   become: yes
   shell:
     chdir: /tmp
     cmd: |
-      curl -o delta.deb -L https://github.com/dandavison/delta/releases/download/{{ git_versions.git_delta }}/git-delta_{{ git_versions.git_delta }}_amd64.deb
+      curl -o delta.deb -L https://github.com/dandavison/delta/releases/download/{{ git_versions.git_delta }}/git-delta_{{ git_versions.git_delta }}_{{ arch_map[ansible_architecture] }}.deb
       dpkg -i delta.deb
       rm -rf delta.deb
     creates: /usr/bin/delta
-  when: ansible_architecture == "x86_64"
-
-- name: install delta from github arm
-  become: yes
-  shell:
-    chdir: /tmp
-    cmd: |
-      curl -o delta.deb -L https://github.com/dandavison/delta/releases/download/{{ git_versions.git_delta }}/git-delta_{{ git_versions.git_delta }}_arm64.deb
-      dpkg -i delta.deb
-      rm -rf delta.deb
-    creates: /usr/bin/delta
-  when: ansible_architecture == "aarch64"

@@ -10,19 +10,9 @@
   become: yes
   shell:
     cmd: |
-      curl -L https://github.com/fluxcd/flux2/releases/download/v{{ git_versions.flux }}/flux_{{ git_versions.flux }}_linux_amd64.tar.gz | tar xvzf -
+      curl -L https://github.com/fluxcd/flux2/releases/download/v{{ git_versions.flux }}/flux_{{ git_versions.flux }}_linux_{{ arch_map[ansible_architecture] }}.tar.gz | tar xvzf -
       mv ./flux /usr/local/bin/flux
     creates: /usr/local/bin/flux
-  when: ansible_architecture == "x86_64"
-
-- name: install flux from github (arm)
-  become: yes
-  shell:
-    cmd: |
-      curl -L https://github.com/fluxcd/flux2/releases/download/v{{ git_versions.flux }}/flux_{{ git_versions.flux }}_linux_arm64.tar.gz | tar xvzf -
-      mv ./flux /usr/local/bin/flux
-    creates: /usr/local/bin/flux
-  when: ansible_architecture == "aarch64"
 
 - name: install k3d from github
   become: yes
@@ -46,7 +36,7 @@
   shell:
     chdir: /tmp
     cmd: |
-      curl -L https://github.com/derailed/k9s/releases/download/v{{ git_versions.k9s }}/k9s_{{ ansible_system }}_arm64.tar.gz | tar xvfz -
+      curl -L https://github.com/derailed/k9s/releases/download/v{{ git_versions.k9s }}/k9s_{{ ansible_system }}_{{ arch_map[ansible_architecture] }}.tar.gz | tar xvfz -
       mv k9s /usr/local/bin/k9s
     creates: /usr/local/bin/k9s
   when: ansible_architecture == "aarch64"
@@ -56,20 +46,9 @@
   shell:
     chdir: /tmp
     cmd: |
-      curl -Lo /usr/local/bin/kind "https://kind.sigs.k8s.io/dl/v{{ git_versions.kind }}/kind-{{ ansible_system | lower }}-amd64"
+      curl -Lo /usr/local/bin/kind "https://kind.sigs.k8s.io/dl/v{{ git_versions.kind }}/kind-{{ ansible_system | lower }}-{{ arch_map[ansible_architecture] }}"
       chmod +x /usr/local/bin/kind
     creates: /usr/local/bin/kind
-  when: ansible_architecture == "x86_64"
-
-- name: install kind from github (arm64)
-  become: yes
-  shell:
-    chdir: /tmp
-    cmd: |
-      curl -Lo /usr/local/bin/kind "https://kind.sigs.k8s.io/dl/v{{ git_versions.kind }}/kind-{{ ansible_system | lower }}-arm64"
-      chmod +x /usr/local/bin/kind
-    creates: /usr/local/bin/kind
-  when: ansible_architecture == "aarch64"
 
 - name: install tilt (amd64)
   become: yes
@@ -87,7 +66,7 @@
   shell:
     chdir: /tmp
     cmd: |
-      curl -fsSL https://github.com/tilt-dev/tilt/releases/download/v{{ git_versions.tilt }}/tilt.{{ git_versions.tilt }}.linux.arm64_ALPHA.tar.gz | tar -xzv tilt
+      curl -fsSL https://github.com/tilt-dev/tilt/releases/download/v{{ git_versions.tilt }}/tilt.{{ git_versions.tilt }}.linux.{{ arch_map[ansible_architecture] }}.tar.gz | tar -xzv tilt
       mv ./tilt /usr/local/bin/tilt
       chmod +x /usr/local/bin/kind
     creates: /usr/local/bin/tilt

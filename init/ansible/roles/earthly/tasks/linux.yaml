@@ -1,19 +1,8 @@
-- name: install earthly from github x86
+- name: install earthly from github
   become: yes
   shell:
     chdir: /tmp
     cmd: |
-      curl -Lo /usr/local/bin/earthly https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64
+      curl -Lo /usr/local/bin/earthly https://github.com/earthly/earthly/releases/download/v{{ git_versions.earthly }}/earthly-linux-{{ arch_map[ansible_architecture] }}
       chmod +x /usr/local/bin/earthly
     creates: /usr/local/bin/earthly
-  when: ansible_architecture == "x86_64"
-
-- name: install earthly from github arm
-  become: yes
-  shell:
-    chdir: /tmp
-    cmd: |
-      curl -Lo /usr/local/bin/earthly https://github.com/earthly/earthly/releases/latest/download/earthly-linux-arm64
-      chmod +x /usr/local/bin/earthly
-    creates: /usr/local/bin/earthly
-  when: ansible_architecture == "aarch64"
