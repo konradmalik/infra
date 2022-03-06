@@ -55,8 +55,9 @@
     - name: vmware_guest
       when:
         - vmware_guest
-    - name: aur_builder-cleanup
-      when: ansible_distribution == "Archlinux"
     # a backup solution
     - name: restic
       when: "'devarch' in inventory_hostname"
+    # KEEP THIS AT THE VERY END
+    - name: aur_builder-cleanup
+      when: ansible_distribution == "Archlinux"
