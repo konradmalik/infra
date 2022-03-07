@@ -1,5 +1,5 @@
 data "oci_core_images" "os" {
-  compartment_id           = var.compartment_id
+  compartment_id           = var.compartment_ocid
   operating_system         = var.operating_system
   operating_system_version = var.operating_system_version
   shape                    = "VM.Standard.A1.Flex"
@@ -9,7 +9,7 @@ data "oci_core_images" "os" {
 
 resource "oci_core_instance" "a1" {
   availability_domain = var.availability_domain
-  compartment_id      = var.compartment_id
+  compartment_id      = var.compartment_ocid
   display_name        = var.hostname
   shape               = "VM.Standard.A1.Flex"
 
@@ -20,7 +20,7 @@ resource "oci_core_instance" "a1" {
 
   create_vnic_details {
     hostname_label   = var.hostname
-    subnet_id        = var.subnet_id
+    subnet_id        = var.subnet_ocid
     assign_public_ip = var.assign_public_ip
     nsg_ids          = var.nsg_ids
   }
@@ -38,7 +38,7 @@ resource "oci_core_instance" "a1" {
 }
 
 data "oci_core_vnic_attachments" "a1_vnic_attachments" {
-  compartment_id = var.compartment_id
+  compartment_id = var.compartment_ocid
   instance_id    = oci_core_instance.a1.id
 }
 

@@ -1,3 +1,34 @@
+variable "tenancy_ocid" {
+  description = "OCID of your tenancy."
+  type        = string
+}
+
+variable "user_ocid" {
+  description = "OCID of the user calling the API"
+  type        = string
+}
+
+variable "private_key_path" {
+  description = "The path (including filename) of the private key stored on your computer."
+  type        = string
+}
+
+variable "private_key_password" {
+  description = "Password to the private key if needed."
+  type        = string
+  sensitive   = true
+}
+
+variable "fingerprint" {
+  description = "Fingerprint for the key pair being used."
+  type        = string
+}
+
+variable "region" {
+  description = "An Oracle Cloud Infrastructure region. See Regions and Availability Domains"
+  type        = string
+}
+
 variable "ocpus" {
   description = "The number of OCPUs to assign to the instance. Must be between 1 and 4."
   type        = number
@@ -49,7 +80,7 @@ variable "hostname" {
   type        = string
 }
 
-variable "compartment_id" {
+variable "compartment_ocid" {
   description = "The OCID of the compartment containing the instance."
   type        = string
 }
@@ -71,11 +102,6 @@ variable "operating_system" {
 
 variable "operating_system_version" {
   description = "The version of the Operating System specified in `operating_system`."
-  type        = string
-}
-
-variable "subnet_id" {
-  description = "The OCID of the subnet to create the VNIC in."
   type        = string
 }
 

@@ -1,9 +1,9 @@
-variable "compartment_id" {
+variable "compartment_ocid" {
   description = "The OCID of the compartment containing the instance."
   type        = string
 }
 
-variable "vcn_id" {
+variable "vcn_ocid" {
   description = "The OCID of the VCN to contain the subnet."
   type        = string
 }
