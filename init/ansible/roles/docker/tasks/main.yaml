@@ -32,7 +32,7 @@
       copy:
         content: |
           #!/bin/sh
-          docker compose "$@"
+          exec docker compose "$@"
         dest: /usr/local/bin/docker-compose
 
     - name: make fake docker-compose command executable
