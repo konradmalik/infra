@@ -29,6 +29,16 @@ variable "region" {
   type        = string
 }
 
+variable "vcn_dns_label" {
+  description = " A DNS label for the VCN, used in conjunction with the VNIC's hostname and subnet's DNS label to form a fully qualified domain name (FQDN) for each VNIC within this subnet."
+  type        = string
+}
+
+variable "subnet_dns_label" {
+  description = "A DNS label for the subnet, used in conjunction with the VNIC's hostname and VCN's DNS label to form a fully qualified domain name (FQDN) for each VNIC within this subnet."
+  type        = string
+}
+
 variable "ocpus" {
   description = "The number of OCPUs to assign to the instance. Must be between 1 and 4."
   type        = number

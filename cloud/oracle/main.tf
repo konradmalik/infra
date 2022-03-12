@@ -11,6 +11,7 @@ module "vcn" {
   source = "./modules/vcn"
 
   compartment_ocid = var.compartment_ocid
+  dns_label        = var.vcn_dns_label
 }
 
 module "subnet" {
@@ -19,6 +20,7 @@ module "subnet" {
   vcn_ocid = module.vcn.vcn_ocid
 
   compartment_ocid = var.compartment_ocid
+  dns_label        = var.subnet_dns_label
 }
 
 module "vm" {

@@ -13,3 +13,8 @@ variable "cidr_block" {
   type        = string
   default     = "10.0.0.0/24"
 }
+
+variable "dns_label" {
+  description = "A DNS label for the subnet, used in conjunction with the VNIC's hostname and VCN's DNS label to form a fully qualified domain name (FQDN) for each VNIC within this subnet."
+  type        = string
+}
