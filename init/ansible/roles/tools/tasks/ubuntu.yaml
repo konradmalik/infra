@@ -74,10 +74,20 @@
   shell:
     chdir: /tmp
     cmd: |
-      curl -o duf.deb -L https://github.com/muesli/duf/releases/download/v{{ git_versions.duf }}/duf_{{ git_versions.duf }}_linux_{{ arch_map[ansible_architecture] }}.deb
+      curl -o duf.deb -L https://github.com/muesli/duf/releases/download/v{{ git_versions.duf }}/duf_{{ git_versions.duf }}_{{ ansible_system | lower }}_{{ arch_map[ansible_architecture] }}.deb
       dpkg -i duf.deb
       rm -rf duf.deb
     creates: /usr/bin/duf
+
+- name: install hyperfine from git releases
+  become: yes
+  shell:
+    chdir: /tmp
+    cmd: |
+      curl -o hyperfine.deb -L https://github.com/sharkdp/hyperfine/releases/download/v{{ git_versions.hyperfine }}/hyperfine_{{ git_versions.hyperfine }}_{{ arch_map[ansible_architecture] }}.deb
+      dpkg -i hyperfine.deb
+      rm -rf hyperfine.deb
+    creates: /usr/bin/hyperfine
 
 - name: install gotop from github
   become: yes

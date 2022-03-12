@@ -31,6 +31,7 @@ all:
       git_delta: 0.12.0
       golangci_lint: 1.44.2
       gotop: 4.1.3
+      hyperfine: 1.13.0
       nvim: 0.6.1
       shfmt: 3.4.3
       starship: 1.3.0

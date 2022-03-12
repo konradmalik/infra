@@ -9,6 +9,7 @@
       - bat
       - exa
       - fd
+      - hyperfine
       - ripgrep
       # ripgrep-all and deps start
       - ripgrep-all

@@ -10,6 +10,7 @@
       - bat
       - exa
       - fd
+      - hyperfine
       - ripgrep
       - the_silver_searcher
       - jq
