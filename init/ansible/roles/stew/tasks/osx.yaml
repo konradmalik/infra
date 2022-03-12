@@ -1,0 +1,10 @@
+- name: stew tap
+  community.general.homebrew_tap:
+    name:
+      - marwanhawari/tap
+
+- name: install stew from brew
+  community.general.homebrew:
+    name:
+      - stew
+    update_homebrew: yes
