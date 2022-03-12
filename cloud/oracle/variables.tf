@@ -29,8 +29,18 @@ variable "region" {
   type        = string
 }
 
+variable "vcn_cidr_blocks" {
+  description = "The CIDR IP address ranges of the vcn."
+  type        = list(string)
+}
+
 variable "vcn_dns_label" {
   description = " A DNS label for the VCN, used in conjunction with the VNIC's hostname and subnet's DNS label to form a fully qualified domain name (FQDN) for each VNIC within this subnet."
+  type        = string
+}
+
+variable "subnet_cidr_block" {
+  description = "The CIDR IP address range of the subnet."
   type        = string
 }
 

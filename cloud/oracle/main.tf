@@ -10,8 +10,10 @@ provider "oci" {
 module "vcn" {
   source = "./modules/vcn"
 
-  compartment_ocid = var.compartment_ocid
-  dns_label        = var.vcn_dns_label
+  compartment_ocid         = var.compartment_ocid
+  dns_label                = var.vcn_dns_label
+  cidr_blocks              = var.vcn_cidr_blocks
+  internet_gateway_enabled = true
 }
 
 module "subnet" {
@@ -21,6 +23,7 @@ module "subnet" {
 
   compartment_ocid = var.compartment_ocid
   dns_label        = var.subnet_dns_label
+  cidr_block       = var.subnet_cidr_block
 }
 
 module "vm" {
