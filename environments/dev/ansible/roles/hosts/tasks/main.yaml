@@ -1,0 +1,9 @@
+- name: update /etc/hosts file with current ansible inventory
+  become: yes
+  blockinfile:
+    # TODO just for test
+    path: /etc/hosts.ansible
+    block: "{{ lookup('template', 'hosts.j2') }}"
+    state: present
+    backup: no
+    create: yes

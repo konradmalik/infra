@@ -1,5 +1,6 @@
 all:
   vars:
+    ansible_python_interpreter: /usr/bin/python3
     # specify user for which this whole playbook should run
     target_user: "{{ lookup('env','USER') or 'konrad' }}"
     # for ssh-ingress if below is enabled
