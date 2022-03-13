@@ -1,6 +1,28 @@
 version: "3"
 
 services:
+  portainer:
+    image: portainer/portainer-ce:2.11.1-alpine
+    ports:
+      - "9443:9443/tcp"
+      - "8000:8000/tcp"
+    environment:
+      TZ: "Europe/Warsaw"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer-data:/data
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: always
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 1G
+        reservations:
+          cpus: "0.5"
+          memory: 1G
+
   pihole:
     image: pihole/pihole:2022.02.1
     ports:
@@ -9,7 +31,7 @@ services:
       - "67:67/udp"
       - "80:80/tcp"
     environment:
-      TZ: 'Europe/Warsaw'
+      TZ: "Europe/Warsaw"
       WEBPASSWORD: "konrad1"
       # HERE specify your external IP that will be used
       FTLCONF_REPLY_ADDR4: "192.168.0.30"
@@ -26,10 +48,10 @@ services:
         condition: always
       resources:
         limits:
-          cpus: '0.5'
+          cpus: "0.5"
           memory: 1G
         reservations:
-          cpus: '0.5'
+          cpus: "0.5"
           memory: 1G
 
   rpi-spotify:
@@ -37,7 +59,7 @@ services:
     network_mode: host
     devices: [/dev/snd]
     environment:
-      TZ: 'Europe/Warsaw'
+      TZ: "Europe/Warsaw"
     command: >
       librespot
         --name Raspotify
@@ -52,10 +74,10 @@ services:
         condition: always
       resources:
         limits:
-          cpus: '1'
+          cpus: "1"
           memory: 1G
         reservations:
-          cpus: '1'
+          cpus: "1"
           memory: 1G
 
   shairport-sync:
@@ -64,19 +86,20 @@ services:
     command: -v
     devices: [/dev/snd]
     environment:
-      TZ: 'Europe/Warsaw'
+      TZ: "Europe/Warsaw"
     deploy:
       replicas: 1
       restart_policy:
         condition: always
       resources:
         limits:
-          cpus: '1'
+          cpus: "1"
           memory: 1G
         reservations:
-          cpus: '1'
+          cpus: "1"
           memory: 1G
 
 volumes:
+  portainer-data:
   pihole-etc-data:
   pihole-etc-dnsmasq:
