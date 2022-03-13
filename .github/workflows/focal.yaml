@@ -20,20 +20,20 @@ jobs:
 
       - name: Show Vagrant version
         run: vagrant --version
-        working-directory: ./init
+        working-directory: ./environments/dev
 
       - name: Update box
         run: vagrant box update
-        working-directory: ./init
+        working-directory: ./environments/dev
 
       - name: Clean old boxes
         run: vagrant box prune --force
-        working-directory: ./init
+        working-directory: ./environments/dev
 
       - name: Run vagrant up
         run: vagrant up
-        working-directory: ./init
+        working-directory: ./environments/dev
 
       - name: ssh into box after boot
         run: vagrant ssh -c "echo 'hello world!'"
-        working-directory: ./init
+        working-directory: ./environments/dev
