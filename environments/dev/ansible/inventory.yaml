@@ -5,8 +5,8 @@ all:
     # for ssh-ingress if below is enabled
     enable_ssh: false
     copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/private.pub') }}"
-    # absolute path to dotfiles repository on a host. Replace is needed for macos compatibility
-    repo_path: "{{ (playbook_dir + '/../../../dotfiles') | realpath | replace('/Users','/home')}}"
+    # path to dotfiles repository on a host. Replace is needed for macos compatibility
+    repo_path: "{{ (playbook_dir + '/../../../../dotfiles') | realpath | replace('/Users','/home')}}"
     # zsh files dir (same as in zshenv)
     zdotdir: "~/.config/zsh"
     # if enabled - some gui only apps will be installed as well

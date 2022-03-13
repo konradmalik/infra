@@ -1,5 +1,3 @@
-_Run all scripts only in the repo catalog!_
-
 **NOTE**:
 This instruction is for Ubuntu Server. On other systems it can be differnet.
 
@@ -7,20 +5,20 @@ This instruction is for Ubuntu Server. On other systems it can be differnet.
 
 Network is managed by netplan. Modify the `01-network.yaml` file (password, dns) and copy it into: `/etc/netplan/01-network.yaml`. It will work upon restart.
 
-# Machines
+# Deployment
 
-Services that should run on each machine are defined in `docker-compose.<machine>.yaml`.
+Services that should run are defined in `docker-compose.yaml`.
 Details and setup are below.
 TLDR for running:
 
-```
-$ make create-<machine>
+```bash
+$ make create
 ```
 
 To undeploy:
 
-```
-$ make delete-<machine>
+```bash
+$ make delete
 ```
 
 # Service-specific instructions
@@ -63,8 +61,8 @@ nameserver 9.9.9.9
 
 To update:
 
-1. Update image version in `docker-compose.<machine>.yaml`
-2. Run `make delete-<machine> && make create-<machine>`
+1. Update image version in `docker-compose.yaml`
+2. Run `make delete && make create`
 
 ## HD Idle (spin down unused disks)
 

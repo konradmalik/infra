@@ -72,15 +72,15 @@ Vagrant.configure(API_VERSION) do |config|
   end
   # main provisioning
   config.vm.provision "ansible_local" do |ansible|
-    ansible.playbook = GUEST_HOME + "/Code/infra/init/ansible/playbook.yml"
-    ansible.inventory_path = GUEST_HOME + "/Code/infra/init/ansible/inventory.yaml"
+    ansible.playbook = GUEST_HOME + "/Code/infra/environments/dev/ansible/playbook.yml"
+    ansible.inventory_path = GUEST_HOME + "/Code/infra/environments/dev/ansible/inventory.yaml"
     ansible.limit  = "local"
     # enables alacritty, vscode etc.
     ansible.extra_vars  = { gui_apps: true }
     ansible.provisioning_path = GUEST_HOME
     # set this just to force running galaxy
-    ansible.galaxy_role_file = GUEST_HOME + "/Code/infra/init/ansible/requirements.yml"
-    ansible.galaxy_command = "ansible-galaxy collection install -r " + GUEST_HOME + "/Code/infra/init/ansible/requirements.yml --force"
+    ansible.galaxy_role_file = GUEST_HOME + "/Code/infra/environments/dev/ansible/requirements.yml"
+    ansible.galaxy_command = "ansible-galaxy collection install -r " + GUEST_HOME + "/Code/infra/environments/dev/ansible/requirements.yml --force"
   end
 end
 
