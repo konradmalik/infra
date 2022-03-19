@@ -1,0 +1,36 @@
+terraform {
+  required_version = ">= 1.0.0"
+  required_providers {
+    b2 = {
+      source = "Backblaze/b2"
+    }
+  }
+
+  backend "s3" {
+    bucket = "konrad-terraform-states"
+    key    = "private/backblaze"
+    region = "eu-central-1"
+  }
+}
+
+provider "b2" {
+}
+
+resource "b2_bucket" "devarch" {
+  bucket_name = "devarch"
+  bucket_type = "allPrivate"
+
+  file_lock_configuration {
+    is_file_lock_enabled = false
+  }
+
+  default_server_side_encryption {
+    mode      = "SSE-B2"
+    algorithm = "AES256"
+  }
+
+  lifecycle_rules {
+    file_name_prefix             = ""
+    days_from_hiding_to_deleting = 7
+  }
+}

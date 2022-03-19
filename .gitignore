@@ -17,3 +17,9 @@ vscode/User/sync
 .zsh_sessions
 .zcompcache
 zfunc
+
+**/.envrc
+.envrc
+**/.terraform
+.terraform
+**/terraform.tfstate*
