@@ -20,7 +20,7 @@ resource "oci_core_instance" "a1" {
 
   create_vnic_details {
     hostname_label   = var.hostname
-    subnet_id        = var.subnet_ocid
+    subnet_id        = oci_core_subnet.subnet.id
     assign_public_ip = var.assign_public_ip
     nsg_ids          = var.nsg_ids
   }
@@ -32,7 +32,7 @@ resource "oci_core_instance" "a1" {
   }
 
   metadata = {
-    ssh_authorized_keys = var.ssh_authorized_keys
+    ssh_authorized_keys = file(var.ssh_authorized_key_path)
     user_data           = var.user_data
   }
 }

@@ -1,14 +1,14 @@
 resource "oci_core_vcn" "vcn" {
   compartment_id = var.compartment_ocid
-  cidr_blocks    = var.cidr_blocks
-  dns_label      = var.dns_label
+  cidr_blocks    = var.vcn_cidr_blocks
+  dns_label      = var.vcn_dns_label
 }
 
 resource "oci_core_internet_gateway" "vcn_internet_gateway" {
   compartment_id = var.compartment_ocid
   vcn_id         = oci_core_vcn.vcn.id
 
-  enabled = var.internet_gateway_enabled
+  enabled = true
 }
 
 resource "oci_core_default_route_table" "default-route-table" {
@@ -17,7 +17,7 @@ resource "oci_core_default_route_table" "default-route-table" {
   route_rules {
     network_entity_id = oci_core_internet_gateway.vcn_internet_gateway.id
 
-    destination      = var.internet_gateway_destination
-    destination_type = var.internet_gateway_destination_type
+    destination      = "0.0.0.0/0"
+    destination_type = "CIDR_BLOCK"
   }
 }

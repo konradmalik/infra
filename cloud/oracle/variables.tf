@@ -1,29 +1,3 @@
-variable "tenancy_ocid" {
-  description = "OCID of your tenancy."
-  type        = string
-}
-
-variable "user_ocid" {
-  description = "OCID of the user calling the API"
-  type        = string
-}
-
-variable "private_key_path" {
-  description = "The path (including filename) of the private key stored on your computer."
-  type        = string
-}
-
-variable "private_key_password" {
-  description = "Password to the private key if needed."
-  type        = string
-  sensitive   = true
-}
-
-variable "fingerprint" {
-  description = "Fingerprint for the key pair being used."
-  type        = string
-}
-
 variable "region" {
   description = "An Oracle Cloud Infrastructure region. See Regions and Availability Domains"
   type        = string
@@ -125,8 +99,8 @@ variable "operating_system_version" {
   type        = string
 }
 
-variable "ssh_authorized_keys" {
-  description = "The public SSH key(s) that should be authorized for the default user."
+variable "ssh_authorized_key_path" {
+  description = "The path public SSH key that should be authorized for the default user."
   type        = string
 }
 
