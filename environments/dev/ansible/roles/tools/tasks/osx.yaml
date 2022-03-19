@@ -34,6 +34,7 @@
       - watchexec
       - unzip
       - wget
+      - node
     update_homebrew: yes
 
 - name: install brew casks
@@ -60,4 +61,3 @@
       - ffmpeg
       - ripgrep-all
     update_homebrew: yes
-

@@ -8,23 +8,6 @@
     creates: /usr/local/bin/nvim
   when: ansible_architecture == "x86_64"
 
-- name: install newer nodejs repo
-  become: yes
-  shell:
-    cmd: |
-      curl -sL https://deb.nodesource.com/setup_14.x | bash -
-    creates: /etc/apt/sources.list.d/nodesource.list
-
-- name: install nodejs (provides npm)
-  become: yes
-  apt:
-    name:
-      - nodejs
-    state: latest
-    update_cache: yes
-    autoclean: yes
-    autoremove: yes
-
 - name: install prettier globally
   become: yes
   community.general.npm:

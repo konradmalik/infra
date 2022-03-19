@@ -46,3 +46,4 @@
       - zathura-pdf-mupdf
       - unzip
       - wget
+      - npm

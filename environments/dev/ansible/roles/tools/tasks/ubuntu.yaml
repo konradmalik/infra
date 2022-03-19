@@ -205,3 +205,20 @@
       cargo install --locked ripgrep_all
     creates: ~/.cargo/bin/rga
 
+- name: install newer nodejs repo
+  become: yes
+  shell:
+    cmd: |
+      curl -fsSL https://deb.nodesource.com/setup_{{ git_versions.nodejs }} | bash -
+    creates: /etc/apt/sources.list.d/nodesource.list
+
+- name: install nodejs (provides npm)
+  become: yes
+  apt:
+    name:
+      - nodejs
+    state: latest
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+
