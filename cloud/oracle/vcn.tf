@@ -2,13 +2,15 @@ resource "oci_core_vcn" "vcn" {
   compartment_id = var.compartment_ocid
   cidr_blocks    = var.vcn_cidr_blocks
   dns_label      = var.vcn_dns_label
+  freeform_tags  = var.freeform_tags
 }
 
 resource "oci_core_internet_gateway" "vcn_internet_gateway" {
   compartment_id = var.compartment_ocid
   vcn_id         = oci_core_vcn.vcn.id
 
-  enabled = true
+  enabled       = true
+  freeform_tags = var.freeform_tags
 }
 
 resource "oci_core_default_route_table" "default-route-table" {
@@ -20,4 +22,5 @@ resource "oci_core_default_route_table" "default-route-table" {
     destination      = "0.0.0.0/0"
     destination_type = "CIDR_BLOCK"
   }
+  freeform_tags = var.freeform_tags
 }

@@ -3,4 +3,5 @@ resource "oci_core_subnet" "subnet" {
   compartment_id = var.compartment_ocid
   cidr_block     = var.subnet_cidr_block
   dns_label      = var.subnet_dns_label
+  freeform_tags  = var.freeform_tags
 }

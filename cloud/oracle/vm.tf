@@ -35,6 +35,8 @@ resource "oci_core_instance" "a1" {
     ssh_authorized_keys = file(var.ssh_authorized_key_path)
     user_data           = var.user_data
   }
+
+  freeform_tags = var.freeform_tags
 }
 
 data "oci_core_vnic_attachments" "a1_vnic_attachments" {
@@ -43,6 +45,7 @@ data "oci_core_vnic_attachments" "a1_vnic_attachments" {
 }
 
 resource "oci_core_ipv6" "ipv6_address" {
-  count   = var.assign_ipv6_address ? 1 : 0
-  vnic_id = data.oci_core_vnic_attachments.a1_vnic_attachments.vnic_attachments[0].vnic_id
+  count         = var.assign_ipv6_address ? 1 : 0
+  vnic_id       = data.oci_core_vnic_attachments.a1_vnic_attachments.vnic_attachments[0].vnic_id
+  freeform_tags = var.freeform_tags
 }

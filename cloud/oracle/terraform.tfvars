@@ -18,3 +18,8 @@ subnet_cidr_block = "10.0.1.0/24"
 ssh_authorized_key_path = "~/.ssh/private.pub"
 assign_public_ip        = true
 assign_ipv6_address     = false
+
+freeform_tags = {
+  "terraform"   = "true",
+  "environment" = "dev",
+}

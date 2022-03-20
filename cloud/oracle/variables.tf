@@ -127,3 +127,7 @@ variable "nsg_ids" {
   type        = list(string)
   default     = []
 }
+
+variable "freeform_tags" {
+  type = map(string)
+}
