@@ -14,7 +14,7 @@
       # ripgrep-all and deps start
       - ripgrep-all
       - graphicsmagick
-      - pandoc
+      - pandoc-bin
       - poppler
       - tesseract
       # ripgrep-all deps end
