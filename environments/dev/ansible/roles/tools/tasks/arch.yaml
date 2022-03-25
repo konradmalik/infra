@@ -33,7 +33,7 @@
       - stow
       - up
       - viddy
-      - shellcheck
+      - shellcheck-bin
       - duf
       - gotop
       - tldr
