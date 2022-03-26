@@ -3,6 +3,7 @@
   apt:
     name:
       - git-extras
+      - git-crypt
     state: latest
     update_cache: yes
     autoclean: yes

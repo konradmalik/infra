@@ -1,9 +1,7 @@
-- name: install git tools
+- name: install earthly aur
   become: yes
   become_user: aur_builder
   kewlfft.aur.aur:
     use: yay
     name:
-      - git-delta
-      - git-extras
-      - git-crypt
+      - earthly-bin

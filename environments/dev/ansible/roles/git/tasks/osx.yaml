@@ -3,4 +3,5 @@
     name:
       - git-delta
       - git-extras
+      - git-crypt
     update_homebrew: yes
