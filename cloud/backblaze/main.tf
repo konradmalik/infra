@@ -34,3 +34,21 @@ resource "b2_bucket" "devarch" {
     days_from_hiding_to_deleting = 7
   }
 }
+
+resource "b2_application_key" "devarch_key" {
+  key_name  = "devarch-key"
+  bucket_id = b2_bucket.devarch.id
+  capabilities = ["deleteFiles", "listAllBucketNames",
+    "listBuckets", "listFiles", "readBucketEncryption",
+    "readBuckets", "readFiles", "shareFiles",
+  "writeBucketEncryption", "writeFiles"]
+}
+
+data "b2_application_key" "devarch_key" {
+  key_name = b2_application_key.devarch_key.key_name
+}
+
+output "application_key" {
+  value     = b2_application_key.devarch_key
+  sensitive = true
+}
