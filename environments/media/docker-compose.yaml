@@ -36,6 +36,7 @@ services:
       # HERE specify your external IP that will be used
       FTLCONF_REPLY_ADDR4: "192.168.0.30"
       PIHOLE_DNS_: "1.1.1.1;1.0.0.1;8.8.8.8;8.8.4.4"
+      DNSMASQ_LISTENING: "all"
     hostname: "pi.hole"
     cap_add:
       - NET_ADMIN
