@@ -1,13 +1,3 @@
-- name: install go apt packages
-  become: yes
-  apt:
-    name:
-      - golang
-    state: latest
-    update_cache: yes
-    autoclean: yes
-    autoremove: yes
-
 - name: install tiny go from git
   become: yes
   shell:

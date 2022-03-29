@@ -4,5 +4,4 @@
   kewlfft.aur.aur:
     use: yay
     name:
-      - go
       - tinygo

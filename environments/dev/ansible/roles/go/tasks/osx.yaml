@@ -6,6 +6,5 @@
 - name: install go brew packages
   community.general.homebrew:
     name:
-      - go
       - tinygo
     update_homebrew: yes

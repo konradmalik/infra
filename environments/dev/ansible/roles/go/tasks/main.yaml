@@ -6,3 +6,5 @@
 
 - import_tasks: arch.yaml
   when: ansible_distribution == "Archlinux"
+
+# go itself is fully managed by asdf
