@@ -34,6 +34,7 @@
     - earthly
     - kubernetes
     - name: cloud
+      ignore_errors: yes
       when: private_machine
     - name: fonts
       when:
@@ -45,6 +46,7 @@
       when:
         - gui_apps
         - ansible_system == "Linux"
+      ignore_errors: true
     - name: vscode
       when:
         - gui_apps
