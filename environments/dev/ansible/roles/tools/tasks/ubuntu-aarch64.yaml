@@ -1,12 +1,3 @@
-- name: install exa from github
-  become: yes
-  shell:
-    chdir: /tmp
-    cmd: |
-      rustup default stable
-      cargo install --git https://github.com/neepoo/exa.git --branch fix-issue-887 --root /usr/local/
-    creates: /usr/local/bin/exa
-
 - name: install up from github
   become: yes
   shell:

@@ -4,7 +4,7 @@
     chdir: /tmp
     cmd: |
       curl -o /usr/local/bin/nvim -L https://github.com/neovim/neovim/releases/download/v{{ git_versions.nvim }}/nvim.appimage
-      chmod u+x /usr/local/bin/nvim
+      chmod +x /usr/local/bin/nvim
     creates: /usr/local/bin/nvim
   when: ansible_architecture == "x86_64"
 

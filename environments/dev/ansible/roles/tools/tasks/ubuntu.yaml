@@ -2,6 +2,7 @@
   become: yes
   apt:
     name:
+      - exa
       - gdb
       - curl
       - fzf
@@ -23,6 +24,7 @@
       - bats
       - unzip
       - wget
+      - zoxide
     state: latest
     update_cache: yes
     autoclean: yes
@@ -55,16 +57,6 @@
   community.general.snap:
     name:
       - procs
-
-- name: install zoxide from github
-  become: yes
-  shell:
-    chdir: /tmp
-    cmd: |
-      curl -L https://github.com/ajeetdsouza/zoxide/releases/download/v{{ git_versions.zoxide }}/zoxide-v{{ git_versions.zoxide }}-{{ ansible_architecture }}-unknown-linux-musl.tar.gz | tar xvfz -
-      mv zoxide /usr/local/bin/zoxide
-      chmod +x /usr/local/bin/zoxide
-    creates: /usr/local/bin/zoxide
 
 - name: Install pipx from pip
   pip:
@@ -101,18 +93,6 @@
     creates: "/usr/local/bin/ngrok"
 
 - block:
-    - name: install exa from github
-      become: yes
-      shell:
-        chdir: /tmp
-        cmd: |
-          # install exa from github releases
-          curl -o exa.zip -L https://github.com/ogham/exa/releases/download/v{{ git_versions.exa }}/exa-linux-{{ ansible_architecture }}-v{{ git_versions.exa }}.zip
-          unzip exa.zip
-          mv **/exa /usr/local/bin/exa
-          rm -rf bin man completions
-        creates: /usr/local/bin/exa
-
     - name: install up from github
       become: yes
       shell:
