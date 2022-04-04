@@ -1,8 +1,12 @@
 - name: add docker apt key
   become: yes
-  apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    state: present
+  shell:
+    chdir: /tmp
+    cmd: |
+      curl -sL https://download.docker.com/linux/ubuntu/gpg |
+        gpg --dearmor |
+        tee /etc/apt/trusted.gpg.d/docker.gpg > /dev/null
+    creates: /etc/apt/trusted.gpg.d/docker.gpg
 
 - name: add docker apt repo
   become: yes

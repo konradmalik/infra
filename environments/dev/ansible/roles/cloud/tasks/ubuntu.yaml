@@ -1,9 +1,13 @@
 - block:
     - name: add hashicorp apt key
       become: yes
-      apt_key:
-        url: https://apt.releases.hashicorp.com/gpg
-        state: present
+      shell:
+        chdir: /tmp
+        cmd: |
+          curl -sL https://apt.releases.hashicorp.com/gpg |
+            gpg --dearmor |
+            tee /etc/apt/trusted.gpg.d/hashicorp.gpg > /dev/null
+        creates: /etc/apt/trusted.gpg.d/hashicorp.gpg
 
     - name: add hashicorp apt repo (amd64)
       become: yes
