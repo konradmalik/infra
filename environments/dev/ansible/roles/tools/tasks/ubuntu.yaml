@@ -9,6 +9,7 @@
       - fd-find
       - jq
       - jo
+      - jc
       - nodejs
       - npm
       - nq
@@ -195,14 +196,6 @@
     cmd: |
       cargo install --locked bottom
     creates: ~/.cargo/bin/btm
-
-- name: install jc from pip via pipx
-  become: no
-  shell:
-    chdir: /tmp
-    cmd: |
-      ~/.local/bin/pipx install jc
-    creates: ~/.local/bin/jc
 
 - name: install pre-commit from pip via pipx
   become: no
