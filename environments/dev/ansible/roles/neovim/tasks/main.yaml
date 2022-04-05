@@ -17,13 +17,11 @@
   with_items:
     - neovim
 
-# distant is required by 'distant' plugin for neovim
 # stylua for lua formatting (for neovim configs etc.)
-- name: install 'distant' and 'stylua' from cargo
+- name: install neovim plugin deps from cargo
   args:
     executable: /bin/bash
   shell:
     cmd: |
       source ~/.cargo/env && \
-      cargo install distant
       cargo install stylua
