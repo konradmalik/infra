@@ -131,7 +131,6 @@
           mv up /usr/local/bin/
         creates: /usr/local/bin/up
 
-
     - name: install viddy from github
       become: yes
       shell:
@@ -141,7 +140,6 @@
           chmod +x viddy
           mv viddy /usr/local/bin/
         creates: /usr/local/bin/viddy
-
 
     - name: install tidy-viewer from git (ubuntu amd64)
       become: yes
@@ -199,9 +197,10 @@
 - name: install 'ripgrep-all' from cargo
   args:
     executable: /bin/bash
+  environment:
+    PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
-      source ~/.cargo/env && \
       cargo install --locked ripgrep_all
     creates: ~/.cargo/bin/rga
 
@@ -221,4 +220,3 @@
     update_cache: yes
     autoclean: yes
     autoremove: yes
-

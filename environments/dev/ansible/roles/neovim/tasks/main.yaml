@@ -21,7 +21,9 @@
 - name: install neovim plugin deps from cargo
   args:
     executable: /bin/bash
+  environment:
+    PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
-      source ~/.cargo/env && \
       cargo install stylua
+    creates: ~/.cargo/bin/stylua
