@@ -16,3 +16,12 @@
     cmd: |
       rustup install stable && \
       rustup default stable
+
+- name: install cargo-edit
+  args:
+    executable: /bin/bash
+  environment:
+    PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
+  shell:
+    cmd: |
+      cargo install cargo-edit
