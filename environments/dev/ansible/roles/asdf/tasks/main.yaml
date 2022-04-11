@@ -35,8 +35,7 @@
     cmd: |
       . ~/.asdf/asdf.sh && \
       asdf plugin-add direnv && \
-      asdf install direnv latest && \
-      asdf global direnv latest
+      asdf install direnv latest
     creates: ~/.asdf/plugins/direnv
 
 - name: install asdf python plugin
@@ -46,7 +45,8 @@
     chdir: /tmp
     cmd: |
       . ~/.asdf/asdf.sh && \
-      asdf plugin-add python
+      asdf plugin-add python && \
+      asdf install python latest
     creates: ~/.asdf/plugins/python
 
 - name: install asdf golang plugin
@@ -56,5 +56,17 @@
     chdir: /tmp
     cmd: |
       . ~/.asdf/asdf.sh && \
-      asdf plugin-add golang
+      asdf plugin-add golang && \
+      asdf install golang latest
+    creates: ~/.asdf/plugins/golang
+
+- name: install asdf golang plugin
+  args:
+    executable: /bin/bash
+  shell:
+    chdir: /tmp
+    cmd: |
+      . ~/.asdf/asdf.sh && \
+      asdf plugin-add rust && \
+      asdf install rust latest
     creates: ~/.asdf/plugins/golang
