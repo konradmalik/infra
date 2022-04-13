@@ -218,7 +218,7 @@
     PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
-      cargo install --locked dust
+      cargo install --locked du-dust
     creates: ~/.cargo/bin/dust
 
 - name: install 'bottom' from cargo
