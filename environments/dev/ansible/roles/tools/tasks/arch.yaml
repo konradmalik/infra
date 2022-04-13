@@ -23,7 +23,7 @@
       # json tools start
       - jq
       - jo
-      - jc
+      - jc-git
       # json tools end
       - dsq
       - dust
