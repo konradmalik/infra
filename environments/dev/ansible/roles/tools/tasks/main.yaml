@@ -10,3 +10,10 @@
 - import_tasks: ubuntu-aarch64.yaml
   when: ansible_architecture == "aarch64"
 
+- name: install pre-commit from pip via pipx
+  become: no
+  shell:
+    chdir: /tmp
+    cmd: |
+      ~/.local/bin/pipx install pre-commit
+    creates: ~/.local/bin/pre-commit
