@@ -7,6 +7,7 @@
       - fzf
       - curl
       - bat
+      - bottom
       - exa
       - fd
       - hyperfine
@@ -22,11 +23,12 @@
       # json tools start
       - jq
       - jo
+      - jc
       # json tools end
       - dsq
+      - dust
       - zoxide
       - procs
-      - ncdu
       - nq-git
       - sshfs
       - tree
@@ -35,7 +37,6 @@
       - viddy
       - shellcheck-bin
       - duf
-      - gotop
       - tldr
       - ngrok
       - croc

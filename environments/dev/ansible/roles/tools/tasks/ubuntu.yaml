@@ -8,7 +8,6 @@
       - fd-find
       - jq
       - jo
-      - ncdu
       - nq
       - sshfs
       - tree
@@ -88,15 +87,6 @@
       dpkg -i hyperfine.deb
       rm -rf hyperfine.deb
     creates: /usr/bin/hyperfine
-
-- name: install gotop from github
-  become: yes
-  shell:
-    chdir: /tmp
-    cmd: |
-      curl -L https://github.com/xxxserxxx/gotop/releases/download/v{{ git_versions.gotop }}/gotop_v{{ git_versions.gotop }}_{{ ansible_system | lower }}_{{ arch_map[ansible_architecture] }}.tgz | tar xvfz -
-      mv gotop /usr/local/bin/gotop
-    creates: /usr/local/bin/gotop
 
 - name: install ngrok
   become: yes
@@ -220,3 +210,31 @@
     update_cache: yes
     autoclean: yes
     autoremove: yes
+
+- name: install 'dust' from cargo
+  args:
+    executable: /bin/bash
+  environment:
+    PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
+  shell:
+    cmd: |
+      cargo install --locked dust
+    creates: ~/.cargo/bin/dust
+
+- name: install 'bottom' from cargo
+  args:
+    executable: /bin/bash
+  environment:
+    PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
+  shell:
+    cmd: |
+      cargo install --locked bottom
+    creates: ~/.cargo/bin/btm
+
+- name: install jc from pip via pipx
+  become: no
+  shell:
+    chdir: /tmp
+    cmd: |
+      ~/.local/bin/pipx install jc
+    creates: ~/.local/bin/jc

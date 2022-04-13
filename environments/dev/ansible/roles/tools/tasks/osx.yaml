@@ -8,6 +8,7 @@
     name:
       - fzf
       - bat
+      - bottom
       - exa
       - fd
       - hyperfine
@@ -15,9 +16,10 @@
       - the_silver_searcher
       - jq
       - jo
+      - jc
       - dsq
+      - dust
       - procs
-      - ncdu
       - nq
       - zoxide
       - tree
@@ -26,7 +28,6 @@
       - viddy
       - shellcheck
       - duf
-      - gotop
       - tldr
       - croc
       - pipx
