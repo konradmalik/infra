@@ -18,11 +18,13 @@
       go build -o /usr/local/bin/viddy .
     creates: /usr/local/bin/viddy
 
-- name: compile tidy-viewer from github
-  become: yes
+- name: install tidy-viewer from cargo
+  args:
+    executable: /bin/bash
+  environment:
+    PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
     chdir: /tmp
     cmd: |
-      rustup default stable
-      cargo install --git https://github.com/alexhallam/tv.git --tag {{ git_versions.tidy_viewer }} --root /usr/local/
-    creates: /usr/local/bin/tidy-viewer
+      cargo install tidy-viewer
+    creates: "~/.cargo/bin/tidy-viewer"

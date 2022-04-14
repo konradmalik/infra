@@ -1,10 +1,16 @@
-- name: install broot ubuntu
-  become: yes
+- name: install broot from cargo
+  args:
+    executable: /bin/bash
+  environment:
+    PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
-    chdir: /tmp
     cmd: |
-      curl -LO https://github.com/Canop/broot/releases/download/v{{ git_versions.broot }}/broot_{{ git_versions.broot }}.zip
-      unzip broot_{{ git_versions.broot }}.zip
-      mv build/{{ ansible_architecture }}-{{ ansible_system | lower }}*/broot /usr/local/bin/broot
-      chmod +x /usr/local/bin/broot
-    creates: /usr/local/bin/broot
+      cargo install broot
+
+- name: link broot binary
+  become: yes
+  file:
+    src: /home/{{ target_user }}/.cargo/bin/broot
+    path: /usr/local/bin/broot
+    state: link
+    force: yes
