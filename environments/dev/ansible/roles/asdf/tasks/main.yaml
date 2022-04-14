@@ -60,7 +60,7 @@
       asdf install golang latest
     creates: ~/.asdf/plugins/golang
 
-- name: install asdf golang plugin
+- name: install asdf rust plugin
   args:
     executable: /bin/bash
   shell:
@@ -69,4 +69,4 @@
       . ~/.asdf/asdf.sh && \
       asdf plugin-add rust && \
       asdf install rust latest
-    creates: ~/.asdf/plugins/golang
+    creates: ~/.asdf/plugins/rust
