@@ -1,0 +1,10 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "archlinux/archlinux"
+  config.vm.provider :libvirt do |libvirt|
+    libvirt.driver = 'qemu'
+    libvirt.uri = 'qemu:///session'
+    libvirt.socket = '#{Dir.home}/.cache/libvirt/libvirt-sock'
+    libvirt.qemuargs :value => '-machine'
+    libvirt.qemuargs :value => 'accel=hvf'
+  end
+end
