@@ -7,6 +7,13 @@ box = "archlinux/archlinux"
 hostname = "devarch"
 ip = "192.168.56.56" # must be 10.0.0.0/8 192.168.0.0/16
 
+$repos = <<-'SCRIPT'
+rm -rf ~/Code
+mkdir -p ~/Code
+cp -a "$1/Code/dotfiles" ~/Code/
+cp -a "$1/Code/infra" ~/Code/
+SCRIPT
+
 cpus = 4
 memory = 8192
 disk_size = "150GB"
@@ -56,8 +63,9 @@ Vagrant.configure(API_VERSION) do |config|
   config.vm.provision "shell", inline: "swapoff -a"
   # copy our repos to the correct place
   config.vm.provision "shell" do |s|
-    s.inline = "rm -rf ~/Code && mkdir -p ~/Code && cp -a " + GUEST_SHARED_PATH + "/Code/dotfiles ~/Code/ && cp -a " + GUEST_SHARED_PATH + "/Code/infra ~/Code/"
+    s.inline = $repos
     s.privileged = false
+    s.args = [GUEST_SHARED_PATH]
   end
   # main provisioning
   config.vm.provision "ansible_local" do |ansible|
