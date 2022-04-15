@@ -1,7 +1,7 @@
 API_VERSION = "2"
 HOST_SHARED_PATH = ENV["HOME"]
 GUEST_HOME = "/home/vagrant"
-GUEST_ANSIBLE_FOLDER = GUEST_HOME + "/Code/infra/environments/dev/ansible
+GUEST_ANSIBLE_FOLDER = GUEST_HOME + "/Code/infra/environments/dev/ansible"
 GUEST_SHARED_PATH = "/vagrant"
 box = "archlinux/archlinux"
 hostname = "devarch"
@@ -54,9 +54,9 @@ Vagrant.configure(API_VERSION) do |config|
   # provisioning
   # Disable swap for each vm
   config.vm.provision "shell", inline: "swapoff -a"
-  # copy our repo to the correct place
+  # copy our repos to the correct place
   config.vm.provision "shell" do |s|
-    s.inline = "mkdir -p ~/Code && cp -a " + GUEST_SHARED_PATH + "/Code/dotfiles ~/Code/ && cp -a " + GUEST_SHARED_PATH + "/Code/infra ~/Code/"
+    s.inline = "rm -rf ~/Code && mkdir -p ~/Code && cp -a " + GUEST_SHARED_PATH + "/Code/dotfiles ~/Code/ && cp -a " + GUEST_SHARED_PATH + "/Code/infra ~/Code/"
     s.privileged = false
   end
   # main provisioning
