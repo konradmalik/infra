@@ -7,8 +7,8 @@ box = "archlinux/archlinux"
 hostname = "devarch"
 ip = "192.168.56.56" # must be 10.0.0.0/8 192.168.0.0/16
 
-cpus = 1
-memory = 2048
+cpus = 4
+memory = 8192
 disk_size = "150GB"
 
 Vagrant.configure(API_VERSION) do |config|
