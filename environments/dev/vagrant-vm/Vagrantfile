@@ -24,7 +24,6 @@ Vagrant.configure(API_VERSION) do |config|
 
   # networking
   config.vm.network "private_network", ip: ip
-  config.ssh.forward_agent = true
   # fixes error with ssh after provisioning
   config.ssh.username = "vagrant"
   config.ssh.password = "vagrant"
