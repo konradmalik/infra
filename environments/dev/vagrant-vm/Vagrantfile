@@ -38,6 +38,8 @@ Vagrant.configure(API_VERSION) do |config|
   end
   config.disksize.size = disk_size
 
+  config.vm.network "forwarded_port", guest: 8080, host_ip: "127.0.0.1", host: 8080
+
   config.vm.provider :virtualbox do |vb|
     vb.name = hostname
     vb.memory = memory
