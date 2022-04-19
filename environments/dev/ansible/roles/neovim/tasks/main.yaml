@@ -18,5 +18,6 @@
     - neovim
 
 - name: headless neovim packer init
+  timeout: 120 # seconds
   shell:
     cmd: nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
