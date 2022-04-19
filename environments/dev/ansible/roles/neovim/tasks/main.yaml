@@ -16,3 +16,7 @@
     cmd: stow --target="$HOME" {{ item }}
   with_items:
     - neovim
+
+- name: headless neovim packer init
+  shell:
+    cmd: nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
