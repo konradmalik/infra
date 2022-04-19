@@ -31,6 +31,12 @@ Vagrant.configure(API_VERSION) do |config|
   # files syncing
   config.vm.synced_folder HOST_SHARED_PATH, GUEST_SHARED_PATH
 
+  # properly set timezone
+  unless Vagrant.has_plugin?("vagrant-timezone")
+    system "vagrant plugin install vagrant-timezone"
+  end
+  config.timezone.value = :host
+
   # force disk size
   unless Vagrant.has_plugin?("vagrant-disksize")
     system "vagrant plugin install vagrant-disksize"
