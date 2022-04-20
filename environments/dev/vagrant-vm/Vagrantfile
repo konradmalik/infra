@@ -27,6 +27,7 @@ Vagrant.configure(API_VERSION) do |config|
   # fixes error with ssh after provisioning
   config.ssh.username = "vagrant"
   config.ssh.password = "vagrant"
+  config.ssh.forward_agent = true
 
   # files syncing
   config.vm.synced_folder HOST_SHARED_PATH, GUEST_SHARED_PATH
@@ -66,8 +67,6 @@ Vagrant.configure(API_VERSION) do |config|
   end
 
   # provisioning
-  # Disable swap for each vm
-  config.vm.provision "shell", inline: "swapoff -a"
   # copy our repos to the correct place
   config.vm.provision "shell" do |s|
     s.inline = $repos
