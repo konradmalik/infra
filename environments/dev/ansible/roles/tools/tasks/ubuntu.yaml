@@ -59,6 +59,12 @@
     name:
       - procs
 
+- name: install ngrok from snap (edge)
+  become: yes
+  community.general.snap:
+    name: ngrok
+    channel: latest/edge
+
 - name: Install pipx from pip
   pip:
     name: pipx
@@ -82,16 +88,6 @@
       dpkg -i hyperfine.deb
       rm -rf hyperfine.deb
     creates: /usr/bin/hyperfine
-
-- name: install ngrok
-  become: yes
-  shell:
-    chdir: /tmp
-    cmd: |
-      curl -LO https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-{{ arch_map[ansible_architecture] }}.zip
-      unzip ngrok-stable-linux-{{ arch_map[ansible_architecture] }}.zip
-      mv ./ngrok /usr/local/bin/ngrok
-    creates: "/usr/local/bin/ngrok"
 
 - block:
     - name: install up from github
