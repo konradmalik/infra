@@ -47,6 +47,8 @@
     pkg:
       - azure-cli
     state: present
+  # TODO remove once M$t adds proper jammy support
+  ignore_errors: yes
 
 - name: install awscli
   become: yes
