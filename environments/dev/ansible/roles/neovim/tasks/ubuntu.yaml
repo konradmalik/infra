@@ -4,6 +4,7 @@
     chdir: /tmp
     cmd: |
       curl -o nvim.appimage -L https://github.com/neovim/neovim/releases/download/v{{ git_versions.nvim }}/nvim.appimage
+      chmod +x nvim.appimage
       ./nvim.appimage --appimage-extract
       mv ./squashfs-root/usr/bin/nvim /usr/local/bin/nvim
       chmod +x /usr/local/bin/nvim

@@ -17,11 +17,11 @@
 - name: install tpm
   shell:
     cmd: git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-  creates: ~/.tmux/plugins/tpm
+    creates: ~/.tmux/plugins/tpm
 
 - name: install all tpm plugins
   shell:
     cmd: |
       ~/.tmux/plugins/tpm/bin/install_plugins
       ~/.tmux/plugins/tpm/bin/update_plugins all
-  creates: ~/.tmux/plugins/tmux-sensible
+    creates: ~/.tmux/plugins/tmux-sensible
