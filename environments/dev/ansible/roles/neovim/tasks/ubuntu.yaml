@@ -1,12 +1,19 @@
+- name: install fuse for neovim from appimage
+  become: yes
+  apt:
+    name:
+      - fuse3
+    state: latest
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+
 - name: install neovim from appimage
   become: yes
   shell:
     chdir: /tmp
     cmd: |
-      curl -o nvim.appimage -L https://github.com/neovim/neovim/releases/download/v{{ git_versions.nvim }}/nvim.appimage
-      chmod +x nvim.appimage
-      ./nvim.appimage --appimage-extract
-      mv ./squashfs-root/usr/bin/nvim /usr/local/bin/nvim
+      curl -o /usr/local/bin/nvim -L https://github.com/neovim/neovim/releases/download/v{{ git_versions.nvim }}/nvim.appimage
       chmod +x /usr/local/bin/nvim
     creates: /usr/local/bin/nvim
   when: ansible_architecture == "x86_64"
