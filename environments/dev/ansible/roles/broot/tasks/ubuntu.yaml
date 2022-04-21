@@ -5,7 +5,8 @@
     PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
-      cargo install broot
+      cargo install --locked broot
+    creates: "~/.cargo/bin/broot"
 
 - name: link broot binary
   become: yes

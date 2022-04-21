@@ -79,15 +79,15 @@
       rm -rf duf.deb
     creates: /usr/bin/duf
 
-- name: install hyperfine from git releases
-  become: yes
+- name: install 'hyperfine' from cargo
+  args:
+    executable: /bin/bash
+  environment:
+    PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
-    chdir: /tmp
     cmd: |
-      curl -o hyperfine.deb -L https://github.com/sharkdp/hyperfine/releases/download/v{{ git_versions.hyperfine }}/hyperfine_{{ git_versions.hyperfine }}_{{ arch_map[ansible_architecture] }}.deb
-      dpkg -i hyperfine.deb
-      rm -rf hyperfine.deb
-    creates: /usr/bin/hyperfine
+      cargo install --locked hyperfine
+    creates: "~/.cargo/bin/hyperfine"
 
 - block:
     - name: install up from github
@@ -110,16 +110,6 @@
           mv viddy /usr/local/bin/
         creates: /usr/local/bin/viddy
 
-    - name: install tidy-viewer from git (ubuntu amd64)
-      become: yes
-      shell:
-        chdir: /tmp
-        cmd: |
-          curl -o tv.deb -L https://github.com/alexhallam/tv/releases/download/{{ git_versions.tidy_viewer }}/tidy-viewer_{{ git_versions.tidy_viewer }}_amd64.deb
-          dpkg -i tv.deb
-          rm -rf tv.deb
-        creates: /usr/bin/tidy-viewer
-
     - name: install dsq from git (ubuntu amd64)
       become: yes
       shell:
@@ -140,15 +130,15 @@
       curl https://getcroc.schollz.com | bash
     creates: /usr/local/bin/croc
 
-- name: install watchexec from git releases
-  become: yes
+- name: install 'watchexec' from cargo
+  args:
+    executable: /bin/bash
+  environment:
+    PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
-    chdir: /tmp
     cmd: |
-      curl -o watchexec.deb -L https://github.com/watchexec/watchexec/releases/download/cli-v{{ git_versions.watchexec }}/watchexec-{{ git_versions.watchexec }}-{{ ansible_architecture }}-unknown-linux-gnu.deb
-      dpkg -i watchexec.deb
-      rm -rf watchexec.deb
-    creates: /usr/bin/watchexec
+      cargo install --locked watchexec-cli
+    creates: "~/.cargo/bin/watchexec"
 
 - name: install ripgrep-all deps
   become: yes

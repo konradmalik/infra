@@ -17,14 +17,3 @@
       cd viddy
       go build -o /usr/local/bin/viddy .
     creates: /usr/local/bin/viddy
-
-- name: install tidy-viewer from cargo
-  args:
-    executable: /bin/bash
-  environment:
-    PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
-  shell:
-    chdir: /tmp
-    cmd: |
-      cargo install tidy-viewer
-    creates: "~/.cargo/bin/tidy-viewer"
