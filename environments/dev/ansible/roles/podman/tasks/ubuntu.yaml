@@ -1,16 +1,3 @@
-- name: add podman apt key
-  become: yes
-  apt_key:
-    url: https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_20.04/Release.key
-    state: present
-
-- name: add podman apt repo
-  become: yes
-  apt_repository:
-    repo: "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_20.04/ /"
-    state: present
-    update_cache: yes
-
 - name: install podman
   become: yes
   apt:

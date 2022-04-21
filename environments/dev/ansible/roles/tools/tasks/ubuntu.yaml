@@ -2,12 +2,16 @@
   become: yes
   apt:
     name:
+      - exa
       - gdb
       - curl
       - fzf
       - fd-find
       - jq
       - jo
+      - jc
+      - nodejs
+      - npm
       - nq
       - sshfs
       - tree
@@ -21,6 +25,7 @@
       - bats
       - unzip
       - wget
+      - zoxide
     state: latest
     update_cache: yes
     autoclean: yes
@@ -54,15 +59,11 @@
     name:
       - procs
 
-- name: install zoxide from github
+- name: install ngrok from snap (edge)
   become: yes
-  shell:
-    chdir: /tmp
-    cmd: |
-      curl -L https://github.com/ajeetdsouza/zoxide/releases/download/v{{ git_versions.zoxide }}/zoxide-v{{ git_versions.zoxide }}-{{ ansible_architecture }}-unknown-linux-musl.tar.gz | tar xvfz -
-      mv zoxide /usr/local/bin/zoxide
-      chmod +x /usr/local/bin/zoxide
-    creates: /usr/local/bin/zoxide
+  community.general.snap:
+    name: ngrok
+    channel: latest/edge
 
 - name: Install pipx from pip
   pip:
@@ -78,39 +79,17 @@
       rm -rf duf.deb
     creates: /usr/bin/duf
 
-- name: install hyperfine from git releases
-  become: yes
+- name: install 'hyperfine' from cargo
+  args:
+    executable: /bin/bash
+  environment:
+    PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
-    chdir: /tmp
     cmd: |
-      curl -o hyperfine.deb -L https://github.com/sharkdp/hyperfine/releases/download/v{{ git_versions.hyperfine }}/hyperfine_{{ git_versions.hyperfine }}_{{ arch_map[ansible_architecture] }}.deb
-      dpkg -i hyperfine.deb
-      rm -rf hyperfine.deb
-    creates: /usr/bin/hyperfine
-
-- name: install ngrok
-  become: yes
-  shell:
-    chdir: /tmp
-    cmd: |
-      curl -LO https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-{{ arch_map[ansible_architecture] }}.zip
-      unzip ngrok-stable-linux-{{ arch_map[ansible_architecture] }}.zip
-      mv ./ngrok /usr/local/bin/ngrok
-    creates: "/usr/local/bin/ngrok"
+      cargo install --locked hyperfine
+    creates: "~/.cargo/bin/hyperfine"
 
 - block:
-    - name: install exa from github
-      become: yes
-      shell:
-        chdir: /tmp
-        cmd: |
-          # install exa from github releases
-          curl -o exa.zip -L https://github.com/ogham/exa/releases/download/v{{ git_versions.exa }}/exa-linux-{{ ansible_architecture }}-v{{ git_versions.exa }}.zip
-          unzip exa.zip
-          mv **/exa /usr/local/bin/exa
-          rm -rf bin man completions
-        creates: /usr/local/bin/exa
-
     - name: install up from github
       become: yes
       shell:
@@ -130,16 +109,6 @@
           chmod +x viddy
           mv viddy /usr/local/bin/
         creates: /usr/local/bin/viddy
-
-    - name: install tidy-viewer from git (ubuntu amd64)
-      become: yes
-      shell:
-        chdir: /tmp
-        cmd: |
-          curl -o tv.deb -L https://github.com/alexhallam/tv/releases/download/{{ git_versions.tidy_viewer }}/tidy-viewer_{{ git_versions.tidy_viewer }}_amd64.deb
-          dpkg -i tv.deb
-          rm -rf tv.deb
-        creates: /usr/bin/tidy-viewer
 
     - name: install dsq from git (ubuntu amd64)
       become: yes
@@ -161,15 +130,15 @@
       curl https://getcroc.schollz.com | bash
     creates: /usr/local/bin/croc
 
-- name: install watchexec from git releases
-  become: yes
+- name: install 'watchexec' from cargo
+  args:
+    executable: /bin/bash
+  environment:
+    PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
-    chdir: /tmp
     cmd: |
-      curl -o watchexec.deb -L https://github.com/watchexec/watchexec/releases/download/cli-v{{ git_versions.watchexec }}/watchexec-{{ git_versions.watchexec }}-{{ ansible_architecture }}-unknown-linux-gnu.deb
-      dpkg -i watchexec.deb
-      rm -rf watchexec.deb
-    creates: /usr/bin/watchexec
+      cargo install --locked watchexec-cli
+    creates: "~/.cargo/bin/watchexec"
 
 - name: install ripgrep-all deps
   become: yes
@@ -194,23 +163,6 @@
       cargo install --locked ripgrep_all
     creates: ~/.cargo/bin/rga
 
-- name: install newer nodejs repo
-  become: yes
-  shell:
-    cmd: |
-      curl -fsSL https://deb.nodesource.com/setup_{{ git_versions.nodejs }} | bash -
-    creates: /etc/apt/sources.list.d/nodesource.list
-
-- name: install nodejs (provides npm)
-  become: yes
-  apt:
-    name:
-      - nodejs
-    state: latest
-    update_cache: yes
-    autoclean: yes
-    autoremove: yes
-
 - name: install 'dust' from cargo
   args:
     executable: /bin/bash
@@ -230,14 +182,6 @@
     cmd: |
       cargo install --locked bottom
     creates: ~/.cargo/bin/btm
-
-- name: install jc from pip via pipx
-  become: no
-  shell:
-    chdir: /tmp
-    cmd: |
-      ~/.local/bin/pipx install jc
-    creates: ~/.local/bin/jc
 
 - name: install pre-commit from pip via pipx
   become: no

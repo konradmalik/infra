@@ -21,19 +21,12 @@
       git clone --depth 1 https://github.com/zsh-users/zsh-completions.git
     creates: /usr/local/share/zsh/plugins/zsh-completions
 
-- name: install starship amd
-  become: yes
-  community.general.snap:
-    name:
-      - starship
-  when: ansible_architecture == "x86_64"
-
-- name: install starship arm
-  become: yes
+- name: install 'starship' from cargo
+  args:
+    executable: /bin/bash
+  environment:
+    PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
-    chdir: /tmp
     cmd: |
-      curl -L https://github.com/starship/starship/releases/download/v{{ git_versions.starship }}/starship-{{ ansible_architecture }}-unknown-linux-musl.tar.gz | tar xvfz -
-      mv starship /usr/local/bin/starship
-    creates: /usr/local/bin/starship
-  when: ansible_architecture == "aarch64"
+      cargo install --locked starship
+    creates: "~/.cargo/bin/starship"

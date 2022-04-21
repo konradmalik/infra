@@ -43,7 +43,6 @@
       - bash-bats
       - watchexec
       - python-pipx
-      - tidy-viewer
       - zathura-pdf-mupdf
       - unzip
       - wget

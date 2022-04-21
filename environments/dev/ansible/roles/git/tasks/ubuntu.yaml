@@ -9,12 +9,12 @@
     autoclean: yes
     autoremove: yes
 
-- name: install delta from github
-  become: yes
+- name: install 'git-delta' from cargo
+  args:
+    executable: /bin/bash
+  environment:
+    PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
-    chdir: /tmp
     cmd: |
-      curl -o delta.deb -L https://github.com/dandavison/delta/releases/download/{{ git_versions.git_delta }}/git-delta_{{ git_versions.git_delta }}_{{ arch_map[ansible_architecture] }}.deb
-      dpkg -i delta.deb
-      rm -rf delta.deb
-    creates: /usr/bin/delta
+      cargo install --locked git-delta
+    creates: ~/.cargo/bin/delta

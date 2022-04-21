@@ -1,4 +1,4 @@
-![Ubuntu Focal](https://github.com/konradmalik/infra/actions/workflows/focal.yaml/badge.svg)
+![Ubuntu Jammy](https://github.com/konradmalik/infra/actions/workflows/jammy.yaml/badge.svg)
 ![Arch Linux](https://github.com/konradmalik/infra/actions/workflows/arch.yaml/badge.svg)
 
 # Personal infrastructure
@@ -7,7 +7,7 @@ Works for:
 
 - Archlinux (amd64)
 - MacOS (amd64)
-- Ubuntu
+- Ubuntu (22.04)
   - amd64
   - aarch64
 

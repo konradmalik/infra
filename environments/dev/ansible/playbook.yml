@@ -45,6 +45,7 @@
       when:
         - gui_apps
         - ansible_system == "Linux"
+      ignore_errors: true
     - name: vscode
       when:
         - gui_apps

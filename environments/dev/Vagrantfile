@@ -1,8 +1,8 @@
 API_VERSION = "2"
 REPO_PATH = "/home/vagrant/Code/infra/environments/dev"
-box = ENV["VAGRANT_BOX"] || "ubuntu/focal64"
+box = ENV["VAGRANT_BOX"] || "ubuntu/jammy64"
 # archlinux/archlinux
-# ubuntu/focal64
+# ubuntu/jammy64
 
 Vagrant.configure(API_VERSION) do |config|
   config.vm.box = box

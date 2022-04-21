@@ -16,3 +16,14 @@
     cmd: stow --target="$HOME" {{ item }}
   with_items:
     - neovim
+
+- name: headless neovim autoinstall
+  timeout: 300 # seconds
+  # the first one initializes packer
+  # the second one installs all plugins
+  # the third one compiles all treesitter parsers
+  shell:
+    cmd: |
+      nvim --headless -c 'qa'
+      nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+      nvim --headless -c 'TSUpdateSync' -c 'qa'

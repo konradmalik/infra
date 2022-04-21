@@ -24,4 +24,5 @@
     PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
-      cargo install cargo-edit
+      cargo install --locked cargo-edit
+    creates: "~/.cargo/bin/cargo-add"
