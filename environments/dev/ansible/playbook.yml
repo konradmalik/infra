@@ -34,7 +34,6 @@
     - earthly
     - kubernetes
     - name: cloud
-      ignore_errors: yes
       when: private_machine
     - name: fonts
       when:
