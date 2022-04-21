@@ -2,7 +2,7 @@
   become: yes
   apt:
     name:
-      - fuse3
+      - libfuse2
     state: latest
     update_cache: yes
     autoclean: yes
