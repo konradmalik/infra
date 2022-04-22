@@ -1,0 +1,10 @@
+- name: install ansible and tools from apt
+  become: yes
+  apt:
+    name:
+      - ansible
+      - ansible-lint
+    state: latest
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes

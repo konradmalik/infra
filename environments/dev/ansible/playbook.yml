@@ -33,6 +33,8 @@
     # earthly requires docker
     - earthly
     - kubernetes
+    - name: ansible
+      when: private_machine
     - name: cloud
       when: private_machine
     - name: fonts

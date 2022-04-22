@@ -1,0 +1,8 @@
+- name: install ansible and tools from aur
+  become: yes
+  become_user: aur_builder
+  kewlfft.aur.aur:
+    use: yay
+    name:
+      - ansible
+      - ansible-lint
