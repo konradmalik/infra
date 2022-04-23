@@ -6,7 +6,7 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "konrad-terraform-states"
+    bucket = "konradmalik-infra"
     key    = "private/oracle"
     region = "eu-central-1"
   }
