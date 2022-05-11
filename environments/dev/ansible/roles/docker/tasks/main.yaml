@@ -7,6 +7,12 @@
 - import_tasks: arch.yaml
   when: ansible_distribution == "Archlinux"
 
+- name: disabling userland-proxy
+  become: true
+  ansible.builtin.copy:
+    dest: "/etc/docker/daemon.json"
+    content: '{"userland-proxy": true}'
+
 - name: enable docker daemon (dont start yet)
   become: yes
   service:
