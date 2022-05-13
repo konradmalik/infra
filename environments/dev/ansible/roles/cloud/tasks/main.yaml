@@ -6,3 +6,14 @@
 
 - import_tasks: arch.yaml
   when: ansible_distribution == "Archlinux"
+
+- name: install asdf terraform plugin
+  args:
+    executable: /bin/bash
+  shell:
+    chdir: /tmp
+    cmd: |
+      . ~/.asdf/asdf.sh && \
+      asdf plugin-add terraform && \
+      asdf install terraform latest
+    creates: ~/.asdf/plugins/terraform

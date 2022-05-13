@@ -15,13 +15,6 @@
         repo: "deb [arch={{ arch_map[ansible_architecture] }}] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
         state: present
         update_cache: yes
-
-    - name: install terraform
-      become: yes
-      apt:
-        pkg:
-          - terraform
-        state: present
   when: ansible_architecture == "x86_64"
 
 - name: add microsoft apt key
@@ -47,8 +40,6 @@
     pkg:
       - azure-cli
     state: present
-  # TODO remove once M$t adds proper jammy support
-  ignore_errors: yes
 
 - name: install awscli
   become: yes

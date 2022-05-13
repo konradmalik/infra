@@ -6,8 +6,5 @@
     name:
       - kubectl
       - helm
-      - flux-bin
-      - rancher-k3d-bin
       - kind-bin
       - k9s
-      - tilt-bin
