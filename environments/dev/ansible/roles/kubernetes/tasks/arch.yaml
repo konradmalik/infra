@@ -6,5 +6,4 @@
     name:
       - kubectl
       - helm
-      - kind-bin
       - k9s

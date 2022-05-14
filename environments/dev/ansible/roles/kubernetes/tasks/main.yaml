@@ -16,7 +16,18 @@
       . ~/.asdf/asdf.sh && \
       asdf plugin-add k3d && \
       asdf install k3d latest
-    creates: ~/.asdf/plugins/
+    creates: ~/.asdf/plugins/k3d
+
+- name: install asdf kind plugin
+  args:
+    executable: /bin/bash
+  shell:
+    chdir: /tmp
+    cmd: |
+      . ~/.asdf/asdf.sh && \
+      asdf plugin-add kind && \
+      asdf install kind latest
+    creates: ~/.asdf/plugins/kind
 
 - name: install asdf flux2 plugin
   args:

@@ -25,12 +25,3 @@
       mv k9s /usr/local/bin/k9s
     creates: /usr/local/bin/k9s
   when: ansible_architecture == "aarch64"
-
-- name: install kind from github (amd64)
-  become: yes
-  shell:
-    chdir: /tmp
-    cmd: |
-      curl -Lo /usr/local/bin/kind "https://kind.sigs.k8s.io/dl/v{{ git_versions.kind }}/kind-{{ ansible_system | lower }}-{{ arch_map[ansible_architecture] }}"
-      chmod +x /usr/local/bin/kind
-    creates: /usr/local/bin/kind

@@ -4,5 +4,4 @@
     name:
       - helm
       - k9s
-      - kind
     update_homebrew: yes
