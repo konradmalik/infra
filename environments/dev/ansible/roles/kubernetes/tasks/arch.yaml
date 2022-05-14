@@ -4,6 +4,4 @@
   kewlfft.aur.aur:
     use: yay
     name:
-      - kubectl
-      - helm
       - k9s

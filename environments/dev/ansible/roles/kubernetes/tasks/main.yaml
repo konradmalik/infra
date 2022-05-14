@@ -50,3 +50,25 @@
       asdf plugin-add tilt && \
       asdf install tilt latest
     creates: ~/.asdf/plugins/tilt
+
+- name: install asdf helm plugin
+  args:
+    executable: /bin/bash
+  shell:
+    chdir: /tmp
+    cmd: |
+      . ~/.asdf/asdf.sh && \
+      asdf plugin-add helm && \
+      asdf install helm latest
+    creates: ~/.asdf/plugins/helm
+
+- name: install asdf kubectl plugin
+  args:
+    executable: /bin/bash
+  shell:
+    chdir: /tmp
+    cmd: |
+      . ~/.asdf/asdf.sh && \
+      asdf plugin-add kubectl && \
+      asdf install kubectl latest
+    creates: ~/.asdf/plugins/kubectl

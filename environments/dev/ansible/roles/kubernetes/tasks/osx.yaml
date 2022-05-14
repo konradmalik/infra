@@ -2,6 +2,5 @@
 - name: install kubernetes brew packages
   community.general.homebrew:
     name:
-      - helm
       - k9s
     update_homebrew: yes
