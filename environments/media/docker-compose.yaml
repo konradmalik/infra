@@ -29,6 +29,7 @@ services:
     environment:
       TZ: "Europe/Warsaw"
       WEBPASSWORD: "konrad1"
+      FTLCONF_REPLY_ADDR4: "192.168.0.2"
       PIHOLE_DNS_: "1.1.1.1;1.0.0.1;8.8.8.8;8.8.4.4"
       DNSMASQ_LISTENING: "all"
       DHCP_ACTIVE: "true"
