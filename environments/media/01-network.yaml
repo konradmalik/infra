@@ -6,11 +6,18 @@ network:
             optional: true
     wifis:
         wlan0:
-            dhcp4: true
-            optional: true
+            dhcp4: false
+            optional: false
+            addresses:
+              - 192.168.0.2/24
+            routes:
+              - to: default
+                via: 192.168.0.1
             nameservers:
-                addresses: [192.168.0.59, 1.1.1.1, 9.9.9.9]
+                addresses:
+                  - 127.0.0.1
             access-points:
-                "access-point-name":
-                    password: "password"
+                "UPC7335283":
+                    password: "pass"
+
 

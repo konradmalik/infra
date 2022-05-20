@@ -2,7 +2,7 @@ version: "3"
 
 services:
   portainer:
-    image: portainer/portainer-ce:2.11.1-alpine
+    image: portainer/portainer-ce:2.13.1-alpine
     ports:
       - "9443:9443/tcp"
       - "8000:8000/tcp"
@@ -24,20 +24,21 @@ services:
           memory: 1G
 
   pihole:
-    image: pihole/pihole:2022.02.1
-    ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "67:67/udp"
-      - "80:80/tcp"
+    image: pihole/pihole:2022.04.3
+    network_mode: host
     environment:
       TZ: "Europe/Warsaw"
       WEBPASSWORD: "konrad1"
-      # HERE specify your external IP that will be used
-      FTLCONF_REPLY_ADDR4: "192.168.0.30"
       PIHOLE_DNS_: "1.1.1.1;1.0.0.1;8.8.8.8;8.8.4.4"
       DNSMASQ_LISTENING: "all"
-    hostname: "pi.hole"
+      DHCP_ACTIVE: "true"
+      DHCP_START: "192.168.0.150"
+      DHCP_END: "192.168.0.200"
+      DHCP_ROUTER: "192.168.0.1"
+    dns:
+      - 127.0.0.1
+      - 1.1.1.1
+      - 1.0.0.1
     cap_add:
       - NET_ADMIN
     volumes:

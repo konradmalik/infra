@@ -27,35 +27,31 @@ $ make delete
 
 ### Running
 
-Simply running pihole won't work, because port 53 is in use by systemd-resolved.
-This is a local dns server that caches results and talks with dns provided by the router.
-Simply disabling this service won't work either, because there won't be any dns resolvers on the machine (no internet).
+1. Handle systemd-resolved
+   Modern releases of Ubuntu (17.10+) include systemd-resolved which is configured by default to implement a caching DNS stub resolver.
+   This will prevent pi-hole from listening on port 53.
+   The stub resolver should be disabled with: `sudo sed -r -i.orig 's/#?DNSStubListener=yes/DNSStubListener=no/g' /etc/systemd/resolved.conf`.
 
-Follow the below steps to make all work:
+This will not change the nameserver settings, which point to the stub resolver thus preventing DNS resolution.
+Change the /etc/resolv.conf symlink to point to /run/systemd/resolve/resolv.conf, which is automatically updated to
+follow the system's netplan: `sudo sh -c 'rm /etc/resolv.conf && ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf'`
+After making these changes, you should restart systemd-resolved using systemctl restart systemd-resolved
 
-1. Disable systemd-resolved `sudo systemctl disable systemd-resolved && sudo systemctl stop systemd-resolved`
-2. Remove resolv.conf (this is a symlink to the one provided by the systemd-resolved): `sudo rm /etc/resolv.conf`
-3. Create proper local hostname entries so that the system can resolve the hostname of the machine.
-   Example:
+2. RPI static ip
+   - make sure the provided netplan is used
+   - you'll be disabling the DHCP server of your router and running that through pihole, so there is a bootstrap problem - how to assign IP to RPI? We use static IP `192.168.0.2` (make sure it's in the same segment as your gateway/router, eg. 192.168.0.1)
+   - disable DHCP on your router
+3. Run the stack
+   - make create
+4. Done
 
-```
-# /etc/hosts
-127.0.0.1 localhost
-::1 localhost
-127.0.1.1 rpi4-1.localdomain <your machine hostname from /etc/hostname>
-```
+If RPI dies or whatever, you'll need to:
 
-4. Set up manual, external DNS addresess for the machine that pihole will run on. Example:
-
-```
-# /etc/resolv.conf
-nameserver 1.1.1.1
-nameserver 1.0.0.1
-nameserver 9.9.9.9
-```
-
-5. Now edit the `docker-compose.<machine>.yaml` and make sure all is setup as you want. Remember to change `ServerIP` to the IP you will use for pihole DNS capabilities.
-6. This is it. Now run it and configure your clients or router accordingly!
+- use a computer
+- connect to wifi
+- assign a static IP address, anywhere from 192.168.0.X but not 1 neither 2
+- connect with the router at 192.168.0.1
+- enable dhcp
 
 ### Updating
 
@@ -79,4 +75,3 @@ HD_IDLE_OPTS="-a /dev/sda -i 300"
 
 Finally, enable and start this service.
 `sudo systemctl enable --now hd-idle.service`
-
