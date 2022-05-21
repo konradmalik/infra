@@ -1,0 +1,43 @@
+version: "3"
+
+services:
+  pihole:
+    image: pihole/pihole:2022.04.3
+    network_mode: host
+    environment:
+      TZ: "Europe/Warsaw"
+      WEBPASSWORD: "konrad1"
+      FTLCONF_REPLY_ADDR4: "192.168.0.3"
+      FTLCONF_REPLY_ADDR6: ""
+      PIHOLE_DNS_: "1.1.1.1;1.0.0.1;8.8.8.8;8.8.4.4"
+      DNSMASQ_LISTENING: "all"
+      DHCP_IPv6: "false"
+      IPv6: "false"
+      DHCP_ACTIVE: "false"
+      DHCP_START: "192.168.0.101"
+      DHCP_END: "192.168.0.149"
+      DHCP_ROUTER: "192.168.0.1"
+    dns:
+      - 127.0.0.1
+      - 1.1.1.1
+      - 1.0.0.1
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - pihole-etc-data:/etc/pihole/
+      - pihole-etc-dnsmasq:/etc/dnsmasq.d/
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: always
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 1G
+        reservations:
+          cpus: "0.5"
+          memory: 1G
+
+volumes:
+  pihole-etc-data:
+  pihole-etc-dnsmasq:
