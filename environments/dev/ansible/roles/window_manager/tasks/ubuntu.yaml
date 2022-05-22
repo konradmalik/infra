@@ -9,10 +9,20 @@
     autoclean: yes
     autoremove: yes
 
+- name: add regolith apt key
+  become: yes
+  shell:
+    chdir: /tmp
+    cmd: |
+      curl -sL https://regolith-linux.github.io/package-repo/regolith.key |
+        gpg --dearmor |
+        tee /etc/apt/trusted.gpg.d/regolith.asc > /dev/null
+    creates: /etc/apt/trusted.gpg.d/regolith.asc
+
 - name: add regolith apt repo
   become: yes
   apt_repository:
-    repo: "ppa:regolith-linux/stable"
+    repo: "deb [arch={{ arch_map[ansible_architecture] }}] https://regolith-release-ubuntu-{{ ansible_distribution_release }}-{{ arch_map[ansible_architecture] }}.s3.amazonaws.com {{ ansible_distribution_release }} main"
     state: present
     update_cache: yes
 
@@ -20,7 +30,7 @@
   become: yes
   apt:
     name:
-      - regolith-desktop-mobile
+      - regolith-desktop
     state: latest
     update_cache: yes
     autoclean: yes
