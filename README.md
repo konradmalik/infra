@@ -13,4 +13,4 @@ Works for:
 
 ATTENTION: Installing wil override any existing and matching dotfiles in your home dir! Only proceed when you have proper backups or if you know what you are doing.
 
-To use, proceed with README in `init/ansible` dir.
+To use, proceed with README in `environments/dev/ansible` dir.
