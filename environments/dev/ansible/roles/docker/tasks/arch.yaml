@@ -5,15 +5,6 @@
     use: yay
     name:
       - docker
-      - docker-compose-cli
+      - docker-compose
       - docker-credential-pass
       - dive
-
-- name: Ensures .docker/cli-plugins dir exists
-  file: path=~/.docker/cli-plugins state=directory
-
-- name: install docker-compose 2
-  get_url:
-    url: https://github.com/docker/compose/releases/download/v{{ git_versions.docker_compose }}/docker-compose-linux-{{ ansible_architecture }}
-    dest: ~/.docker/cli-plugins/docker-compose
-    mode: "0755"

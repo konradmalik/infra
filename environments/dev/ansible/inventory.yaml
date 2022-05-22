@@ -19,9 +19,8 @@ all:
     # versions used mostly by ubuntu tasks that install stuff from github directly
     git_versions:
       asdf: 0.10.0
-      docker_compose: 2.4.1
       dive: 0.10.0
-      dsq: 0.15.1
+      dsq: 0.18.0
       duf: 0.8.1
       earthly: 0.6.14
       k9s: 0.25.18

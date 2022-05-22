@@ -21,6 +21,7 @@
     pkg:
       - docker-ce
       - docker-ce-cli
+      - docker-compose
       - docker-compose-plugin
     state: present
 

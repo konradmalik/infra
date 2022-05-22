@@ -34,18 +34,6 @@
         groups: [docker]
         append: yes
 
-    - name: create fake docker-compose command
-      copy:
-        content: |
-          #!/bin/sh
-          exec docker compose "$@"
-        dest: /usr/local/bin/docker-compose
-
-    - name: make fake docker-compose command executable
-      file:
-        dest: /usr/local/bin/docker-compose
-        mode: a+x
-
   become: yes
   when:
     - ansible_system == "Linux"
