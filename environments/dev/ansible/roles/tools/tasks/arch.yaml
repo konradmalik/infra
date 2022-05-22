@@ -25,7 +25,6 @@
       - jo
       - jc-git
       # json tools end
-      - dsq
       - dust
       - zoxide
       - procs
@@ -47,3 +46,14 @@
       - unzip
       - wget
       - npm
+
+- name: install dsq from git (arch amd64)
+  become: yes
+  shell:
+    chdir: /tmp
+    cmd: |
+      curl -LO "https://github.com/multiprocessio/dsq/releases/download/{{ git_versions.dsq }}/dsq-linux-x64-{{ git_versions.dsq }}.zip"
+      unzip dsq-*-{{ git_versions.dsq }}.zip
+      sudo mv dsq /usr/local/bin/dsq
+    creates: /usr/local/bin/dsq
+  when: ansible_architecture == "x86_64"
