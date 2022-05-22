@@ -7,6 +7,13 @@
 - import_tasks: arch.yaml
   when: ansible_distribution == "Archlinux"
 
+- name: make sure /etc/docker exists
+  become: true
+  file:
+    path: /etc/docker
+    state: directory
+    mode: 0755
+
 - name: disabling userland-proxy
   become: true
   ansible.builtin.copy:
