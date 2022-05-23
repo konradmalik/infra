@@ -1,12 +1,3 @@
-- import_tasks: arch.yaml
-  when: ansible_distribution == "Archlinux"
-
-- import_tasks: linux.yaml
-  when: ansible_system == "Linux" and ansible_system != "Archlinux"
-
-- import_tasks: osx.yaml
-  when: ansible_distribution == "MacOSX"
-
 - name: install asdf earthly plugin
   args:
     executable: /bin/bash
