@@ -1,8 +1,0 @@
-- name: install earthly from github
-  become: yes
-  shell:
-    chdir: /tmp
-    cmd: |
-      curl -Lo /usr/local/bin/earthly https://github.com/earthly/earthly/releases/download/v{{ git_versions.earthly }}/earthly-linux-{{ arch_map[ansible_architecture] }}
-      chmod +x /usr/local/bin/earthly
-    creates: /usr/local/bin/earthly

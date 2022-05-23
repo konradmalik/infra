@@ -1,7 +1,0 @@
-- name: install earthly aur
-  become: yes
-  become_user: aur_builder
-  kewlfft.aur.aur:
-    use: yay
-    name:
-      - earthly-bin
