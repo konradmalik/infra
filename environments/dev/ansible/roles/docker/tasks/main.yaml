@@ -14,11 +14,11 @@
     state: directory
     mode: 0755
 
-- name: disabling userland-proxy and forcing overlay2 # overlay2 important in vagrant boxes
+- name: disabling userland-proxy
   become: true
   ansible.builtin.copy:
     dest: "/etc/docker/daemon.json"
-    content: '{"userland-proxy": true, "storage-driver": "overlay2"}'
+    content: '{"userland-proxy": true}'
 
 - name: enable docker daemon (dont start yet)
   become: yes
