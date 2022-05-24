@@ -36,12 +36,17 @@ all:
       armv7l: armhf
       aarch64: arm64
 
+vms:
+  hosts:
+    devarch:
+  vars:
+    enable_ssh: true
+    private_machine: true
+
 local:
   hosts:
     localhost:
-      ansible_connection: local
-      enable_ssh: false
-      private_machine: true
-    devarch:
-      enable_ssh: true
-      private_machine: true
+  vars:
+    ansible_connection: local
+    enable_ssh: false
+    private_machine: true
