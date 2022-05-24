@@ -14,3 +14,11 @@
   with_items:
     - git
     - git-{{ ansible_system | lower }}
+
+- name: install git-open globally
+  become: yes
+  community.general.npm:
+    name: "{{ item }}"
+    global: yes
+  with_items:
+    - git-open
