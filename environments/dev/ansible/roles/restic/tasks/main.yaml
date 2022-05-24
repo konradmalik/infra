@@ -8,7 +8,7 @@
   become: yes
   shell:
     chdir: "{{ repo_path }}/private/files"
-    cmd: stow --target="$HOME" --no-folding {{ item }}
+    cmd: stow --target="/" --no-folding {{ item }}
   with_items:
     - restic-devarch
 

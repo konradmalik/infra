@@ -39,7 +39,9 @@ all:
 local:
   hosts:
     localhost:
-  vars:
-    ansible_connection: local
-    enable_ssh: false
-    private_machine: true
+      ansible_connection: local
+      enable_ssh: false
+      private_machine: true
+    devarch:
+      enable_ssh: true
+      private_machine: true
