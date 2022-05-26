@@ -1,5 +1,5 @@
 - name: install git tools
-  become: yes
+  become: true
   apt:
     name:
       - git-extras
@@ -18,3 +18,28 @@
     cmd: |
       cargo install --locked git-delta
     creates: ~/.cargo/bin/delta
+
+- name: install glab from snap
+  become: true
+  community.general.snap:
+    name: glab
+    channel: latest/edge
+  register: glab
+
+- name: allow glab to access ssh-keys
+  become: true
+  shell:
+    cmd: snap connect glab:ssh-keys
+  when: glab.changed
+
+- name: install asdf lazygit plugin
+  args:
+    executable: /bin/bash
+  shell:
+    chdir: /tmp
+    cmd: |
+      . ~/.asdf/asdf.sh && \
+      asdf plugin-add lazygit && \
+      asdf install lazygit latest && \
+      asdf global lazygit latest
+    creates: ~/.asdf/plugins/lazygit

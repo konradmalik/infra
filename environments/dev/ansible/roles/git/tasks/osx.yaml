@@ -4,4 +4,6 @@
       - git-delta
       - git-extras
       - git-crypt
+      - lazygit
+      - glab
     update_homebrew: yes
