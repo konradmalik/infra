@@ -72,3 +72,25 @@
       asdf plugin-add kubectl && \
       asdf install kubectl latest
     creates: ~/.asdf/plugins/kubectl
+
+- name: install asdf kustomize plugin
+  args:
+    executable: /bin/bash
+  shell:
+    chdir: /tmp
+    cmd: |
+      . ~/.asdf/asdf.sh && \
+      asdf plugin-add kustomize && \
+      asdf install kustomize latest
+    creates: ~/.asdf/plugins/kustomize
+
+- name: install asdf kubeconform plugin
+  args:
+    executable: /bin/bash
+  shell:
+    chdir: /tmp
+    cmd: |
+      . ~/.asdf/asdf.sh && \
+      asdf plugin-add kubeconform && \
+      asdf install kubeconform latest
+    creates: ~/.asdf/plugins/kubeconform
