@@ -17,6 +17,7 @@
       asdf plugin-add k3d && \
       asdf install k3d latest
     creates: ~/.asdf/plugins/k3d
+  when: ansible_architecture == "x86_64"
 
 - name: install asdf kind plugin
   args:
@@ -50,6 +51,7 @@
       asdf plugin-add tilt && \
       asdf install tilt latest
     creates: ~/.asdf/plugins/tilt
+  when: ansible_architecture == "x86_64"
 
 - name: install asdf helm plugin
   args:

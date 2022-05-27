@@ -17,6 +17,7 @@ network:
             nameservers:
                 addresses:
                   - 127.0.0.1
+                  - 1.1.1.1
             access-points:
                 "UPC7335283":
                     password: "pass"
