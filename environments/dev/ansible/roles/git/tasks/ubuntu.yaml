@@ -4,6 +4,7 @@
     name:
       - git-extras
       - git-crypt
+      - git-lfs
     state: latest
     update_cache: yes
     autoclean: yes

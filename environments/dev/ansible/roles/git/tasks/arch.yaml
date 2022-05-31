@@ -7,5 +7,6 @@
       - git-delta
       - git-extras
       - git-crypt
+      - git-lfs
       - lazygit
       - glab
