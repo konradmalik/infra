@@ -18,14 +18,14 @@ all:
     vmware_guest: false
     # versions used mostly by ubuntu tasks that install stuff from github directly
     git_versions:
-      asdf: 0.10.0
+      asdf: 0.10.1
       dive: 0.10.0
       dsq: 0.18.0
       duf: 0.8.1
-      earthly: 0.6.14
       k9s: 0.25.18
       nvim: 0.7.0
       shfmt: 3.4.3
+      sshocker: 0.3.0
       tinygo: 0.22.0
       viddy: 0.3.4
     # Mappings from Ansible reported architecture to distro release architecture
