@@ -14,6 +14,8 @@ all:
     gui_apps: false
     # if enabled, ssh config will be linked (outbound ssh)
     private_machine: false
+    # if true, will autoreboot at 2 am after automatic updates
+    enable_auto_reboot: false
     # if enabled, will setup stuff needed to properly work inside a vmware guest
     vmware_guest: false
     # versions used mostly by ubuntu tasks that install stuff from github directly

@@ -4,6 +4,7 @@
     - name: aur_builder-setup
       when: ansible_distribution == "Archlinux"
     - system
+    - unattended_upgrades
     # languages earliest possible (needed later)
     - python
     - go
