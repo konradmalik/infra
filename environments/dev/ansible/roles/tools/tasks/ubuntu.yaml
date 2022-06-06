@@ -96,8 +96,7 @@
         chdir: /tmp
         cmd: |
           curl -LO https://github.com/akavel/up/releases/latest/download/up
-          chmod +x up
-          mv up /usr/local/bin/
+          install up /usr/local/bin/
         creates: /usr/local/bin/up
 
     - name: install viddy from github
@@ -106,8 +105,7 @@
         chdir: /tmp
         cmd: |
           curl -L https://github.com/sachaos/viddy/releases/download/v{{ git_versions.viddy }}/viddy_{{ git_versions.viddy }}_{{ ansible_system }}_{{ ansible_architecture }}.tar.gz | tar xvfz -
-          chmod +x viddy
-          mv viddy /usr/local/bin/
+          install viddy /usr/local/bin/
         creates: /usr/local/bin/viddy
 
     - name: install dsq from git (ubuntu amd64)

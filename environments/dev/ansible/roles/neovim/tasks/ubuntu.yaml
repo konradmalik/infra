@@ -13,8 +13,8 @@
   shell:
     chdir: /tmp
     cmd: |
-      curl -o /usr/local/bin/nvim -L https://github.com/neovim/neovim/releases/download/v{{ git_versions.nvim }}/nvim.appimage
-      chmod +x /usr/local/bin/nvim
+      curl -o nvim -L https://github.com/neovim/neovim/releases/download/v{{ git_versions.nvim }}/nvim.appimage
+      install nvim /usr/local/bin/
     creates: /usr/local/bin/nvim
   when: ansible_architecture == "x86_64"
 
@@ -31,6 +31,6 @@
   shell:
     chdir: /tmp
     cmd: |
-      curl -o /usr/local/bin/shfmt -L https://github.com/mvdan/sh/releases/download/v{{ git_versions.shfmt }}/shfmt_v{{ git_versions.shfmt }}_linux_{{ arch_map[ansible_architecture] }}
-      chmod +x /usr/local/bin/shfmt
+      curl -o shfmt -L https://github.com/mvdan/sh/releases/download/v{{ git_versions.shfmt }}/shfmt_v{{ git_versions.shfmt }}_linux_{{ arch_map[ansible_architecture] }}
+      install shfmt /usr/local/bin/
     creates: /usr/local/bin/shfmt
