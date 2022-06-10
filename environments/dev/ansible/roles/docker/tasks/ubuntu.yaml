@@ -42,3 +42,12 @@
     name: docker-credential-pass
     channel: latest/edge
   when: ansible_architecture == "x86_64"
+
+- name: install nerdctl from github
+  become: yes
+  shell:
+    chdir: /tmp
+    cmd: |
+      curl -L https://github.com/containerd/nerdctl/releases/download/v{{ git_versions.nerdctl }}/nerdctl-{{ git_versions.nerdctl }}-linux-{{ arch_map[ansible_architecture] }}.tar.gz | tar xvfz -
+      install nerdctl /usr/local/bin/
+    creates: /usr/local/bin/nerdctl

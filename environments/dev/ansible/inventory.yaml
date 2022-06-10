@@ -25,6 +25,7 @@ all:
       dsq: 0.18.0
       duf: 0.8.1
       k9s: 0.25.18
+      nerdctl: 0.20.0
       nvim: 0.7.0
       shfmt: 3.4.3
       sshocker: 0.3.0

@@ -8,3 +8,4 @@
       - docker-compose
       - docker-credential-pass
       - dive
+      - nerdctl-git

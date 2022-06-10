@@ -1,7 +1,7 @@
-- name: install docker cask
+- name: install lima
   community.general.homebrew_cask:
     name:
-      - docker
+      - lima
 
 - name: install docker brew packages
   community.general.homebrew:
