@@ -50,11 +50,3 @@
       unzip awscliv2.zip
       ./aws/install
     creates: /usr/local/aws-cli
-
-- name: install oci-cli from pip via pipx
-  become: no
-  shell:
-    chdir: /tmp
-    cmd: |
-      ~/.local/bin/pipx install oci-cli
-    creates: ~/.local/bin/oci

@@ -3,5 +3,4 @@
     name:
       - azure-cli
       - awscli
-      - oci-cli
     update_homebrew: yes
