@@ -6,6 +6,7 @@
 - name: install brew packages
   community.general.homebrew:
     name:
+      - gnu-sed
       - fzf
       - bat
       - bottom
