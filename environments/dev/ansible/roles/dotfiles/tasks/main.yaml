@@ -17,4 +17,5 @@
     cmd: stow --target="$HOME" --no-folding {{ item }}
   with_items:
     - gpg
+    - bin
 
