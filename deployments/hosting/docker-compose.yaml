@@ -13,6 +13,7 @@ services:
       TZ: "Europe/Warsaw"
       WEBPASSWORD: "konrad1"
       FTLCONF_REPLY_ADDR4: "192.168.0.3"
+      FTLCONF_BLOCK_ICLOUD_PR: "false"
       PIHOLE_DNS_: "1.1.1.1;1.0.0.1;8.8.8.8;8.8.4.4"
       DNSMASQ_LISTENING: "all"
     dns:
