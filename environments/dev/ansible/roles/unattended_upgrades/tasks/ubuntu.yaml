@@ -38,5 +38,5 @@
       ansible.builtin.lineinfile:
         path: /etc/apt/apt.conf.d/50unattended-upgrades
         regexp: "Unattended-Upgrade::Automatic-Reboot-Time"
-        line: 'Unattended-Upgrade::Automatic-Reboot-Time "02:00"'
+        line: 'Unattended-Upgrade::Automatic-Reboot-Time "02:00";'
   when: enable_auto_reboot
