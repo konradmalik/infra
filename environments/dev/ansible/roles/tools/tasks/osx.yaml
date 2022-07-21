@@ -6,6 +6,8 @@
 - name: install brew packages
   community.general.homebrew:
     name:
+      - coreutils
+      - findutils
       - gnu-sed
       - fzf
       - bat
