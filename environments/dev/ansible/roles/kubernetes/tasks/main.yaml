@@ -96,3 +96,10 @@
       asdf plugin-add kubeconform && \
       asdf install kubeconform latest
     creates: ~/.asdf/plugins/kubeconform
+
+- name: link k9s dot files
+  shell:
+    chdir: "{{ repo_path }}/files"
+    cmd: stow --target="$HOME" {{ item }}
+  with_items:
+    - k9s
