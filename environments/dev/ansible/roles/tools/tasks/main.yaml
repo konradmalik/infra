@@ -19,3 +19,27 @@
     cmd: |
       cargo install --locked tidy-viewer
     creates: "~/.cargo/bin/tidy-viewer"
+
+- name: install mypy from pip via pipx
+  become: no
+  shell:
+    chdir: /tmp
+    cmd: |
+      ~/.local/bin/pipx install mypy
+    creates: ~/.local/bin/mypy
+
+- name: install black from pip via pipx
+  become: no
+  shell:
+    chdir: /tmp
+    cmd: |
+      ~/.local/bin/pipx install black
+    creates: ~/.local/bin/black
+
+- name: install isort from pip via pipx
+  become: no
+  shell:
+    chdir: /tmp
+    cmd: |
+      ~/.local/bin/pipx install isort
+    creates: ~/.local/bin/isort
