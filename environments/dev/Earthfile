@@ -1,9 +1,6 @@
 VERSION 0.6
 
-ARG IMAGE=archlinux:base-devel
-#ARG IMAGE=ubuntu:jammy
-
-FROM $IMAGE
+FROM scratch
 
 jammy:
     FROM ubuntu:jammy
@@ -20,7 +17,7 @@ ansible:
     ARG BASE=+arch
 
     FROM $BASE
-    RUN echo "$USER   ALL=(ALL:ALL) ALL" > /etc/sudoers
+    RUN echo "$USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers
     RUN useradd -m $USER
     USER $USER
     WORKDIR /home/$USER
@@ -29,7 +26,7 @@ ansible:
     RUN ./ansible/install-dependencies.sh
     RUN cd ./ansible && \
         ansible-playbook \
-            -i inventory.yaml \
+            -i ./inventory.yaml \
             ./playbook.yml \
             --extra-vars "variable_host=localhost" \
-            --extra-vars "ansible_become_pass=passwordless"
+            --extra-vars "ansible_become_pass=''"

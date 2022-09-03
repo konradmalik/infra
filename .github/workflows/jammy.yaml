@@ -22,6 +22,6 @@ jobs:
         run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.19/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
       - name: Earthly version
         run: earthly --version
-      - name: Run for archlinux
+      - name: Run for jammy
         working-directory: ./environments/dev
-        run: earthly --ci --push +ansible --BASE=+arch
+        run: earthly --ci --push +ansible --BASE=+jammy
