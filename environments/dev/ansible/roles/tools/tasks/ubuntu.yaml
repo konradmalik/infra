@@ -108,8 +108,8 @@
       shell:
         chdir: /tmp
         cmd: |
-          curl -LO "https://github.com/multiprocessio/dsq/releases/download/{{ git_versions.dsq }}/dsq-linux-x64-{{ git_versions.dsq }}.zip"
-          unzip dsq-*-{{ git_versions.dsq }}.zip
+          curl -LO "https://github.com/multiprocessio/dsq/releases/download/v{{ git_versions.dsq }}/dsq-linux-x64-v{{ git_versions.dsq }}.zip"
+          unzip dsq-*-v{{ git_versions.dsq }}.zip
           sudo mv dsq /usr/local/bin/dsq
         creates: /usr/local/bin/dsq
 
