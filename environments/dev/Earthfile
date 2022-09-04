@@ -36,5 +36,5 @@ ansible:
         ansible-playbook \
             -i ./inventory.yaml \
             ./playbook.yml \
-            --extra-vars "variable_host=localhost" \
+            --extra-vars "variable_host=local" \
             --extra-vars "ansible_become_pass=''"
