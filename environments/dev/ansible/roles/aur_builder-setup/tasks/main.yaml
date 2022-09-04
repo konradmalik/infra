@@ -17,6 +17,7 @@
   become: yes
   lineinfile:
     path: /etc/sudoers.d/11-install-aur_builder
+    mode: 0440
     line: "aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman"
     create: yes
     validate: "visudo -cf %s"

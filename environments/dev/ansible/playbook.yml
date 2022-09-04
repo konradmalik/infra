@@ -4,7 +4,8 @@
     - name: aur_builder-setup
       when: ansible_distribution == "Archlinux"
     - system
-    - unattended_upgrades
+    - name: unattended_upgrades
+      when: not docker
     # languages earliest possible (needed later)
     - python
     - go
@@ -28,40 +29,53 @@
     # macos should go through app store
     - name: tailscale
       when: ansible_system == "Linux"
-    - docker
+    - name: docker
+      when: not docker
     # deprecate docker once comfortable with podman
-    - podman
+    - name: podman
+      when: not docker
     # earthly requires docker
-    - earthly
-    - kubernetes
+    - name: earthly
+      when: not docker
+    - name: kubernetes
+      when: not docker
     - name: ansible
       when: private_machine
     - name: cloud
-      when: private_machine
+      when:
+        - private_machine
+        - not docker
     - name: fonts
       when:
         - gui_apps
+        - not docker
     - name: alacritty
       when:
         - gui_apps
+        - not docker
     - name: window_manager
       when:
         - gui_apps
+        - not docker
         - ansible_system == "Linux"
-      ignore_errors: true
     - name: vscode
       when:
         - gui_apps
+        - not docker
         - ansible_architecture == "x86_64"
     - name: vagrant
       when:
+        - not docker
         - ansible_architecture == "x86_64"
     - name: vmware_guest
       when:
+        - not docker
         - vmware_guest
     # a backup solution
     - name: restic
-      when: "'devarch' in inventory_hostname"
+      when:
+        - not docker
+        - "'devarch' in inventory_hostname"
     # KEEP THIS AT THE VERY END
     - name: aur_builder-cleanup
       when: ansible_distribution == "Archlinux"

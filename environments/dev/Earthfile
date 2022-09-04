@@ -17,13 +17,21 @@ ansible:
     ARG BASE=+arch
 
     FROM $BASE
-    RUN echo "$USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers
-    RUN useradd -m $USER
+    RUN echo "$USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/12-user-nopasswd
+    RUN chmod 0440 /etc/sudoers.d/12-user-nopasswd
+    RUN useradd --create-home $USER
     USER $USER
     WORKDIR /home/$USER
 
-    COPY --dir ./ansible .
+    RUN mkdir ./ansible
+    COPY ./ansible/install-dependencies.sh ./ansible/install-dependencies.sh
     RUN ./ansible/install-dependencies.sh
+
+    RUN set -eux; \
+            mkdir ~/.ssh; \
+            curl https://github.com/konradmalik.keys | tee -a ~/.ssh/authorized_keys
+
+    COPY --dir ./ansible .
     RUN cd ./ansible && \
         ansible-playbook \
             -i ./inventory.yaml \

@@ -14,7 +14,7 @@
   shell:
     chdir: /tmp
     cmd: |
-      curl -sL https://regolith-linux.github.io/package-repo/regolith.key |
+      curl -sL https://regolith-desktop.org/regolith.key |
         gpg --dearmor |
         tee /etc/apt/trusted.gpg.d/regolith.asc > /dev/null
     creates: /etc/apt/trusted.gpg.d/regolith.asc
@@ -22,7 +22,7 @@
 - name: add regolith apt repo
   become: yes
   apt_repository:
-    repo: "deb [arch={{ arch_map[ansible_architecture] }}] https://regolith-release-ubuntu-{{ ansible_distribution_release }}-{{ arch_map[ansible_architecture] }}.s3.amazonaws.com {{ ansible_distribution_release }} main"
+    repo: "deb [arch={{ arch_map[ansible_architecture] }}] https://regolith-desktop.org/release-ubuntu-{{ ansible_distribution_release }}-{{ arch_map[ansible_architecture] }} {{ ansible_distribution_release }} main"
     state: present
     update_cache: yes
 

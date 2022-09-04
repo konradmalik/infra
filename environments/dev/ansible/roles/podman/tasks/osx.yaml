@@ -10,6 +10,6 @@
   shell:
     chdir: /tmp
     cmd: |
-      ~/.local/bin/pipx install podman-compose
+      pipx install podman-compose
     creates: ~/.local/bin/podman-compose
 

@@ -10,6 +10,9 @@ all:
     repo_path: "/home/{{ target_user }}/Code/dotfiles"
     # zsh files dir (same as in zshenv)
     zdotdir: "~/.config/zsh"
+    # if true - assumes installation in a docker-container
+    # some apps will be disabled, like the docker daemon itself
+    docker: false
     # if enabled - some gui only apps will be installed as well
     gui_apps: false
     # if enabled, ssh config will be linked (outbound ssh)
@@ -20,17 +23,17 @@ all:
     vmware_guest: false
     # versions used mostly by ubuntu tasks that install stuff from github directly
     git_versions:
-      asdf: 0.10.1
+      asdf: 0.10.2
       dive: 0.10.0
-      dsq: 0.18.0
+      dsq: 0.22.0
       duf: 0.8.1
-      k9s: 0.25.18
-      nerdctl: 0.20.0
-      nvim: 0.7.0
-      shfmt: 3.4.3
+      k9s: 0.26.3
+      nerdctl: 0.22.2
+      nvim: 0.7.2
+      shfmt: 3.5.1
       sshocker: 0.3.0
-      tinygo: 0.22.0
-      viddy: 0.3.4
+      tinygo: 0.25.0
+      viddy: 0.3.6
     # Mappings from Ansible reported architecture to distro release architecture
     arch_map:
       x86_64: amd64
@@ -43,13 +46,33 @@ vms:
   hosts:
     devarch:
   vars:
+    docker: false
+    enable_auto_reboot: false
     enable_ssh: true
+    gui_apps: false
     private_machine: true
+    vmware_guest: false
 
 local:
   hosts:
     localhost:
   vars:
     ansible_connection: local
+    docker: false
+    enable_auto_reboot: false
     enable_ssh: false
+    gui_apps: false
     private_machine: true
+    vmware_guest: false
+
+docker:
+  hosts:
+    localhost:
+  vars:
+    ansible_connection: local
+    docker: true
+    enable_auto_reboot: false
+    enable_ssh: false
+    gui_apps: false
+    private_machine: false
+    vmware_guest: false
