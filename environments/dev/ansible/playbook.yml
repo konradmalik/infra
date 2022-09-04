@@ -1,5 +1,15 @@
 - hosts: "{{ variable_host | default('local') }}"
   gather_facts: true
+  tasks:
+    - name: Print my vars
+      ansible.builtin.debug:
+        msg: |
+          docker: "{{ docker }}"
+          enable_auto_reboot: "{{ enable_auto_reboot }}"
+          enable_ssh: "{{ enable_ssh }}"
+          gui_apps: "{{ gui_apps }}"
+          private_machine: "{{ private_machine }}"
+          vmware_guest: "{{ vmware_guest }}"
   roles:
     - name: aur_builder-setup
       when: ansible_distribution == "Archlinux"

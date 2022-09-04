@@ -5,6 +5,5 @@
       - git-extras
       - git-crypt
       - git-lfs
-      - lazygit
       - glab
     update_homebrew: yes
