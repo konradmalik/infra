@@ -2,16 +2,6 @@ API_VERSION = "2"
 REPO_PATH = "/home/vagrant/Code/infra/environments/dev"
 
 Vagrant.configure(API_VERSION) do |config|
-  config.vm.define "jammy" do |jammy|
-    jammy.vm.box = "ubuntu/jammy64"
-  end
-
-  config.vm.define "arch" do |arch|
-    arch.vm.box = "archlinux/archlinux"
-    # https://bugs.archlinux.org/task/75661
-    arch.vm.provision "shell", inline: "pacman -Sy --noconfirm python-packaging"
-  end
-
   # networking
   #config.vm.network :private_network, ip: "192.168.10.2"
   config.ssh.forward_agent = true
@@ -24,6 +14,16 @@ Vagrant.configure(API_VERSION) do |config|
     vb.name = "devenv"
     vb.cpus = 2
     vb.memory = 2048
+  end
+
+  config.vm.define "jammy" do |jammy|
+    jammy.vm.box = "ubuntu/jammy64"
+  end
+
+  config.vm.define "arch" do |arch|
+    arch.vm.box = "archlinux/archlinux"
+    # https://bugs.archlinux.org/task/75661
+    arch.vm.provision "shell", inline: "sudo pacman -S --noconfirm python-packaging"
   end
 
   # provisioning
