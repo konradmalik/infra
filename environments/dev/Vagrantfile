@@ -26,6 +26,8 @@ Vagrant.configure(API_VERSION) do |config|
   #config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "/home/vagrant/.ssh/id_rsa.pub"
   # main provisioning
   config.vm.provision "ansible_local" do |ansible|
+    # due to problems on arch
+    ansible.install_mode = "pip"
     ansible.playbook = REPO_PATH + "/ansible/playbook.yml"
     ansible.inventory_path = REPO_PATH + "/ansible/inventory.yaml"
     ansible.limit  = "local"
