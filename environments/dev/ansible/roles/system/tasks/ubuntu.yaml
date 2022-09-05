@@ -16,6 +16,7 @@
       - git
       - unzip
       - pip
+      - cmake
     state: latest
     update_cache: yes
     autoclean: yes

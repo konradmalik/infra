@@ -67,7 +67,7 @@ local:
 
 docker:
   hosts:
-    localhost:
+    devarchd:
   vars:
     ansible_connection: local
     docker: true
