@@ -1,11 +1,16 @@
 API_VERSION = "2"
 REPO_PATH = "/home/vagrant/Code/infra/environments/dev"
-box = ENV["VAGRANT_BOX"] || "ubuntu/jammy64"
-# archlinux/archlinux
-# ubuntu/jammy64
 
 Vagrant.configure(API_VERSION) do |config|
-  config.vm.box = box
+  config.vm.define "jammy" do |jammy|
+    jammy.vm.box = "ubuntu/jammy64"
+  end
+
+  config.vm.define "arch" do |arch|
+    arch.vm.box = "archlinux/archlinux"
+    # https://bugs.archlinux.org/task/75661
+    arch.vm.provision "shell", inline: "pacman -Sy --noconfirm python-packaging"
+  end
 
   # networking
   #config.vm.network :private_network, ip: "192.168.10.2"
@@ -26,8 +31,6 @@ Vagrant.configure(API_VERSION) do |config|
   #config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "/home/vagrant/.ssh/id_rsa.pub"
   # main provisioning
   config.vm.provision "ansible_local" do |ansible|
-    # due to problems on arch
-    ansible.install_mode = "pip"
     ansible.playbook = REPO_PATH + "/ansible/playbook.yml"
     ansible.inventory_path = REPO_PATH + "/ansible/inventory.yaml"
     ansible.limit  = "local"
