@@ -46,6 +46,9 @@
       - unzip
       - wget
       - npm
+      # formatting from cmdline
+      - prettier
+      - shfmt
 
 - name: install dsq from git (arch amd64)
   become: yes

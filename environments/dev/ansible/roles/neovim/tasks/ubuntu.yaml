@@ -17,20 +17,3 @@
       install nvim /usr/local/bin/
     creates: /usr/local/bin/nvim
   when: ansible_architecture == "x86_64"
-
-- name: install prettier globally
-  become: yes
-  community.general.npm:
-    name: "{{ item }}"
-    global: yes
-  with_items:
-    - prettier
-
-- name: install shfmt binary
-  become: yes
-  shell:
-    chdir: /tmp
-    cmd: |
-      curl -o shfmt -L https://github.com/mvdan/sh/releases/download/v{{ git_versions.shfmt }}/shfmt_v{{ git_versions.shfmt }}_linux_{{ arch_map[ansible_architecture] }}
-      install shfmt /usr/local/bin/
-    creates: /usr/local/bin/shfmt

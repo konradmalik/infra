@@ -18,7 +18,7 @@
     - neovim
 
 - name: headless neovim autoinstall
-  timeout: 300 # seconds
+  timeout: 400 # seconds
   # the first one initializes packer
   # the second one installs all plugins
   # the third one compiles all treesitter parsers

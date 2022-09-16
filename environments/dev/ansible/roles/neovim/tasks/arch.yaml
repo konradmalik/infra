@@ -5,5 +5,3 @@
     use: yay
     name:
       - neovim
-      - prettier
-      - shfmt

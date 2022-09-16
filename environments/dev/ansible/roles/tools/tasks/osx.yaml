@@ -39,6 +39,9 @@
       - unzip
       - wget
       - node
+      # formatting from cmdline
+      - prettier
+      - shfmt
     update_homebrew: yes
 
 - name: install brew casks
