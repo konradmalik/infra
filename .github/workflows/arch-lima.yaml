@@ -1,0 +1,54 @@
+name: Arch Linux lima test
+
+on: [push]
+
+jobs:
+  vagrant-up:
+    runs-on: macos-latest
+    env:
+      MACHINE: arch
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Install Lima
+        run: |
+          set -x
+          # Github runners seem to symlink to python2.7 version of 2to3,
+          # breaking upgrades to latest python@3.9
+          rm -f /usr/local/bin/2to3
+          time brew update
+          time brew install lima
+          time brew upgrade
+
+      - name: Cache ~/Library/Caches/lima/download
+        uses: actions/cache@v3
+        with:
+          path: ~/Library/Caches/lima/download
+          key: ${{ runner.os }}-${{ env.MACHINE }}
+
+      - name: Start devarch
+        working-directory: ./environments/dev/lima
+        run: |
+          set -x
+          time limactl start -n devarch ./devarch.yaml
+
+      - name: Install dependencies
+        working-directory: ./environments/dev/ansible
+        run: |
+          set -x
+          time limactl shell devarch sudo pacman -Sy
+          time limactl shell devarch sudo pacman -S ansible
+          time limactl shell devarch ./install-dependencies.sh
+
+      - name: Run ansible
+        working-directory: ./environments/dev/ansible
+        run: |
+          set -x
+          time ansible-playbook \
+                -i ./inventory.yaml \
+                ./playbook.yml \
+                --extra-vars "variable_host=lima" \
+                --extra-vars "private_machine=false" \
+                --extra-vars "ansible_become_pass=''"
