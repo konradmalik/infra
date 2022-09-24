@@ -20,7 +20,7 @@
       register: stat_result
 
     - name: link asdf completion
-      file:
+      ansible.builtin.file:
         src: "~/.asdf/completions/_asdf"
         path: "{{ zdotdir }}/zfunc/_asdf"
         state: link
