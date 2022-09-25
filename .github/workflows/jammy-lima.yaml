@@ -1,4 +1,4 @@
-name: Arch Linux lima test
+name: Ubuntu Jammy lima test
 
 on: [push]
 
@@ -27,7 +27,7 @@ jobs:
           key: ${{ runner.os }}-archlinux
 
       - name: Start lima
-        run: time limactl start --name=default --tty=false template://archlinux
+        run: time limactl start --name=default --tty=false template://ubuntu-lts
 
       - name: Copy files
         run: |
@@ -39,7 +39,7 @@ jobs:
         working-directory: ./environments/dev/ansible
         run: |
           set -x
-          time lima sudo pacman -Sy --noconfirm ansible python python-packaging
+          time lima sudo apt update && sudo apt install -y ansible python3
           time lima ./install-dependencies.sh
 
       - name: Run ansible
