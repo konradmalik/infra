@@ -3,7 +3,7 @@ name: Arch Linux test
 on: [push]
 
 jobs:
-  vagrant-up:
+  arch-vagrant-up:
     runs-on: macos-10.15
     env:
       MACHINE: arch

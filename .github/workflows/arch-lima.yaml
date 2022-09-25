@@ -3,7 +3,7 @@ name: Arch Linux lima test
 on: [push]
 
 jobs:
-  vagrant-up:
+  arch-lima-up:
     runs-on: macos-latest
     env:
       MACHINE: arch
@@ -32,7 +32,7 @@ jobs:
         working-directory: ./environments/dev/lima
         run: |
           set -x
-          time limactl start -n devarch ./devarch.yaml
+          time limactl start --name=devarch ./devarch.yaml
 
       - name: Install dependencies
         working-directory: ./environments/dev/ansible

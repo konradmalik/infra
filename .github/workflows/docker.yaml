@@ -3,7 +3,7 @@ name: Arch Linux Docker test
 on: [push]
 
 jobs:
-  earthly:
+  arch-earthly-up:
     runs-on: ubuntu-latest
     env:
       FORCE_COLOR: 1
