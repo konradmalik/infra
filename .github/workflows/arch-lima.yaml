@@ -29,26 +29,27 @@ jobs:
           key: ${{ runner.os }}-${{ env.MACHINE }}
 
       - name: Start devarch
-        working-directory: ./environments/dev/lima
+        run: time limactl start --name=devarch --tty=false template://archlinux
+
+      - name: Copy files
         run: |
           set -x
-          time limactl start --name=devarch ./devarch.yaml
+          time limactl shell devarch mkdir -p /home/runner.linux/Code
+          time limactl shell devarch cp -a ../infra /home/runner.linux/Code/
 
       - name: Install dependencies
         working-directory: ./environments/dev/ansible
         run: |
           set -x
-          time limactl shell devarch sudo pacman -Sy
-          time limactl shell devarch sudo pacman -S ansible
+          time limactl shell devarch sudo pacman -Sy --noconfirm ansible python python-packaging
           time limactl shell devarch ./install-dependencies.sh
 
       - name: Run ansible
         working-directory: ./environments/dev/ansible
         run: |
-          set -x
-          time ansible-playbook \
-                -i ./inventory.yaml \
-                ./playbook.yml \
-                --extra-vars "variable_host=lima" \
-                --extra-vars "private_machine=false" \
-                --extra-vars "ansible_become_pass=''"
+          time limactl shell devarch ansible-playbook \
+              -i ./inventory.yaml \
+              ./playbook.yml \
+              --extra-vars "variable_host=lima" \
+              --extra-vars "private_machine=false" \
+              --extra-vars "ansible_become_pass=''"
