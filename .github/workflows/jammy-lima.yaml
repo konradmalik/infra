@@ -40,7 +40,8 @@ jobs:
         working-directory: ./environments/dev/ansible
         run: |
           set -x
-          time lima sudo apt update && sudo apt install -y ansible python3
+          time lima sudo apt update
+          time lima sudo apt install -y ansible python3
           time lima ./install-dependencies.sh
 
       - name: Run ansible

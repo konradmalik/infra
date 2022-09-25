@@ -12,9 +12,8 @@ images:
   - location: "https://geo.mirror.pkgbuild.com/images/latest/Arch-Linux-x86_64-cloudimg.qcow2"
     arch: "x86_64"
 
-cpus: 4
-memory: "8GiB"
-disk: "100GiB"
+cpus: 2
+memory: "4GiB"
 
 mounts:
   - location: "~"
