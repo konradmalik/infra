@@ -49,7 +49,5 @@ jobs:
           time lima ansible-playbook \
               -i ./inventory.yaml \
               ./playbook.yml \
-              --extra-vars "variable_host=lima" \
-              --extra-vars "docker=false" \
-              --extra-vars "private_machine=false" \
+              --extra-vars "variable_host=cicd" \
               --extra-vars "ansible_become_pass=''"

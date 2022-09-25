@@ -55,6 +55,19 @@ lima:
     private_machine: true
     vmware_guest: false
 
+cicd:
+  hosts:
+    limavm:
+  vars:
+    ansible_connection: local
+    docker: false
+    enable_auto_reboot: false
+    enable_ssh: false
+    gui_apps: false
+    repo_path: "/home/{{ target_user }}.linux/Code/dotfiles"
+    private_machine: false
+    vmware_guest: false
+
 local:
   hosts:
     localhost:
