@@ -27,7 +27,8 @@ jobs:
           key: ${{ runner.os }}-archlinux
 
       - name: Start lima
-        run: time limactl start --name=default --tty=false template://archlinux
+        working-directory: ./environments/dev/lima
+        run: time limactl start --name=default --tty=false ./archlinux-ci.yaml
 
       - name: Copy files
         run: |
