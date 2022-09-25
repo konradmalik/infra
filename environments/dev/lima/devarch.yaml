@@ -11,6 +11,9 @@ images:
   - location: "https://geo.mirror.pkgbuild.com/images/latest/Arch-Linux-x86_64-cloudimg.qcow2"
     arch: "x86_64"
 
+firmware:
+  legacyBIOS: true
+
 cpus: 4
 memory: "8GiB"
 disk: "100GiB"
@@ -22,12 +25,10 @@ mounts:
     writable: true
   - location: "/tmp/lima"
     writable: true
-firmware:
-  legacyBIOS: true
 
 containerd:
   system: false
-  user: false
+  user: true
 
 ssh:
   localPort: 60022
