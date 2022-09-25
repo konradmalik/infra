@@ -42,12 +42,3 @@
   when:
     - private_machine
     - private_found.matched > 0
-
-- name: install sshocker from github
-  become: yes
-  shell:
-    chdir: /tmp
-    cmd: |
-      curl -o sshocker --fail -L https://github.com/lima-vm/sshocker/releases/download/v{{ git_versions.sshocker }}/sshocker-$(uname -s)-$(uname -m)
-      install sshocker /usr/local/bin/
-    creates: /usr/local/bin/sshocker
