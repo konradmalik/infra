@@ -11,7 +11,7 @@
 - name: link broot binary
   become: yes
   file:
-    src: /home/{{ target_user }}/.cargo/bin/broot
-    path: /usr/local/bin/broot
+    src: "~/.cargo/bin/broot"
+    path: "/usr/local/bin/broot"
     state: link
     force: yes

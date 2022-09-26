@@ -6,8 +6,9 @@ all:
     # for ssh-ingress if below is enabled
     enable_ssh: true
     copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/private.pub') }}"
+    home_path: "/home/{{ target_user }}"
     # path to dotfiles repository on a host (I assume all hosts are linux machines)
-    repo_path: "/home/{{ target_user }}/Code/dotfiles"
+    repo_path: "{{ home_path }}/Code/dotfiles"
     # zsh files dir (same as in zshenv)
     zdotdir: "~/.config/zsh"
     # if true - assumes installation in a docker-container
@@ -50,7 +51,7 @@ lima:
     enable_auto_reboot: false
     enable_ssh: false
     gui_apps: false
-    repo_path: "/home/{{ target_user }}.linux/Code/dotfiles"
+    home_path: "/home/{{ target_user }}.linux"
     private_machine: true
     vmware_guest: false
 
@@ -63,7 +64,7 @@ cicd:
     enable_auto_reboot: false
     enable_ssh: false
     gui_apps: false
-    repo_path: "/home/{{ target_user }}.linux/Code/dotfiles"
+    home_path: "/home/{{ target_user }}.linux"
     private_machine: false
     vmware_guest: false
 

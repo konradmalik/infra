@@ -1,7 +1,7 @@
 - name: make sure 'Code' exists
   become: yes
   ansible.builtin.file:
-    path: /home/{{ target_user }}/Code
+    path: "{{ home_path }}/Code"
     state: directory
     mode: "0755"
     recurse: no
@@ -11,7 +11,7 @@
 - name: make sure 'Code' and the rest belongs to "{{ target_user }}"
   become: yes
   ansible.builtin.file:
-    path: /home/{{ target_user }}/Code
+    path: "{{ home_path }}/Code"
     state: directory
     recurse: yes
     owner: "{{ target_user }}"

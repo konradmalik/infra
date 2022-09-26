@@ -3,7 +3,7 @@ name: Ubuntu Jammy lima test
 on: [push]
 
 jobs:
-  arch-lima-up:
+  jammy-lima-up:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
