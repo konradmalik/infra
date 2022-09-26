@@ -23,12 +23,13 @@ mounts:
   - location: "~/Code"
     mountPoint: "/home/konrad.linux/Code"
     writable: true
+  - location: "~"
   - location: "/tmp/lima"
     writable: true
 
 containerd:
   system: false
-  user: true
+  user: false
 
 ssh:
   localPort: 60022

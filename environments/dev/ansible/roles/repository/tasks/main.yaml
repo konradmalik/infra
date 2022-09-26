@@ -1,4 +1,4 @@
-- name: make sure 'Code' exists
+- name: make sure 'Code' exists and belongs to "{{ target_user }}"
   become: yes
   ansible.builtin.file:
     path: "{{ home_path }}/Code"
@@ -8,21 +8,22 @@
     owner: "{{ target_user }}"
     group: "{{ target_user }}"
 
-- name: make sure 'Code' and the rest belongs to "{{ target_user }}"
-  become: yes
-  ansible.builtin.file:
-    path: "{{ home_path }}/Code"
-    state: directory
-    recurse: yes
-    owner: "{{ target_user }}"
-    group: "{{ target_user }}"
-
 - name: Check if dotfiles repo exists
   stat:
     path: ~/Code/dotfiles
   register: dotfiles_stat_result
 
 - block:
+    - name: make sure dotfiles repo belongs to "{{ target_user }}"
+      become: yes
+      ansible.builtin.file:
+        path: "{{ repo_path }}"
+        state: directory
+        mode: "0755"
+        recurse: no
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+
     - name: Ensure dotfiles repo exists (public)
       ansible.builtin.git:
         repo: https://github.com/konradmalik/dotfiles.git

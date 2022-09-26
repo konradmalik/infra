@@ -12,9 +12,12 @@ images:
   - location: "https://geo.mirror.pkgbuild.com/images/latest/Arch-Linux-x86_64-cloudimg.qcow2"
     arch: "x86_64"
 
-mounts:
-  - location: "~"
-  - location: "/tmp/lima"
-    writable: true
 firmware:
   legacyBIOS: true
+
+cpus: 2
+memory: "2GiB"
+
+mounts:
+  - location: "~"
+
