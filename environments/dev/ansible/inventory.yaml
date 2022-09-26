@@ -13,13 +13,15 @@ all:
     zdotdir: "~/.config/zsh"
     # if true - assumes installation in a docker-container
     # some apps will be disabled, like the docker daemon itself
-    docker: false
+    is_docker: false
     # if enabled - some gui only apps will be installed as well
     gui_apps: false
     # if enabled, ssh config will be linked (outbound ssh)
     private_machine: false
     # if true, will autoreboot at 2 am after automatic updates
     enable_auto_reboot: false
+    # if enabled, will install virtualbox and vagrant
+    vagrant: false
     # if enabled, will setup stuff needed to properly work inside a vmware guest
     vmware_guest: false
     # versions used mostly by ubuntu tasks that install stuff from github directly
@@ -47,7 +49,7 @@ lima:
     devarch:
   vars:
     ansible_connection: local
-    docker: true
+    is_docker: true
     enable_auto_reboot: false
     enable_ssh: false
     gui_apps: false
@@ -60,7 +62,7 @@ cicd:
     limavm:
   vars:
     ansible_connection: local
-    docker: false
+    is_docker: false
     enable_auto_reboot: false
     enable_ssh: false
     gui_apps: false
@@ -73,7 +75,7 @@ local:
     localhost:
   vars:
     ansible_connection: local
-    docker: false
+    is_docker: false
     enable_auto_reboot: false
     enable_ssh: false
     gui_apps: false
@@ -85,7 +87,7 @@ docker:
     devarchd:
   vars:
     ansible_connection: local
-    docker: true
+    is_docker: true
     enable_auto_reboot: false
     enable_ssh: false
     gui_apps: false

@@ -20,4 +20,3 @@ memory: "2GiB"
 
 mounts:
   - location: "~"
-

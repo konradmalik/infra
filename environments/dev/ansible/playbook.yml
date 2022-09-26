@@ -4,18 +4,19 @@
     - name: Print my vars
       ansible.builtin.debug:
         msg: |
-          docker: "{{ docker }}"
+          is_docker: "{{ is_docker }}"
           enable_auto_reboot: "{{ enable_auto_reboot }}"
           enable_ssh: "{{ enable_ssh }}"
           gui_apps: "{{ gui_apps }}"
           private_machine: "{{ private_machine }}"
+          vagrant: "{{ vagrant }}"
           vmware_guest: "{{ vmware_guest }}"
   roles:
     - name: aur_builder-setup
       when: ansible_distribution == "Archlinux"
     - system
     - name: unattended_upgrades
-      when: not docker
+      when: not is_docker
     # languages earliest possible (needed later)
     - python
     - go
@@ -40,51 +41,51 @@
     - name: tailscale
       when: ansible_system == "Linux"
     - name: docker
-      when: not docker
+      when: not is_docker
     # deprecate docker once comfortable with podman
     - name: podman
-      when: not docker
+      when: not is_docker
     # earthly requires docker
     - name: earthly
-      when: not docker
+      when: not is_docker
     - name: kubernetes
-      when: not docker
+      when: not is_docker
     - name: ansible
       when: private_machine
     - name: cloud
       when:
         - private_machine
-        - not docker
+        - not is_docker
     - name: fonts
       when:
         - gui_apps
-        - not docker
+        - not is_docker
     - name: alacritty
       when:
         - gui_apps
-        - not docker
+        - not is_docker
     - name: window_manager
       when:
         - gui_apps
-        - not docker
+        - not is_docker
         - ansible_system == "Linux"
     - name: vscode
       when:
         - gui_apps
-        - not docker
+        - not is_docker
         - ansible_architecture == "x86_64"
     - name: vagrant
       when:
-        - not docker
+        - not is_docker
         - ansible_architecture == "x86_64"
     - name: vmware_guest
       when:
-        - not docker
+        - not is_docker
         - vmware_guest
     # a backup solution
     - name: restic
       when:
-        - not docker
+        - not is_docker
         - "'devarch' in inventory_hostname"
     # KEEP THIS AT THE VERY END
     - name: aur_builder-cleanup
