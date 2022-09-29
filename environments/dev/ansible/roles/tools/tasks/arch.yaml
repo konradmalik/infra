@@ -4,6 +4,7 @@
   kewlfft.aur.aur:
     use: yay
     name:
+      - moreutils
       - fzf
       - curl
       - bat
