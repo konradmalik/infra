@@ -20,10 +20,8 @@ disk: "100GiB"
 
 mountType: "9p"
 mounts:
-  - location: "~/Code"
-    mountPoint: "/home/konrad.linux/Code"
-    writable: true
   - location: "~"
+    writable: true
   - location: "/tmp/lima"
     writable: true
 
