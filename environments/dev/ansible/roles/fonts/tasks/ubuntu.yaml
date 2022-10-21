@@ -3,9 +3,16 @@
     cmd: |
       mkdir -p ~/.local/share/fonts
       rm -rf ~/.local/share/fonts/*
+
       cd ~/.local/share/fonts
-      curl -fLo "JetBrainsMono Nerd Font.ttf" "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Regular/complete/JetBrains%20Mono%20Regular%20Nerd%20Font%20Complete.ttf?raw=true"
-      curl -fLo "AnonymiceNerdFont.ttf" "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/AnonymousPro/complete/Anonymice%20Nerd%20Font%20Complete%20Mono.ttf?raw=true"
-      curl -fLo "ShureTechNerdFont.ttf" "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/ShareTechMono/complete/Shure%20Tech%20Mono%20Nerd%20Font%20Complete.ttf?raw=true"
+
+      curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Hack.zip
+      unzip Hack.zip
+
+      curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/FiraMono.zip
+      unzip FiraMono.zip
+
+      rm -rf *.zip
+
       fc-cache
-    creates: "~/.local/share/fonts/ShureTechNerdFont.ttf"
+    creates: "~/.local/share/fonts/Hack"
