@@ -9,8 +9,8 @@
       curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Hack.zip
       unzip Hack.zip
 
-      curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/FiraMono.zip
-      unzip FiraMono.zip
+      curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Meslo.zip
+      unzip Meslo.zip
 
       rm -rf *.zip
 

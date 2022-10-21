@@ -5,7 +5,7 @@
     use: yay
     name:
       - nerd-fonts-hack
-      - nerd-fonts-fira-code
+      - nerd-fonts-meslo
       - noto-fonts
       - noto-fonts-cjk
       - noto-fonts-emoji
