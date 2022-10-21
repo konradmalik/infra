@@ -4,9 +4,8 @@
       mkdir -p ~/.local/share/fonts
       rm -rf ~/.local/share/fonts/*
       cd ~/.local/share/fonts
-      curl -fLo "SauceCodePro Nerd Font.ttf" "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/SourceCodePro/Regular/complete/Sauce%20Code%20Pro%20Nerd%20Font%20Complete.ttf?raw=true"
       curl -fLo "JetBrainsMono Nerd Font.ttf" "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Regular/complete/JetBrains%20Mono%20Regular%20Nerd%20Font%20Complete.ttf?raw=true"
       curl -fLo "AnonymiceNerdFont.ttf" "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/AnonymousPro/complete/Anonymice%20Nerd%20Font%20Complete%20Mono.ttf?raw=true"
+      curl -fLo "ShureTechNerdFont.ttf" "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/ShareTechMono/complete/Shure%20Tech%20Mono%20Nerd%20Font%20Complete.ttf?raw=true"
       fc-cache
-    creates: "~/.local/share/fonts/SauceCodePro Nerd Font.ttf"
-
+    creates: "~/.local/share/fonts/ShureTechNerdFont.ttf"
