@@ -1,5 +1,5 @@
 - name: install apt packages
-  become: yes
+  become: true
   apt:
     name:
       - moreutils
@@ -42,7 +42,7 @@
     force: yes
 
 - name: link bat
-  become: yes
+  become: true
   file:
     src: /usr/bin/batcat
     path: /usr/local/bin/bat
@@ -50,13 +50,13 @@
     force: yes
 
 - name: install non-classic snap packages
-  become: yes
+  become: true
   community.general.snap:
     name:
       - procs
 
 - name: install ngrok from snap (edge)
-  become: yes
+  become: true
   community.general.snap:
     name: ngrok
     channel: latest/edge
@@ -66,7 +66,7 @@
     name: pipx
 
 - name: install duf from git releases
-  become: yes
+  become: true
   shell:
     chdir: /tmp
     cmd: |
@@ -87,7 +87,7 @@
 
 - block:
     - name: install up from github
-      become: yes
+      become: true
       shell:
         chdir: /tmp
         cmd: |
@@ -96,7 +96,7 @@
         creates: /usr/local/bin/up
 
     - name: install viddy from github
-      become: yes
+      become: true
       shell:
         chdir: /tmp
         cmd: |
@@ -105,7 +105,7 @@
         creates: /usr/local/bin/viddy
 
     - name: install dsq from git (ubuntu amd64)
-      become: yes
+      become: true
       shell:
         chdir: /tmp
         cmd: |
@@ -117,7 +117,7 @@
   when: ansible_architecture == "x86_64"
 
 - name: install croc
-  become: yes
+  become: true
   shell:
     chdir: /tmp
     cmd: |
@@ -135,7 +135,7 @@
     creates: "~/.cargo/bin/watchexec"
 
 - name: install ripgrep-all deps
-  become: yes
+  become: true
   apt:
     name:
       - pandoc
@@ -178,15 +178,16 @@
     creates: ~/.cargo/bin/btm
 
 - name: install pre-commit from pip via pipx
-  become: no
+  environment:
+    PATH: "~/.local/bin:{{ ansible_env.PATH }}"
+  become: false
   shell:
     chdir: /tmp
-    cmd: |
-      ~/.local/bin/pipx install pre-commit
+    cmd: pipx install pre-commit
     creates: ~/.local/bin/pre-commit
 
 - name: install prettier globally
-  become: yes
+  become: true
   community.general.npm:
     name: "{{ item }}"
     global: yes
@@ -194,7 +195,7 @@
     - prettier
 
 - name: install shfmt binary
-  become: yes
+  become: true
   shell:
     chdir: /tmp
     cmd: |

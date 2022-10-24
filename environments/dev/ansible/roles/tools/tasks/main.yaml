@@ -27,8 +27,9 @@
 
 - name: install 'data-diff' from pip via pipx
   become: false
+  environment:
+    PATH: "~/.local/bin:{{ ansible_env.PATH }}"
   shell:
     chdir: /tmp
-    cmd: |
-      ~/.local/bin/pipx install 'data-diff[all]'
+    cmd: pipx install 'data-diff[all]'
     creates: ~/.local/bin/data-diff
