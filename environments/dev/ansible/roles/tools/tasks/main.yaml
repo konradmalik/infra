@@ -24,3 +24,11 @@
     cmd: |
       cargo install --locked tidy-viewer
     creates: "~/.cargo/bin/tidy-viewer"
+
+- name: install 'data-diff' from pip via pipx
+  become: false
+  shell:
+    chdir: /tmp
+    cmd: |
+      ~/.local/bin/pipx install 'data-diff[all]'
+    creates: ~/.local/bin/data-diff
