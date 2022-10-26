@@ -7,7 +7,7 @@
 
 - name: install podman-compose from pip via pipx
   environment:
-    PATH: "~/.local/bin:{{ ansible_env.PATH }}"
+    PATH: "{{ home_path }}/.local/bin:{{ ansible_env.PATH }}"
   become: false
   shell:
     chdir: /tmp

@@ -19,7 +19,7 @@
   args:
     executable: /bin/bash
   environment:
-    PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
+    PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
       cargo install --locked tidy-viewer
@@ -28,7 +28,7 @@
 - name: install 'data-diff' from pip via pipx
   become: false
   environment:
-    PATH: "~/.local/bin:{{ ansible_env.PATH }}"
+    PATH: "{{ home_path }}/.local/bin:{{ ansible_env.PATH }}"
   shell:
     chdir: /tmp
     cmd: pipx install 'data-diff[all]'

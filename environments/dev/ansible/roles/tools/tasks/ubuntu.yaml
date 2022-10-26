@@ -79,7 +79,7 @@
   args:
     executable: /bin/bash
   environment:
-    PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
+    PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
       cargo install --locked hyperfine
@@ -128,7 +128,7 @@
   args:
     executable: /bin/bash
   environment:
-    PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
+    PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
       cargo install --locked watchexec-cli
@@ -151,7 +151,7 @@
   args:
     executable: /bin/bash
   environment:
-    PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
+    PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
       cargo install --locked ripgrep_all
@@ -161,7 +161,7 @@
   args:
     executable: /bin/bash
   environment:
-    PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
+    PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
       cargo install --locked du-dust
@@ -171,7 +171,7 @@
   args:
     executable: /bin/bash
   environment:
-    PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
+    PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
       cargo install --locked bottom
@@ -179,7 +179,7 @@
 
 - name: install pre-commit from pip via pipx
   environment:
-    PATH: "~/.local/bin:{{ ansible_env.PATH }}"
+    PATH: "{{ home_path }}/.local/bin:{{ ansible_env.PATH }}"
   become: false
   shell:
     chdir: /tmp

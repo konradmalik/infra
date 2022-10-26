@@ -11,7 +11,7 @@
   args:
     executable: /bin/bash
   environment:
-    PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
+    PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
       rustup install stable && \
@@ -21,7 +21,7 @@
   args:
     executable: /bin/bash
   environment:
-    PATH: "~/.cargo/bin:{{ ansible_env.PATH }}"
+    PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
       cargo install --locked cargo-edit
