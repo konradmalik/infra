@@ -35,30 +35,8 @@ services:
           cpus: "0.5"
           memory: 1G
 
-  portainer:
-    image: portainer/portainer-ce:2.13.1-alpine
-    ports:
-      - "9443:9443/tcp"
-      - "8000:8000/tcp"
-    environment:
-      TZ: "Europe/Warsaw"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - portainer-data:/data
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: always
-      resources:
-        limits:
-          cpus: "0.5"
-          memory: 1G
-        reservations:
-          cpus: "0.5"
-          memory: 1G
-
   rpi-spotify:
-    image: konradmalik/librespot:0.3.1
+    image: konradmalik/librespot:0.4.2-r0
     network_mode: host
     devices: [/dev/snd]
     environment:
@@ -84,7 +62,7 @@ services:
           memory: 1G
 
   shairport-sync:
-    image: mikebrady/shairport-sync:3.3.8
+    image: mikebrady/shairport-sync@sha256:86a4b981d04d2f4fb3197902e3601204fefc4983b51bc97be70ea8d7f7719f64
     network_mode: host
     command: -v
     devices: [/dev/snd]
@@ -103,6 +81,5 @@ services:
           memory: 1G
 
 volumes:
-  portainer-data:
   pihole-etc-data:
   pihole-etc-dnsmasq:

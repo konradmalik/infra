@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  rpi-spotify:
+    image: konradmalik/librespot:latest
+    network_mode: host
+    devices: ['/dev/snd:/dev/snd']
+    command: >
+      librespot
+        --name Raspotify
+        --bitrate 320
+        --enable-volume-normalisation
+        --disable-audio-cache
+        --initial-volume 50
+
