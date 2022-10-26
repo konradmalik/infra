@@ -1,5 +1,5 @@
 - name: install venv and others
-  become: yes
+  become: true
   apt:
     name:
       - python3-venv
@@ -10,7 +10,7 @@
     autoremove: yes
 
 - name: install python compile-dependencies
-  become: yes
+  become: true
   apt:
     name:
       - build-essential

@@ -1,5 +1,5 @@
 - name: make sure 'Code' exists and belongs to "{{ target_user }}"
-  become: yes
+  become: true
   ansible.builtin.file:
     path: "{{ home_path }}/Code"
     state: directory
@@ -15,7 +15,7 @@
 
 - block:
     - name: make sure dotfiles repo belongs to "{{ target_user }}"
-      become: yes
+      become: true
       ansible.builtin.file:
         path: "{{ repo_path }}"
         state: directory

@@ -1,5 +1,5 @@
 - name: install up from github
-  become: yes
+  become: true
   shell:
     chdir: /tmp
     cmd: |
@@ -9,7 +9,7 @@
     creates: /usr/local/bin/up
 
 - name: install viddy from github
-  become: yes
+  become: true
   shell:
     chdir: /tmp
     cmd: |

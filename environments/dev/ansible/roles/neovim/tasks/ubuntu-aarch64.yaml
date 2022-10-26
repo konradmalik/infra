@@ -1,5 +1,5 @@
 - name: install compile dependencies for neovim
-  become: yes
+  become: true
   apt:
     name:
       - ninja-build
@@ -18,7 +18,7 @@
     autoremove: yes
 
 - name: compile neovim from github (for arm64)
-  become: yes
+  become: true
   shell:
     chdir: /tmp
     cmd: |

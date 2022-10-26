@@ -1,5 +1,5 @@
 - name: install go
-  become: yes
+  become: true
   apt:
     name:
       - golang
@@ -9,7 +9,7 @@
     autoremove: yes
 
 - name: install tiny go from git
-  become: yes
+  become: true
   shell:
     chdir: /tmp
     cmd: |

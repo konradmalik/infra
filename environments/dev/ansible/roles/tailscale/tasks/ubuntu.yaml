@@ -1,5 +1,5 @@
 - name: add tailscale apt key
-  become: yes
+  become: true
   shell:
     chdir: /tmp
     cmd: |
@@ -9,21 +9,21 @@
     creates: /etc/apt/trusted.gpg.d/tailscale.gpg
 
 - name: add tailscale apt repo
-  become: yes
+  become: true
   apt_repository:
     repo: deb https://pkgs.tailscale.com/stable/{{ ansible_distribution | lower }} {{ ansible_distribution_release | lower }} main
     state: present
     update_cache: yes
 
 - name: install tailscale
-  become: yes
+  become: true
   apt:
     pkg:
       - tailscale
     state: present
 
 - name: start and enable tailscale daemon
-  become: yes
+  become: true
   service:
     name: tailscaled
     state: started

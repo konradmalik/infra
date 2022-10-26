@@ -1,5 +1,5 @@
 - name: install fuse for neovim from appimage
-  become: yes
+  become: true
   apt:
     name:
       - libfuse2
@@ -9,7 +9,7 @@
     autoremove: yes
 
 - name: install neovim from appimage
-  become: yes
+  become: true
   shell:
     chdir: /tmp
     cmd: |

@@ -9,7 +9,7 @@
     creates: "~/.cargo/bin/broot"
 
 - name: link broot binary
-  become: yes
+  become: true
   file:
     # has to be full path due to 'become'
     src: "{{ home_path }}/.cargo/bin/broot"

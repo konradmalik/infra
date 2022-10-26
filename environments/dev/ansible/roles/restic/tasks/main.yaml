@@ -5,7 +5,7 @@
   when: ansible_distribution == "Archlinux"
 
 - name: link files
-  become: yes
+  become: true
   shell:
     chdir: "{{ repo_path }}/private/files"
     cmd: stow --target="/" --no-folding {{ item }}
@@ -21,7 +21,7 @@
       restic init || true
 
 - name: Enable backup and check timers
-  become: yes
+  become: true
   ansible.builtin.systemd:
     name: "{{ item }}"
     enabled: yes

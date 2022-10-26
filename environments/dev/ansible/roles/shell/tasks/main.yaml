@@ -16,7 +16,7 @@
     - starship
 
 - name: change shell to zsh for "{{ target_user }}"
-  become: yes
+  become: true
   user:
     name: "{{ target_user }}"
     shell: /bin/zsh

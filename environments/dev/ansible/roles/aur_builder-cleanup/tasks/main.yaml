@@ -1,5 +1,5 @@
 - name: remove aur_builder user
-  become: yes
+  become: true
   user:
     name: aur_builder
     state: absent
@@ -7,7 +7,7 @@
     force: yes
 
 - name: delete aur_builder content & directory
-  become: yes
+  become: true
   file:
     state: absent
     path: /home/aur_builder

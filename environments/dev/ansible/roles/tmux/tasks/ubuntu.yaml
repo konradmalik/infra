@@ -1,5 +1,5 @@
 - name: install tmux
-  become: yes
+  become: true
   apt:
     name:
       - tmux

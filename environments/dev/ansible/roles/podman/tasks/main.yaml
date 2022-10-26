@@ -32,4 +32,4 @@
 #         dest: /usr/local/bin/docker-compose
 #         mode: a+x
 #
-#   become: yes
+#   become: true

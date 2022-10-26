@@ -1,12 +1,12 @@
 - name: install podman
-  become: yes
+  become: true
   apt:
     pkg:
       - podman
     state: present
 
 - name: install dive from github
-  become: yes
+  become: true
   shell:
     chdir: /tmp
     cmd: |

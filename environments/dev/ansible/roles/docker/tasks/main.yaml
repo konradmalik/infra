@@ -21,7 +21,7 @@
     content: '{"userland-proxy": true}'
 
 - name: enable docker daemon (dont start yet)
-  become: yes
+  become: true
   service:
     name: docker
     state: stopped
@@ -41,6 +41,6 @@
         groups: [docker]
         append: yes
 
-  become: yes
+  become: true
   when:
     - ansible_system == "Linux"

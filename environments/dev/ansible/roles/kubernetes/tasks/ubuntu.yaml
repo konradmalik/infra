@@ -1,5 +1,5 @@
 - name: install k9s from github (amd64)
-  become: yes
+  become: true
   shell:
     chdir: /tmp
     cmd: |
@@ -9,7 +9,7 @@
   when: ansible_architecture == "x86_64"
 
 - name: install k9s from github (arm64)
-  become: yes
+  become: true
   shell:
     chdir: /tmp
     cmd: |

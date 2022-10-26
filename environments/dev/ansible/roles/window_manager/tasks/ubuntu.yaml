@@ -1,5 +1,5 @@
 - name: install clipboard apt packages
-  become: yes
+  become: true
   apt:
     name:
       - xclip
@@ -10,7 +10,7 @@
     autoremove: yes
 
 - name: add regolith apt key
-  become: yes
+  become: true
   shell:
     chdir: /tmp
     cmd: |
@@ -20,14 +20,14 @@
     creates: /etc/apt/trusted.gpg.d/regolith.asc
 
 - name: add regolith apt repo
-  become: yes
+  become: true
   apt_repository:
     repo: "deb [arch={{ arch_map[ansible_architecture] }}] https://regolith-desktop.org/release-ubuntu-{{ ansible_distribution_release }}-{{ arch_map[ansible_architecture] }} {{ ansible_distribution_release }} main"
     state: present
     update_cache: yes
 
 - name: install regolith apt packages
-  become: yes
+  become: true
   apt:
     name:
       - regolith-desktop

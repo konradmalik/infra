@@ -1,5 +1,5 @@
 - name: install zsh, plugins
-  become: yes
+  become: true
   apt:
     name:
       - zsh
@@ -12,7 +12,7 @@
     autoremove: yes
 
 - name: install zsh-completions from github
-  become: yes
+  become: true
   shell:
     chdir: /usr/local/share/zsh/
     cmd: |

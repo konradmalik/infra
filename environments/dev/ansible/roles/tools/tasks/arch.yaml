@@ -1,5 +1,5 @@
 - name: install yay packages
-  become: yes
+  become: true
   become_user: aur_builder
   kewlfft.aur.aur:
     use: yay
@@ -52,7 +52,7 @@
       - shfmt
 
 - name: install dsq from git (arch amd64)
-  become: yes
+  become: true
   shell:
     chdir: /tmp
     cmd: |

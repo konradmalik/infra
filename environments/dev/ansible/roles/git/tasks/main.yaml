@@ -16,7 +16,7 @@
     - git-{{ ansible_system | lower }}
 
 - name: install git-open globally
-  become: yes
+  become: true
   community.general.npm:
     name: "{{ item }}"
     global: yes

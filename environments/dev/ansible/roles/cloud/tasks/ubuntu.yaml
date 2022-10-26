@@ -1,6 +1,6 @@
 - block:
     - name: add hashicorp apt key
-      become: yes
+      become: true
       shell:
         chdir: /tmp
         cmd: |
@@ -10,7 +10,7 @@
         creates: /etc/apt/trusted.gpg.d/hashicorp.gpg
 
     - name: add hashicorp apt repo (amd64)
-      become: yes
+      become: true
       apt_repository:
         repo: "deb [arch={{ arch_map[ansible_architecture] }}] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
         state: present
@@ -18,7 +18,7 @@
   when: ansible_architecture == "x86_64"
 
 - name: add microsoft apt key
-  become: yes
+  become: true
   shell:
     chdir: /tmp
     cmd: |
@@ -28,21 +28,21 @@
     creates: /etc/apt/trusted.gpg.d/microsoft.gpg
 
 - name: add microsoft azure cli apt repo (amd64)
-  become: yes
+  become: true
   apt_repository:
     repo: "deb [arch={{ arch_map[ansible_architecture] }}] https://packages.microsoft.com/repos/azure-cli/ {{ ansible_distribution_release }} main"
     state: present
     update_cache: yes
 
 - name: install azure cli
-  become: yes
+  become: true
   apt:
     pkg:
       - azure-cli
     state: present
 
 - name: install awscli
-  become: yes
+  become: true
   shell:
     chdir: /tmp
     cmd: |

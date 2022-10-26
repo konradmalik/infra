@@ -1,5 +1,5 @@
 - name: install ranger
-  become: yes
+  become: true
   apt:
     name:
       - ranger

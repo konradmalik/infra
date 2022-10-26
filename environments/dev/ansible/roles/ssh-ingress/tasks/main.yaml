@@ -4,7 +4,7 @@
 - import_tasks: arch.yaml
   when: ansible_distribution == "Archlinux"
 
-# use block to become: yes for all inside
+# use block to become: true for all inside
 - block:
     - name: Set authorized key for remote user
       authorized_key:

@@ -1,5 +1,5 @@
 - name: install python compile-dependencies
-  become: yes
+  become: true
   become_user: aur_builder
   kewlfft.aur.aur:
     use: yay
@@ -10,7 +10,7 @@
       - xz
 
 - name: install poetry
-  become: yes
+  become: true
   become_user: aur_builder
   kewlfft.aur.aur:
     use: yay

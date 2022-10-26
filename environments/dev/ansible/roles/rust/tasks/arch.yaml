@@ -1,12 +1,12 @@
 - name: remove rust because it conflicts with rustup
-  become: yes
+  become: true
   community.general.pacman:
     name:
       - rust
     state: absent
 
 - name: install rustup (arch)
-  become: yes
+  become: true
   become_user: aur_builder
   kewlfft.aur.aur:
     use: yay
@@ -26,7 +26,7 @@
         users_present: "{{ getent_passwd.keys()|list }}"
 
     - name: set default toolchain for aur_builder it exists
-      become: yes
+      become: true
       become_user: aur_builder
       args:
         executable: /bin/bash
