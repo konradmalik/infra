@@ -23,9 +23,9 @@
     - rust
     #
     - tools
-    - charm
     - repository
     - dotfiles
+    - charm
     - git
     - ssh-egress
     - role: ssh-ingress
