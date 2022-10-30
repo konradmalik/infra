@@ -7,4 +7,11 @@
 - import_tasks: arch.yaml
   when: ansible_distribution == "Archlinux"
 
-# go itself is fully managed by asdf
+- name: install gup via go install
+  environment:
+    GOBIN: "{{ home_path }}/.go/bin"
+  become: false
+  shell:
+    chdir: /tmp
+    cmd: go install github.com/nao1215/gup@latest
+    creates: ~/.go/bin/gup
