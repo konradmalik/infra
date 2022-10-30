@@ -12,10 +12,10 @@
           vagrant: "{{ vagrant }}"
           vmware_guest: "{{ vmware_guest }}"
   roles:
-    - name: aur_builder-setup
+    - role: aur_builder-setup
       when: ansible_distribution == "Archlinux"
     - system
-    - name: unattended_upgrades
+    - role: unattended_upgrades
       when: not is_docker
     # languages earliest possible (needed later)
     - python
@@ -23,11 +23,12 @@
     - rust
     #
     - tools
+    - charm
     - repository
     - dotfiles
     - git
     - ssh-egress
-    - name: ssh-ingress
+    - role: ssh-ingress
       when:
         - enable_ssh
         - ansible_system == "Linux"
@@ -38,55 +39,55 @@
     - asdf
     - broot
     # macos should go through app store
-    - name: tailscale
+    - role: tailscale
       when: ansible_system == "Linux"
-    - name: docker
+    - role: docker
       when: not is_docker
     # deprecate docker once comfortable with podman
-    - name: podman
+    - role: podman
       when: not is_docker
     # earthly requires docker
-    - name: earthly
+    - role: earthly
       when: not is_docker
-    - name: kubernetes
+    - role: kubernetes
       when: not is_docker
-    - name: ansible
+    - role: ansible
       when: private_machine
-    - name: cloud
+    - role: cloud
       when:
         - private_machine
         - not is_docker
-    - name: fonts
+    - role: fonts
       when:
         - gui_apps
         - not is_docker
-    - name: alacritty
+    - role: alacritty
       when:
         - gui_apps
         - not is_docker
-    - name: window_manager
+    - role: window_manager
       when:
         - gui_apps
         - not is_docker
         - ansible_system == "Linux"
-    - name: vscode
+    - role: vscode
       when:
         - gui_apps
         - not is_docker
         - ansible_architecture == "x86_64"
-    - name: vagrant
+    - role: vagrant
       when:
         - not is_docker
         - ansible_architecture == "x86_64"
-    - name: vmware_guest
+    - role: vmware_guest
       when:
         - not is_docker
         - vmware_guest
     # a backup solution
-    - name: restic
+    - role: restic
       when:
         - not is_docker
         - "'devarch' in inventory_hostname"
     # KEEP THIS AT THE VERY END
-    - name: aur_builder-cleanup
+    - role: aur_builder-cleanup
       when: ansible_distribution == "Archlinux"

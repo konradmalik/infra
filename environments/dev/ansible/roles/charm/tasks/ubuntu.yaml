@@ -1,0 +1,26 @@
+- name: add charm apt key
+  become: true
+  shell:
+    chdir: /tmp
+    cmd: |
+      curl -fsSL https://repo.charm.sh/apt/gpg.key |
+        gpg --dearmor -o /etc/apt/trusted.gpg.d/charm.gpg
+    creates: /etc/apt/trusted.gpg.d/charm.gpg
+
+- name: add charm apt repo
+  become: true
+  apt_repository:
+    repo: deb [signed-by=/etc/apt/trusted.gpg.d/charm.gpg] https://repo.charm.sh/apt/ * *
+    state: present
+    update_cache: yes
+
+- name: install charm tools
+  become: true
+  apt:
+    pkg:
+      - glow
+      - vhs
+      - ttyd
+      - ffmpeg
+      - gum
+    state: present
