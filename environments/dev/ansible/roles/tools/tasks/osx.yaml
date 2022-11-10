@@ -18,6 +18,7 @@
       - fd
       - hyperfine
       - ripgrep
+      - sd
       - sad
       - the_silver_searcher
       - jq

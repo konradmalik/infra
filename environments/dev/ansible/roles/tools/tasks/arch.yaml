@@ -13,6 +13,7 @@
       - fd
       - hyperfine
       - ripgrep
+      - sd
       - sad
       # ripgrep-all and deps start
       - ripgrep-all
