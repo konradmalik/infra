@@ -177,6 +177,16 @@
       cargo install --locked bottom
     creates: ~/.cargo/bin/btm
 
+- name: install 'sad' from cargo
+  args:
+    executable: /bin/bash
+  environment:
+    PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
+  shell:
+    cmd: |
+      cargo install --locked --all-features --git https://github.com/ms-jpq/sad --branch senpai
+    creates: ~/.cargo/bin/sad
+
 - name: install pre-commit from pip via pipx
   environment:
     PATH: "{{ home_path }}/.local/bin:{{ ansible_env.PATH }}"
