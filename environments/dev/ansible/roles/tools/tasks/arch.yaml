@@ -22,7 +22,6 @@
       - poppler
       - tesseract
       # ripgrep-all deps end
-      - the_silver_searcher
       # json tools start
       - jq
       - jo

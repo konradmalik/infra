@@ -19,7 +19,6 @@
       - stow
       - bat
       - ripgrep
-      - silversearcher-ag
       - shellcheck
       - tldr
       - zathura
