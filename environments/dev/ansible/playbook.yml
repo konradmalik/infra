@@ -21,6 +21,9 @@
     - rust
     #
     - tools
+    - role: nix
+      when:
+        - not is_docker # it requires systemd
     - repository
     - dotfiles
     - charm
