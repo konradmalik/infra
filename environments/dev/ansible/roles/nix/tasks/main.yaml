@@ -1,5 +1,7 @@
 - name: install nix from script
   become: true
+  args:
+    executable: /bin/bash
   shell:
     cmd: yes | sh <(curl -L https://nixos.org/nix/install) --daemon
     creates: "/nix"
