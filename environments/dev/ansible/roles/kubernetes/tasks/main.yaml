@@ -70,7 +70,6 @@
   environment:
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
-    chdir: /tmp
     cmd: |
       asdf plugin-add kubectl && \
       asdf install kubectl latest
@@ -82,7 +81,6 @@
   environment:
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
-    chdir: /tmp
     cmd: |
       asdf plugin-add kustomize && \
       asdf install kustomize latest
@@ -94,7 +92,6 @@
   environment:
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
-    chdir: /tmp
     cmd: |
       asdf plugin-add kubeconform && \
       asdf install kubeconform latest
