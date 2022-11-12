@@ -3,3 +3,10 @@
   shell:
     cmd: yes | sh <(curl -L https://nixos.org/nix/install) --daemon
     creates: "/nix"
+
+- name: link nix config
+  shell:
+    chdir: "{{ repo_path }}/files"
+    cmd: stow --target="$HOME" {{ item }}
+  with_items:
+    - nix
