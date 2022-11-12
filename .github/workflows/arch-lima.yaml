@@ -40,7 +40,7 @@ jobs:
         working-directory: ./environments/dev/ansible
         run: |
           set -x
-          time lima sudo pacman -Sy --noconfirm ansible python python-packaging
+          time lima sudo pacman -Sy --noconfirm ansible python python-packaging openssl
           time lima ./install-dependencies.sh
 
       - name: Run ansible

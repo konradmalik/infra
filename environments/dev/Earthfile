@@ -10,7 +10,7 @@ jammy:
 arch:
     FROM archlinux:base-devel
 
-    RUN pacman -Sy --noconfirm ansible python python-packaging
+    RUN pacman -Sy --noconfirm ansible python python-packaging openssl
 
 ansible:
     ARG USER=konrad

@@ -20,10 +20,6 @@ all:
     private_machine: false
     # if true, will autoreboot at 2 am after automatic updates
     enable_auto_reboot: false
-    # if enabled, will install virtualbox and vagrant
-    vagrant: false
-    # if enabled, will setup stuff needed to properly work inside a vmware guest
-    vmware_guest: false
     # versions used mostly by ubuntu tasks that install stuff from github directly
     git_versions:
       asdf: 0.10.2
@@ -55,7 +51,6 @@ lima:
     gui_apps: false
     home_path: "/home/{{ target_user }}.linux"
     private_machine: true
-    vmware_guest: false
 
 cicd:
   hosts:
@@ -68,7 +63,6 @@ cicd:
     gui_apps: false
     home_path: "/home/{{ target_user }}.linux"
     private_machine: false
-    vmware_guest: false
 
 local:
   hosts:
@@ -80,7 +74,6 @@ local:
     enable_ssh: false
     gui_apps: false
     private_machine: true
-    vmware_guest: false
 
 docker:
   hosts:
@@ -92,4 +85,3 @@ docker:
     enable_ssh: false
     gui_apps: false
     private_machine: false
-    vmware_guest: false

@@ -9,8 +9,6 @@
           enable_ssh: "{{ enable_ssh }}"
           gui_apps: "{{ gui_apps }}"
           private_machine: "{{ private_machine }}"
-          vagrant: "{{ vagrant }}"
-          vmware_guest: "{{ vmware_guest }}"
   roles:
     - role: aur_builder-setup
       when: ansible_distribution == "Archlinux"
@@ -75,14 +73,6 @@
         - gui_apps
         - not is_docker
         - ansible_architecture == "x86_64"
-    - role: vagrant
-      when:
-        - not is_docker
-        - ansible_architecture == "x86_64"
-    - role: vmware_guest
-      when:
-        - not is_docker
-        - vmware_guest
     # a backup solution
     - role: restic
       when:
