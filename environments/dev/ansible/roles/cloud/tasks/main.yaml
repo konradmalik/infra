@@ -10,10 +10,10 @@
 - name: install asdf terraform plugin
   args:
     executable: /bin/bash
+  environment:
+    PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
-    chdir: /tmp
     cmd: |
-      . ~/.asdf/asdf.sh && \
       asdf plugin-add terraform && \
       asdf install terraform latest
     creates: ~/.asdf/plugins/terraform

@@ -1,10 +1,10 @@
 - name: install asdf earthly plugin
   args:
     executable: /bin/bash
+  environment:
+    PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
-    chdir: /tmp
     cmd: |
-      . ~/.asdf/asdf.sh && \
       asdf plugin-add earthly https://github.com/YR-ZR0/asdf-earthly && \
       asdf install earthly latest
     creates: ~/.asdf/plugins/earthly

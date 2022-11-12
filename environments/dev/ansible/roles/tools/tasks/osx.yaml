@@ -35,6 +35,7 @@
       - shellcheck
       - duf
       - tldr
+      - direnv
       - croc
       - pipx
       - bats-core

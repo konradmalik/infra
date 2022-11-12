@@ -30,21 +30,20 @@
 - name: install asdf direnv plugin
   args:
     executable: /bin/bash
+  environment:
+    PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
-    chdir: /tmp
     cmd: |
-      . ~/.asdf/asdf.sh && \
-      asdf plugin-add direnv && \
-      asdf install direnv latest
+      asdf plugin-add direnv
     creates: ~/.asdf/plugins/direnv
 
 - name: install asdf python plugin
   args:
     executable: /bin/bash
+  environment:
+    PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
-    chdir: /tmp
     cmd: |
-      . ~/.asdf/asdf.sh && \
       asdf plugin-add python && \
       asdf install python latest
     creates: ~/.asdf/plugins/python
@@ -52,10 +51,10 @@
 - name: install asdf golang plugin
   args:
     executable: /bin/bash
+  environment:
+    PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
-    chdir: /tmp
     cmd: |
-      . ~/.asdf/asdf.sh && \
       asdf plugin-add golang && \
       asdf install golang latest
     creates: ~/.asdf/plugins/golang
@@ -63,10 +62,10 @@
 - name: install asdf rust plugin
   args:
     executable: /bin/bash
+  environment:
+    PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
-    chdir: /tmp
     cmd: |
-      . ~/.asdf/asdf.sh && \
       asdf plugin-add rust && \
       asdf install rust latest
     creates: ~/.asdf/plugins/rust

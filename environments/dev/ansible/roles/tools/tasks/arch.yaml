@@ -39,6 +39,7 @@
       - shellcheck-bin
       - duf
       - tldr
+      - direnv
       - ngrok
       - croc
       - bash-bats
