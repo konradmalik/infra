@@ -10,6 +10,7 @@ jammy:
 arch:
     FROM archlinux:base-devel
 
+    RUN pacman -Syu --noconfirm
     RUN pacman -Sy --noconfirm ansible python python-packaging openssl
 
 ansible:
