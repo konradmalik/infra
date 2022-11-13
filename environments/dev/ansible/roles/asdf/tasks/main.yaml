@@ -28,41 +28,29 @@
       when: stat_result.stat.exists
 
 - name: install asdf direnv plugin
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      asdf plugin-add direnv
+    cmd: asdf plugin-add direnv
     creates: ~/.asdf/plugins/direnv
 
 - name: install asdf python plugin
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      asdf plugin-add python
+    cmd: asdf plugin-add python
     creates: ~/.asdf/plugins/python
 
 - name: install asdf golang plugin
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      asdf plugin-add golang
+    cmd: asdf plugin-add golang
     creates: ~/.asdf/plugins/golang
 
 - name: install asdf rust plugin
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      asdf plugin-add rust
+    cmd: asdf plugin-add rust
     creates: ~/.asdf/plugins/rust

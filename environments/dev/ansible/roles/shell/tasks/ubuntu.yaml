@@ -22,11 +22,8 @@
     creates: /usr/local/share/zsh/plugins/zsh-completions
 
 - name: install 'starship' from cargo
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      cargo install --locked starship
+    cmd: cargo install --locked starship
     creates: "~/.cargo/bin/starship"

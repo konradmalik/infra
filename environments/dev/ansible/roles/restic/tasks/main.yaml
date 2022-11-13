@@ -17,8 +17,8 @@
     executable: /bin/bash
   shell:
     cmd: |
-      source /etc/restic/b2_env.sh && \
-      restic init || true
+      source /etc/restic/b2_env.sh \
+      && restic init || true
 
 - name: Enable backup and check timers
   become: true

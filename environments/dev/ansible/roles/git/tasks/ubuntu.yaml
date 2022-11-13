@@ -11,13 +11,10 @@
     autoremove: yes
 
 - name: install 'git-delta' from cargo
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      cargo install --locked git-delta
+    cmd: cargo install --locked git-delta
     creates: ~/.cargo/bin/delta
 
 - name: install glab from snap

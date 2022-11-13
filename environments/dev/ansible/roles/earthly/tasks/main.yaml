@@ -1,6 +1,4 @@
 - name: install asdf earthly plugin
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:

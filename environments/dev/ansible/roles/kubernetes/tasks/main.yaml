@@ -8,85 +8,61 @@
   when: ansible_distribution == "Archlinux"
 
 - name: install asdf k3d plugin
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      asdf plugin-add k3d
+    cmd: asdf plugin-add k3d
     creates: ~/.asdf/plugins/k3d
   when: ansible_architecture == "x86_64"
 
 - name: install asdf kind plugin
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      asdf plugin-add kind
+    cmd: asdf plugin-add kind
     creates: ~/.asdf/plugins/kind
 
 - name: install asdf flux2 plugin
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      asdf plugin-add flux2
+    cmd: asdf plugin-add flux2
     creates: ~/.asdf/plugins/flux2
 
 - name: install asdf tilt plugin
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      asdf plugin-add tilt
+    cmd: asdf plugin-add tilt
     creates: ~/.asdf/plugins/tilt
   when: ansible_architecture == "x86_64"
 
 - name: install asdf helm plugin
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      asdf plugin-add helm
+    cmd: asdf plugin-add helm
     creates: ~/.asdf/plugins/helm
 
 - name: install asdf kubectl plugin
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      asdf plugin-add kubectl
+    cmd: asdf plugin-add kubectl
     creates: ~/.asdf/plugins/kubectl
 
 - name: install asdf kustomize plugin
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      asdf plugin-add kustomize
+    cmd: asdf plugin-add kustomize
     creates: ~/.asdf/plugins/kustomize
 
 - name: install asdf kubeconform plugin
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      asdf plugin-add kubeconform
+    cmd: asdf plugin-add kubeconform
     creates: ~/.asdf/plugins/kubeconform
 
 - name: link k9s dot files

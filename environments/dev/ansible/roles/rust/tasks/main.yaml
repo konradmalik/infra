@@ -8,21 +8,16 @@
   when: ansible_distribution == "Archlinux"
 
 - name: set default toolchain
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      rustup install stable && \
-      rustup default stable
+    cmd: 
+      rustup install stable \
+      && rustup default stable
 
 - name: install cargo-edit
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      cargo install --locked cargo-edit
+    cmd: cargo install --locked cargo-edit
     creates: "~/.cargo/bin/cargo-add"

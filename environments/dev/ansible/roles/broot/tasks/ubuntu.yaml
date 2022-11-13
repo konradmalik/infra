@@ -1,11 +1,8 @@
 - name: install broot from cargo
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      cargo install --locked broot
+    cmd: cargo install --locked broot
     creates: "~/.cargo/bin/broot"
 
 - name: link broot binary

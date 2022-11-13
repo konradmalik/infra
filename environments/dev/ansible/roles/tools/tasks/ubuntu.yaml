@@ -76,13 +76,10 @@
     creates: /usr/bin/duf
 
 - name: install 'hyperfine' from cargo
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      cargo install --locked hyperfine
+    cmd: cargo install --locked hyperfine
     creates: "~/.cargo/bin/hyperfine"
 
 - block:
@@ -125,13 +122,10 @@
     creates: /usr/local/bin/croc
 
 - name: install 'watchexec' from cargo
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      cargo install --locked watchexec-cli
+    cmd: cargo install --locked watchexec-cli
     creates: "~/.cargo/bin/watchexec"
 
 - name: install ripgrep-all deps
@@ -148,61 +142,44 @@
     autoremove: yes
 
 - name: install 'ripgrep-all' from cargo
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      cargo install --locked ripgrep_all
+    cmd: cargo install --locked ripgrep_all
     creates: ~/.cargo/bin/rga
 
 - name: install 'dust' from cargo
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      cargo install --locked du-dust
+    cmd: cargo install --locked du-dust
     creates: ~/.cargo/bin/dust
 
 - name: install 'bottom' from cargo
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      cargo install --locked bottom
+    cmd: cargo install --locked bottom
     creates: ~/.cargo/bin/btm
 
 - name: install 'sad' from cargo
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      cargo install --locked --all-features --git https://github.com/ms-jpq/sad --branch senpai
+    cmd: cargo install --locked --all-features --git https://github.com/ms-jpq/sad --branch senpai
     creates: ~/.cargo/bin/sad
 
 - name: install 'sd' from cargo
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      cargo install --locked sd
+    cmd: cargo install --locked sd
     creates: ~/.cargo/bin/sd
 
 - name: install pre-commit from pip via pipx
   environment:
     PATH: "{{ home_path }}/.local/bin:{{ ansible_env.PATH }}"
-  become: false
   shell:
-    chdir: /tmp
     cmd: pipx install pre-commit
     creates: ~/.local/bin/pre-commit
 
@@ -219,6 +196,6 @@
   shell:
     chdir: /tmp
     cmd: |
-      curl -o shfmt -L https://github.com/mvdan/sh/releases/download/v{{ git_versions.shfmt }}/shfmt_v{{ git_versions.shfmt }}_linux_{{ arch_map[ansible_architecture] }}
-      install shfmt /usr/local/bin/
+      curl -o shfmt -L https://github.com/mvdan/sh/releases/download/v{{ git_versions.shfmt }}/shfmt_v{{ git_versions.shfmt }}_linux_{{ arch_map[ansible_architecture] }} \
+      && install shfmt /usr/local/bin/
     creates: /usr/local/bin/shfmt

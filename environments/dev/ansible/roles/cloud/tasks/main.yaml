@@ -8,11 +8,8 @@
   when: ansible_distribution == "Archlinux"
 
 - name: install asdf terraform plugin
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      asdf plugin-add terraform
+    cmd: asdf plugin-add terraform
     creates: ~/.asdf/plugins/terraform

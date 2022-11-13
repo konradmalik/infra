@@ -16,20 +16,22 @@
   when: ansible_architecture == "aarch64"
 
 - name: install 'tidy-viewer' from cargo
-  args:
-    executable: /bin/bash
   environment:
     PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      cargo install --locked tidy-viewer
+    cmd: cargo install --locked tidy-viewer
     creates: "~/.cargo/bin/tidy-viewer"
 
 - name: install 'data-diff' from pip via pipx
-  become: false
   environment:
     PATH: "{{ home_path }}/.local/bin:{{ ansible_env.PATH }}"
   shell:
-    chdir: /tmp
     cmd: pipx install 'data-diff[all]'
+    creates: ~/.local/bin/data-diff
+
+- name: install 'diagrams' from pip via pipx
+  environment:
+    PATH: "{{ home_path }}/.local/bin:{{ ansible_env.PATH }}"
+  shell:
+    cmd: pipx install diagrams
     creates: ~/.local/bin/data-diff
