@@ -14,8 +14,7 @@
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
-      asdf plugin-add k3d && \
-      asdf install k3d latest
+      asdf plugin-add k3d
     creates: ~/.asdf/plugins/k3d
   when: ansible_architecture == "x86_64"
 
@@ -26,8 +25,7 @@
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
-      asdf plugin-add kind && \
-      asdf install kind latest
+      asdf plugin-add kind
     creates: ~/.asdf/plugins/kind
 
 - name: install asdf flux2 plugin
@@ -37,8 +35,7 @@
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
-      asdf plugin-add flux2 && \
-      asdf install flux2 latest
+      asdf plugin-add flux2
     creates: ~/.asdf/plugins/flux2
 
 - name: install asdf tilt plugin
@@ -48,8 +45,7 @@
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
-      asdf plugin-add tilt && \
-      asdf install tilt latest
+      asdf plugin-add tilt
     creates: ~/.asdf/plugins/tilt
   when: ansible_architecture == "x86_64"
 
@@ -60,8 +56,7 @@
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
-      asdf plugin-add helm && \
-      asdf install helm latest
+      asdf plugin-add helm
     creates: ~/.asdf/plugins/helm
 
 - name: install asdf kubectl plugin
@@ -71,8 +66,7 @@
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
-      asdf plugin-add kubectl && \
-      asdf install kubectl latest
+      asdf plugin-add kubectl
     creates: ~/.asdf/plugins/kubectl
 
 - name: install asdf kustomize plugin
@@ -82,8 +76,7 @@
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
-      asdf plugin-add kustomize && \
-      asdf install kustomize latest
+      asdf plugin-add kustomize
     creates: ~/.asdf/plugins/kustomize
 
 - name: install asdf kubeconform plugin
@@ -93,8 +86,7 @@
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
-      asdf plugin-add kubeconform && \
-      asdf install kubeconform latest
+      asdf plugin-add kubeconform
     creates: ~/.asdf/plugins/kubeconform
 
 - name: link k9s dot files

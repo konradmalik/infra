@@ -4,7 +4,7 @@
     chdir: /tmp
     cmd: |
       curl -L https://github.com/derailed/k9s/releases/download/v{{ git_versions.k9s }}/k9s_{{ ansible_system }}_{{ ansible_architecture }}.tar.gz | tar xvfz -
-      mv k9s /usr/local/bin/k9s
+      install k9s /usr/local/bin/k9s
     creates: /usr/local/bin/k9s
   when: ansible_architecture == "x86_64"
 
@@ -14,6 +14,6 @@
     chdir: /tmp
     cmd: |
       curl -L https://github.com/derailed/k9s/releases/download/v{{ git_versions.k9s }}/k9s_{{ ansible_system }}_{{ arch_map[ansible_architecture] }}.tar.gz | tar xvfz -
-      mv k9s /usr/local/bin/k9s
+      install k9s /usr/local/bin/k9s
     creates: /usr/local/bin/k9s
   when: ansible_architecture == "aarch64"

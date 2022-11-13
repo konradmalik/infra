@@ -14,6 +14,5 @@
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
-      asdf plugin-add terraform && \
-      asdf install terraform latest
+      asdf plugin-add terraform
     creates: ~/.asdf/plugins/terraform

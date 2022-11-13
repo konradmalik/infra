@@ -15,6 +15,6 @@
 
 - name: install nix-env (direnv plugin)
   shell:
-    cmd: nix-env -f '<nixpkgs>' -iA nix-direnv
+    # interactive is required, as nix paths are added in zshrc and bashrc, and those are sourced only for interactive shells
+    cmd: /bin/bash -i -c "nix-env -f '<nixpkgs>' -iA nix-direnv"
     creates: ~/.nix-profile/share/nix-direnv/direnvrc
-

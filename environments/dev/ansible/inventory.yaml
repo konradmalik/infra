@@ -30,6 +30,7 @@ all:
       nerdctl: 0.22.2
       nvim: 0.8.0
       shfmt: 3.5.1
+      tee: 0.13.0
       tinygo: 0.25.0
       viddy: 0.3.6
     # Mappings from Ansible reported architecture to distro release architecture

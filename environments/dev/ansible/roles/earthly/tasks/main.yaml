@@ -4,9 +4,7 @@
   environment:
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: |
-      asdf plugin-add earthly https://github.com/YR-ZR0/asdf-earthly && \
-      asdf install earthly latest
+    cmd: asdf plugin-add earthly https://github.com/YR-ZR0/asdf-earthly
     creates: ~/.asdf/plugins/earthly
 
 - name: link earthly config

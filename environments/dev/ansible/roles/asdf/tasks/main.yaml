@@ -44,8 +44,7 @@
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
-      asdf plugin-add python && \
-      asdf install python latest
+      asdf plugin-add python
     creates: ~/.asdf/plugins/python
 
 - name: install asdf golang plugin
@@ -55,8 +54,7 @@
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
-      asdf plugin-add golang && \
-      asdf install golang latest
+      asdf plugin-add golang
     creates: ~/.asdf/plugins/golang
 
 - name: install asdf rust plugin
@@ -66,6 +64,5 @@
     PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
   shell:
     cmd: |
-      asdf plugin-add rust && \
-      asdf install rust latest
+      asdf plugin-add rust
     creates: ~/.asdf/plugins/rust
