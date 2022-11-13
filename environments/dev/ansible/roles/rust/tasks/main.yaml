@@ -11,7 +11,7 @@
   environment:
     PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
   shell:
-    cmd: 
+    cmd: |
       rustup install stable \
       && rustup default stable
 
