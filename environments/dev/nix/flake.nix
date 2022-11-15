@@ -12,26 +12,43 @@
   outputs = { self, nixpkgs, nixpkgs-unstable, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        unstable = import nixpkgs-unstable { "system" = system; };
-        stable = import nixpkgs { "system" = system; };
-        legacy = nixpkgs.legacyPackages.${system};
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [
+            unstable-overlay
+            unstable-legacy-overlay
+            legacy-overlay
+          ];
+        };
+
+        unstable-overlay = final: prev: {
+          unstable = import nixpkgs-unstable {
+            system = prev.system;
+          };
+        };
+        unstable-legacy-overlay = final: prev: {
+          unstable-legacy = nixpkgs-unstable.legacyPackages.${prev.system};
+        };
+        legacy-overlay = final: prev: {
+          legacy = nixpkgs.legacyPackages.${prev.system};
+        };
         # can be here as it's not really system dependent
         # if ever becomes that - we can move it to outputs and refer to it as 'self.profileExports.${system}'
-        profileExports = stable.writeText "profile-exports" ''
+        profileExports = pkgs.writeText "profile-exports" ''
           export MANPATH=$HOME/.nix-profile/share/man:/nix/var/nix/profiles/default/share/man:/usr/share/man
           export INFOPATH=$HOME/.nix-profile/share/info:/nix/var/nix/profiles/default/share/info:/usr/share/info
         '';
       in
       {
-        packages.default = stable.buildEnv {
+        packages.default = pkgs.buildEnv {
           name = "konrad-home-env";
           paths = [
-            (stable.runCommand "profile" { } ''
+            (pkgs.runCommand "profile" { } ''
               mkdir -p $out/etc/profile.d
               cp ${profileExports} $out/etc/profile.d/profile-exports.sh
             '')
 
-            unstable.nix-direnv
+            pkgs.unstable.nix-direnv
           ];
           pathsToLink = [ "/share/man" "/share/doc" "/share/info" "/bin" "/etc" ];
           extraOutputsToInstall = [ "man" "doc" "info" ];
