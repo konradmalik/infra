@@ -13,8 +13,9 @@
   with_items:
     - nix
 
-- name: install nix-env (direnv plugin)
+- name: install home-env managed as a nix flake
   shell:
     # interactive is required, as nix paths are added in zshrc and bashrc, and those are sourced only for interactive shells
-    cmd: /bin/bash -i -c "nix-env -f '<nixpkgs>' -iA nix-direnv"
+    # '%2F' is urlencoded '/'
+    cmd: /bin/bash -i -c "nix profile install 'git+https://github.com/konradmalik/infra?dir=environments%2Fdev%2Fnix'"
     creates: ~/.nix-profile/share/nix-direnv/direnvrc
