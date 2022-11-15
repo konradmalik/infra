@@ -17,7 +17,7 @@
         legacy = nixpkgs.legacyPackages.${system};
       in
       {
-        defaultPackage = stable.buildEnv {
+        packages.default = stable.buildEnv {
           name = "konrad-home-env";
           paths = [
             unstable.nix-direnv
