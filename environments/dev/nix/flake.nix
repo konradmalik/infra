@@ -2,8 +2,8 @@
   description = "Konrad's home flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -48,7 +48,7 @@
 
             pkgs.unstable.nix-direnv
           ];
-          pathsToLink = [ "/share/man" "/share/doc" "/share/info" "/bin" "/etc" ];
+          pathsToLink = [ "/share" "/bin" "/etc" ];
           extraOutputsToInstall = [ "man" "doc" "info" ];
           postBuild = ''
             if [ -x $out/bin/install-info -a -w $out/share/info ]; then
