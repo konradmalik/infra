@@ -14,19 +14,26 @@
     state: link
     force: yes
 
+- name: make sure /usr/local/share/applications folder exists and has proper mode
+  become: true
+  ansible.builtin.file:
+    path: /usr/local/share/applications
+    state: directory
+    mode: "0755"
+
 - name: Download alacritty.desktop entry
   become: true
   ansible.builtin.get_url:
     url: https://github.com/alacritty/alacritty/releases/latest/download/Alacritty.desktop
     dest: /usr/local/share/applications/Alacritty.desktop
-    mode: "0755"
+    mode: "0644"
 
 - name: make sure pixmaps folder exists and has proper mode
   become: true
   ansible.builtin.file:
     path: /usr/share/pixmaps
     state: directory
-    mode: 0755
+    mode: "0755"
 
 - name: Download alacritty.svg icon
   become: true
