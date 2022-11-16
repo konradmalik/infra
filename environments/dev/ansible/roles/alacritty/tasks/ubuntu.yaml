@@ -1,5 +1,36 @@
-- name: install alacritty snap package
+- name: install 'alacritty' from cargo
+  environment:
+    PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
+  shell:
+    cmd: cargo install --locked alacritty
+    creates: "~/.cargo/bin/alacritty"
+
+- name: link alacritty binary for all users
   become: true
-  community.general.snap:
-    name: alacritty
-    classic: yes
+  ansible.builtin.file:
+    # has to be full path due to 'become'
+    src: "{{ home_path }}/.cargo/bin/alacritty"
+    path: "/usr/local/bin/alacritty"
+    state: link
+    force: yes
+
+- name: Download alacritty.desktop entry
+  become: true
+  ansible.builtin.get_url:
+    url: https://github.com/alacritty/alacritty/releases/latest/download/Alacritty.desktop
+    dest: /usr/local/share/applications/Alacritty.desktop
+    mode: "0755"
+
+- name: make sure pixmaps folder exists and has proper mode
+  become: true
+  ansible.builtin.file:
+    path: /usr/share/pixmaps
+    state: directory
+    mode: 0755
+
+- name: Download alacritty.svg icon
+  become: true
+  ansible.builtin.get_url:
+    url: https://github.com/alacritty/alacritty/releases/latest/download/Alacritty.svg
+    dest: /usr/share/pixmaps/Alacritty.svg
+    mode: "0644"
