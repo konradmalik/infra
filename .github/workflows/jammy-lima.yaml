@@ -24,7 +24,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/Library/Caches/lima/download
-          key: ${{ runner.os }}-archlinux
+          key: ${{ runner.os }}-jammy
 
       - name: Start lima
         working-directory: ./environments/dev/lima
