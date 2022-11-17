@@ -46,6 +46,7 @@
               cp ${profileExports} $out/etc/profile.d/profile-exports.sh
             '')
 
+            pkgs.unstable.direnv
             pkgs.unstable.nix-direnv
           ];
           pathsToLink = [ "/share" "/bin" "/etc" ];
