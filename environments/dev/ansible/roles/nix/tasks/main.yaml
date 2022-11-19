@@ -33,3 +33,21 @@
   shell:
     # interactive is required, as nix paths are added in zshrc and bashrc, and those are sourced only for interactive shells
     cmd: /bin/bash -i -c "nix profile upgrade '.*'"
+
+# on linux make sure kvm is accessible, cross-arch builds will benefit
+- block:
+    - name: create udev rule to allow kvm
+      copy:
+        content: |
+          KERNEL=="kvm", GROUP="kvm", MODE="0660"
+        dest: /etc/udev/rules.d/99-kvm.rules
+
+    - name: adding existing user "{{ target_user }}" to group "kvm"
+      user:
+        name: "{{ target_user }}"
+        groups: [kvm]
+        append: yes
+  become: true
+  when:
+    - not is_docker
+    - ansible_system == "Linux"
