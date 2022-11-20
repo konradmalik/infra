@@ -15,10 +15,9 @@
     - git
     - git-{{ ansible_system | lower }}
 
-- name: install git-open globally
-  become: true
-  community.general.npm:
-    name: "{{ item }}"
-    global: yes
-  with_items:
-    - git-open
+- name: install 'git-branchless' from cargo
+  environment:
+    PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
+  shell:
+    cmd: cargo install --locked git-branchless
+    creates: ~/.cargo/bin/git-branchless
