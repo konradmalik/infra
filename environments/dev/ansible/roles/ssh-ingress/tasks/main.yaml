@@ -4,14 +4,22 @@
 - import_tasks: arch.yaml
   when: ansible_distribution == "Archlinux"
 
+- name: make sure ssh folder has proper mode
+  file:
+    path: ~/.ssh
+    state: directory
+    mode: "0700"
+
+- name: get authorized_keys from github
+  ansible.builtin.get_url:
+    url: https://github.com/konradmalik.keys
+    # dest requires absolute path
+    dest: "{{ home_path }}/.ssh/authorized_keys"
+    force: true
+    mode: "0600"
+
 # use block to become: true for all inside
 - block:
-    - name: Set authorized key for remote user
-      authorized_key:
-        user: "{{ target_user }}"
-        state: present
-        key: "{{ copy_local_key }}"
-
     - name: Disable root SSH login
       lineinfile:
         dest: /etc/ssh/sshd_config
@@ -32,7 +40,6 @@
         rule: allow
         name: OpenSSH
       when: ansible_distribution == "Ubuntu"
-
 
     - name: UFW - Deny all other incoming traffic by default (all but raspberry pis)
       ufw:
