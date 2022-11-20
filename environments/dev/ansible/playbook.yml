@@ -28,6 +28,8 @@
         - not is_docker # it requires systemd
     - charm
     - git
+    - role: bitwarden
+      when: private_machine
     - ssh-egress
     - role: ssh-ingress
       when:
