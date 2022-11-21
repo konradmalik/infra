@@ -8,35 +8,24 @@
     owner: "{{ target_user }}"
     group: "{{ target_user }}"
 
-- name: Check if dotfiles repo exists
-  stat:
-    path: ~/Code/dotfiles
-  register: dotfiles_stat_result
+- name: Ensure dotfiles repo exists (public)
+  ansible.builtin.git:
+    repo: https://github.com/konradmalik/dotfiles.git
+    dest: "{{ home_path }}/Code/dotfiles"
+    version: main
+    recursive: false
+    clone: true
+    force: true
+    update: true
+  when: not private_machine
 
-- block:
-    - name: make sure dotfiles repo belongs to "{{ target_user }}"
-      become: true
-      ansible.builtin.file:
-        path: "{{ repo_path }}"
-        state: directory
-        mode: "0755"
-        recurse: no
-        owner: "{{ target_user }}"
-        group: "{{ target_user }}"
-
-    - name: Ensure dotfiles repo exists (public)
-      ansible.builtin.git:
-        repo: https://github.com/konradmalik/dotfiles.git
-        dest: ~/Code/dotfiles
-        version: main
-        recursive: "no"
-      when: not private_machine
-
-    - name: Ensure dotfiles repo exists (private)
-      ansible.builtin.git:
-        repo: git@github.com:konradmalik/dotfiles.git
-        dest: ~/Code/dotfiles
-        version: main
-        recursive: "yes"
-      when: private_machine
-  when: not dotfiles_stat_result.stat.exists
+- name: Ensure dotfiles repo exists (private)
+  ansible.builtin.git:
+    repo: git@github.com:konradmalik/dotfiles.git
+    dest: "{{ home_path }}/Code/dotfiles"
+    version: main
+    recursive: true
+    clone: true
+    force: true
+    update: true
+  when: private_machine
