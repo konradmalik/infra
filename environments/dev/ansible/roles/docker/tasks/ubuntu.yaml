@@ -1,12 +1,10 @@
 - name: add docker apt key
   become: true
-  shell:
-    chdir: /tmp
-    cmd: |
-      curl -sL https://download.docker.com/linux/ubuntu/gpg |
-        gpg --dearmor |
-        tee /etc/apt/trusted.gpg.d/docker.gpg > /dev/null
-    creates: /etc/apt/trusted.gpg.d/docker.gpg
+  ansible.builtin.get_url:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    dest: /etc/apt/trusted.gpg.d/docker.asc
+    mode: "0644"
+    force: true
 
 - name: add docker apt repo
   become: true

@@ -11,13 +11,11 @@
 
 - name: add regolith apt key
   become: true
-  shell:
-    chdir: /tmp
-    cmd: |
-      curl -sL https://regolith-desktop.org/regolith.key |
-        gpg --dearmor |
-        tee /etc/apt/trusted.gpg.d/regolith.asc > /dev/null
-    creates: /etc/apt/trusted.gpg.d/regolith.asc
+  ansible.builtin.get_url:
+    url: https://regolith-desktop.org/regolith.key
+    dest: /etc/apt/trusted.gpg.d/regolith.asc
+    mode: "0644"
+    force: true
 
 - name: add regolith apt repo
   become: true

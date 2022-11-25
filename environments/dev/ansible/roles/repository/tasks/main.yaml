@@ -9,6 +9,7 @@
     group: "{{ target_user }}"
 
 - name: Ensure dotfiles repo exists (public)
+  become: false
   ansible.builtin.git:
     repo: https://github.com/konradmalik/dotfiles.git
     dest: "{{ home_path }}/Code/dotfiles"
@@ -20,12 +21,15 @@
   when: not private_machine
 
 - name: Ensure dotfiles repo exists (private)
+  become: false
   ansible.builtin.git:
     repo: git@github.com:konradmalik/dotfiles.git
     dest: "{{ home_path }}/Code/dotfiles"
     version: main
-    recursive: true
+    recursive: false
     clone: true
     force: true
     update: true
+    accept_newhostkey: true
+    #key_file: "{{ home_path }}/.ssh/private"
   when: private_machine

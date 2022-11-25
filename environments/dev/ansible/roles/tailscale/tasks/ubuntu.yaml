@@ -1,12 +1,10 @@
 - name: add tailscale apt key
   become: true
-  shell:
-    chdir: /tmp
-    cmd: |
-      curl -sL https://pkgs.tailscale.com/stable/{{ ansible_distribution | lower }}/{{ ansible_distribution_release | lower }}.gpg |
-        gpg --dearmor |
-        tee /etc/apt/trusted.gpg.d/tailscale.gpg > /dev/null
-    creates: /etc/apt/trusted.gpg.d/tailscale.gpg
+  ansible.builtin.get_url:
+    url: https://pkgs.tailscale.com/stable/{{ ansible_distribution | lower }}/{{ ansible_distribution_release | lower }}.gpg
+    dest: /etc/apt/trusted.gpg.d/tailscale.asc
+    mode: "0644"
+    force: true
 
 - name: add tailscale apt repo
   become: true

@@ -1,13 +1,11 @@
 - block:
     - name: add hashicorp apt key
       become: true
-      shell:
-        chdir: /tmp
-        cmd: |
-          curl -sL https://apt.releases.hashicorp.com/gpg |
-            gpg --dearmor |
-            tee /etc/apt/trusted.gpg.d/hashicorp.gpg > /dev/null
-        creates: /etc/apt/trusted.gpg.d/hashicorp.gpg
+      ansible.builtin.get_url:
+        url: https://apt.releases.hashicorp.com/gpg
+        dest: /etc/apt/trusted.gpg.d/hashicorp.asc
+        mode: "0644"
+        force: true
 
     - name: add hashicorp apt repo (amd64)
       become: true
@@ -19,13 +17,11 @@
 
 - name: add microsoft apt key
   become: true
-  shell:
-    chdir: /tmp
-    cmd: |
-      curl -sL https://packages.microsoft.com/keys/microsoft.asc |
-        gpg --dearmor |
-        tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
-    creates: /etc/apt/trusted.gpg.d/microsoft.gpg
+  ansible.builtin.get_url:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+    dest: /etc/apt/trusted.gpg.d/microsoft.asc
+    mode: "0644"
+    force: true
 
 - name: add microsoft azure cli apt repo (amd64)
   become: true

@@ -1,16 +1,15 @@
 - name: add charm apt key
   become: true
-  shell:
-    chdir: /tmp
-    cmd: |
-      curl -fsSL https://repo.charm.sh/apt/gpg.key |
-        gpg --dearmor -o /etc/apt/trusted.gpg.d/charm.gpg
-    creates: /etc/apt/trusted.gpg.d/charm.gpg
+  ansible.builtin.get_url:
+    url: https://repo.charm.sh/apt/gpg.key
+    dest: /etc/apt/trusted.gpg.d/charm.asc
+    mode: "0644"
+    force: true
 
 - name: add charm apt repo
   become: true
   apt_repository:
-    repo: deb [signed-by=/etc/apt/trusted.gpg.d/charm.gpg] https://repo.charm.sh/apt/ * *
+    repo: deb https://repo.charm.sh/apt/ * *
     state: present
     update_cache: yes
 

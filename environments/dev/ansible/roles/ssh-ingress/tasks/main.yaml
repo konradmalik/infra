@@ -4,36 +4,68 @@
 - import_tasks: arch.yaml
   when: ansible_distribution == "Archlinux"
 
+- import_tasks: osx.yaml
+  when: ansible_distribution == "MacOSX"
+
 - name: make sure ssh folder has proper mode
   file:
     path: ~/.ssh
     state: directory
     mode: "0700"
 
+- name: make sure authorized_keys.d folder has proper mode
+  file:
+    path: ~/.ssh/authorized_keys.d
+    state: directory
+    mode: "0700"
+
+- name: install 'ssh-key-dir' from cargo
+  environment:
+    PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
+  shell:
+    cmd: cargo install --locked ssh-key-dir
+    creates: "~/.cargo/bin/ssh-key-dir"
+
+- name: install 'ssh-key-dir' into root
+  become: true
+  shell:
+    cmd: "install --owner root --group root --mode 755 {{ home_path }}/.cargo/bin/ssh-key-dir /usr/local/bin/ssh-key-dir"
+    creates: /usr/local/bin/ssh-key-dir
+
 - name: get authorized_keys from github
   ansible.builtin.get_url:
     url: https://github.com/konradmalik.keys
-    #url: https://gitlab.com/konradmalik.keys
     # dest requires absolute path
-    dest: "{{ home_path }}/.ssh/authorized_keys"
+    dest: "{{ home_path }}/.ssh/authorized_keys.d/konradmalik-github"
     force: true
     mode: "0600"
 
-# use block to become: true for all inside
-- block:
-    - name: Disable root SSH login
-      lineinfile:
-        dest: /etc/ssh/sshd_config
-        regexp: "^PermitRootLogin"
-        line: "PermitRootLogin no"
-        state: present
+- name: get authorized_keys from gitlab
+  ansible.builtin.get_url:
+    url: https://gitlab.com/konradmalik.keys
+    # dest requires absolute path
+    dest: "{{ home_path }}/.ssh/authorized_keys.d/konradmalik-gitlab"
+    force: true
+    mode: "0600"
 
-    - name: Disable SSH password authentication
-      lineinfile:
-        dest: /etc/ssh/sshd_config
-        regexp: "PasswordAuthentication"
-        line: "PasswordAuthentication no"
-        state: present
+- block:
+    - name: install sshd overrides
+      ansible.builtin.copy:
+        dest: /etc/ssh/sshd_config.d/99-konrad.conf
+        content: |
+          PermitRootLogin no
+          PasswordAuthentication no
+          AuthorizedKeysCommand /usr/local/bin/ssh-key-dir %u
+          AuthorizedKeysCommandUser root
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: start and enable ssh daemon
+      service:
+        name: sshd
+        state: started
+        enabled: yes
 
     # UFW Setup
     - name: UFW - Allow SSH connections
@@ -50,12 +82,4 @@
       when:
         - ansible_distribution == "Ubuntu"
         - "'rpis' not in group_names"
-
-    - name: start and enable ssh daemon
-      service:
-        name: sshd
-        state: started
-        enabled: yes
-
   become: true
-  when: ansible_system == "Linux"

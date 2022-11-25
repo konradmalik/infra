@@ -1,5 +1,6 @@
 all:
   vars:
+    ansible_ssh_extra_args: "-o IdentitiesOnly=yes -o PubKeyAuthentication=yes -o ForwardAgent=yes"
     ansible_python_interpreter: /usr/bin/python3
     # specify user for which this whole playbook should run
     target_user: "{{ lookup('env','USER') or 'konrad' }}"

@@ -12,6 +12,9 @@ if [[ -z "${TARGET_HOSTS}" ]]; then
 	exit 1
 fi
 
+# set cwd to the script
+cd "$(dirname "$0")"
+
 ansible-playbook \
 	-i inventory.yaml \
 	-i ../../../private/environments/dev/ansible/inventory.yaml \

@@ -21,7 +21,8 @@
     - rust
     #
     - tools
-    - repository
+    - role: repository
+      tags: repository
     - dotfiles
     - role: nix
       when:
@@ -69,6 +70,7 @@
         - gui_apps
         - not is_docker
     - role: window_manager
+      tags: window_manager
       when:
         - gui_apps
         - not is_docker
