@@ -64,8 +64,8 @@
     - name: start and enable ssh daemon
       service:
         name: sshd
-        state: started
-        enabled: yes
+        state: restarted
+        enabled: true
 
     # UFW Setup
     - name: UFW - Allow SSH connections
