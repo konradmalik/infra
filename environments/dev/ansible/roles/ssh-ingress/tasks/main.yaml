@@ -55,6 +55,7 @@
         content: |
           PermitRootLogin no
           PasswordAuthentication no
+          ChallengeResponseAuthentication no
           AuthorizedKeysCommand /usr/local/bin/ssh-key-dir %u
           AuthorizedKeysCommandUser root
         owner: root
