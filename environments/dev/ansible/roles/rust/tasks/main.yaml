@@ -14,10 +14,3 @@
     cmd: |
       rustup install stable \
       && rustup default stable
-
-- name: install cargo-edit
-  environment:
-    PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
-  shell:
-    cmd: cargo install --locked cargo-edit
-    creates: "~/.cargo/bin/cargo-add"
