@@ -26,7 +26,7 @@
     repo: git@github.com:konradmalik/dotfiles.git
     dest: "{{ home_path }}/Code/dotfiles"
     version: main
-    recursive: false
+    recursive: true
     clone: true
     force: true
     update: true

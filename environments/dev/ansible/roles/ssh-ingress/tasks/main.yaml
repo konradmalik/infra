@@ -35,7 +35,6 @@
 - name: get authorized_keys from github
   ansible.builtin.get_url:
     url: https://github.com/konradmalik.keys
-    # dest requires absolute path
     dest: "{{ home_path }}/.ssh/authorized_keys.d/konradmalik-github"
     force: true
     mode: "0600"
@@ -43,10 +42,22 @@
 - name: get authorized_keys from gitlab
   ansible.builtin.get_url:
     url: https://gitlab.com/konradmalik.keys
-    # dest requires absolute path
     dest: "{{ home_path }}/.ssh/authorized_keys.d/konradmalik-gitlab"
     force: true
     mode: "0600"
+
+- name: install 'klucznik' from cargo
+  environment:
+    PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
+  shell:
+    cmd: cargo install --locked klucznik
+    creates: "~/.cargo/bin/klucznik"
+
+- name: Run 'klucznik' every day
+  ansible.builtin.cron:
+    name: "check dirs"
+    hour: "12"
+    job: "/usr/local/bin/klucznik --source https://github.com/konradmalik.keys --source https://gitlab.com/konradmalik.keys --destination {{ home_path }}/.ssh/authorized_keys.d/klucznik"
 
 - block:
     - name: install sshd overrides
