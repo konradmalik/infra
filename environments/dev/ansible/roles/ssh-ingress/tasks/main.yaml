@@ -26,11 +26,13 @@
     cmd: cargo install --locked ssh-key-dir
     creates: "~/.cargo/bin/ssh-key-dir"
 
-- name: install 'ssh-key-dir' into root
+- name: link 'ssh-key-dir' into root
   become: true
-  shell:
-    cmd: "install --owner root --group root --mode 755 {{ home_path }}/.cargo/bin/ssh-key-dir /usr/local/bin/ssh-key-dir"
-    creates: /usr/local/bin/ssh-key-dir
+  ansible.builtin.file:
+    src: "{{ home_path }}/.cargo/bin/ssh-key-dir"
+    path: "/usr/local/bin/ssh-key-dir"
+    state: link
+    force: yes
 
 - name: get authorized_keys from github
   ansible.builtin.get_url:
@@ -53,9 +55,17 @@
     cmd: cargo install --locked klucznik
     creates: "~/.cargo/bin/klucznik"
 
+- name: link 'klucznik' into root
+  become: true
+  ansible.builtin.file:
+    src: "{{ home_path }}/.cargo/bin/klucznik"
+    path: "/usr/local/bin/klucznik"
+    state: link
+    force: yes
+
 - name: Run 'klucznik' every day
   ansible.builtin.cron:
-    name: "check dirs"
+    name: "klucznik sync"
     hour: "12"
     job: "/usr/local/bin/klucznik --source https://github.com/konradmalik.keys --source https://gitlab.com/konradmalik.keys --destination {{ home_path }}/.ssh/authorized_keys.d/klucznik"
 
