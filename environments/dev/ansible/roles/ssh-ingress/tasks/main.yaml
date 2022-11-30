@@ -67,7 +67,7 @@
   ansible.builtin.cron:
     name: "klucznik sync"
     hour: "12"
-    job: "/usr/local/bin/klucznik --source https://github.com/konradmalik.keys --source https://gitlab.com/konradmalik.keys --destination {{ home_path }}/.ssh/authorized_keys.d/klucznik"
+    job: "/usr/local/bin/klucznik --sources https://github.com/konradmalik.keys --sources https://gitlab.com/konradmalik.keys --destination {{ home_path }}/.ssh/authorized_keys.d/klucznik"
 
 - block:
     - name: install sshd overrides
