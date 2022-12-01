@@ -26,13 +26,12 @@
     cmd: cargo install --locked ssh-key-dir
     creates: "~/.cargo/bin/ssh-key-dir"
 
-- name: link 'ssh-key-dir' into root
+# cannot do it via link, ssh command won't follow links
+- name: install 'ssh-key-dir' into root
   become: true
-  ansible.builtin.file:
-    src: "{{ home_path }}/.cargo/bin/ssh-key-dir"
-    path: "/usr/local/bin/ssh-key-dir"
-    state: link
-    force: yes
+  shell:
+    cmd: install --mode 755 --owner root --group root {{ home_path }}/.cargo/bin/ssh-key-dir /usr/local/bin/ssh-key-dir
+    creates: /usr/local/bin/ssh-key-dir
 
 - name: get authorized_keys from github
   ansible.builtin.get_url:
