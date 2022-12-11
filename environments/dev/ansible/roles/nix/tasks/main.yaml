@@ -6,34 +6,6 @@
     cmd: yes | sh <(curl -L https://nixos.org/nix/install) --daemon
     creates: "/nix"
 
-- name: link nix config
-  shell:
-    chdir: "{{ repo_path }}/files"
-    cmd: stow --target="$HOME" {{ item }}
-  with_items:
-    - nix
-
-- name: check if our flake exists
-  shell:
-    # interactive is required, as nix paths are added in zshrc and bashrc, and those are sourced only for interactive shells
-    cmd: /bin/bash -i -c "nix profile list | grep --quiet 'konrad-home-env'"
-  register: konrad_home_env_flake
-  failed_when: false
-  changed_when: false
-
-- name: install home-env managed as a nix flake
-  shell:
-    # interactive is required, as nix paths are added in zshrc and bashrc, and those are sourced only for interactive shells
-    # '%2F' is urlencoded '/'
-    cmd: /bin/bash -i -c "nix profile install 'git+https://github.com/konradmalik/infra?dir=environments%2Fdev%2Fnix'"
-    creates: ~/.nix-profile/share/nix-direnv/direnvrc
-  when: konrad_home_env_flake.rc != 0
-
-- name: update home-env in nix
-  shell:
-    # interactive is required, as nix paths are added in zshrc and bashrc, and those are sourced only for interactive shells
-    cmd: /bin/bash -i -c "nix profile upgrade '.*'"
-
 # on linux make sure kvm is accessible, cross-arch builds will benefit
 - block:
     - name: create udev rule to allow kvm
@@ -51,3 +23,21 @@
   when:
     - not is_docker
     - ansible_system == "Linux"
+
+- name: link nix config
+  shell:
+    chdir: "{{ repo_path }}/files"
+    cmd: stow --target="$HOME" {{ item }}
+  with_items:
+    - nix
+
+- name: build home flake
+  shell:
+    # interactive is required, as nix paths are added in zshrc and bashrc, and those are sourced only for interactive shells
+    cmd: /bin/bash -i -c "nix build --no-link 'git+file://{{ repo_path }}?dir=files%2fnix%2f.config%2fnixpkgs#homeConfigurations.{{ target_user }}@{{ ansible_hostname }}.activationPackage'"
+
+- name: activate home flake
+  shell:
+    # interactive is required, as nix paths are added in zshrc and bashrc, and those are sourced only for interactive shells
+    # "$(nix path-info <flake-uri>#homeConfigurations.jdoe.activationPackage)"/activate
+    cmd: /bin/bash -i -c "$(nix path-info git+file://{{ repo_path }}?dir=files%2fnix%2f.config%2fnixpkgs#homeConfigurations.{{ target_user }}@{{ ansible_hostname }}.activationPackage) /activate"
