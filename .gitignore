@@ -3,6 +3,8 @@
 #nvim
 .netrwhist
 **/packer_compiled.vim
+#nix
+result
 #vscode
 .config/Code/*
 !.config/Code/User/
