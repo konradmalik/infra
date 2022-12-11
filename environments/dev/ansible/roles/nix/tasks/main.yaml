@@ -31,13 +31,18 @@
   with_items:
     - nix
 
-- name: build home flake
+- name: build and activate home flake
   shell:
+    chdir: "{{ repo_path }}"
     # interactive is required, as nix paths are added in zshrc and bashrc, and those are sourced only for interactive shells
-    cmd: /bin/bash -i -c "nix build --no-link 'git+file://{{ repo_path }}?dir=files%2fnix%2f.config%2fnixpkgs#homeConfigurations.{{ target_user }}@{{ ansible_hostname }}.activationPackage'"
+    cmd: /bin/bash -i -c "nix build '.#homeConfigurations.{{ target_user }}@{{ ansible_hostname }}.activationPackage' && ./result/activate"
+  when:
+    - ansible_system == "Linux"
 
-- name: activate home flake
+- name: build and activate nix-darwin flake
   shell:
+    chdir: "{{ repo_path }}"
     # interactive is required, as nix paths are added in zshrc and bashrc, and those are sourced only for interactive shells
-    # "$(nix path-info <flake-uri>#homeConfigurations.jdoe.activationPackage)"/activate
-    cmd: /bin/bash -i -c "$(nix path-info git+file://{{ repo_path }}?dir=files%2fnix%2f.config%2fnixpkgs#homeConfigurations.{{ target_user }}@{{ ansible_hostname }}.activationPackage)/activate"
+    cmd: /bin/bash -i -c "nix build .#darwinConfigurations.{{ target_user }}@{{ ansible_hostname }}.system && ./result/sw/bin/darwin-rebuild switch --flake ."
+  when:
+    - ansible_system == "Darwin"
