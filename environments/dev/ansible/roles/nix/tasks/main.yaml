@@ -27,7 +27,7 @@
 - name: link nix config
   shell:
     chdir: "{{ repo_path }}/files"
-    cmd: stow --target="$HOME" {{ item }}
+    cmd: stow --target="$XDG_CONFIG_HOME"{{ item }}
   with_items:
     - nix
 

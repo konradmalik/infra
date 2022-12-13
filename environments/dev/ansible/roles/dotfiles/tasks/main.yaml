@@ -6,7 +6,7 @@
 - name: link general dot files
   shell:
     chdir: "{{ repo_path }}/files"
-    cmd: stow --target="$HOME" {{ item }}
+    cmd: stow --target="$XDG_CONFIG_HOME"{{ item }}
   with_items:
     - inputrc
     - gdb
@@ -14,7 +14,7 @@
 - name: link no folding general dot files
   shell:
     chdir: "{{ repo_path }}/files"
-    cmd: stow --target="$HOME" --no-folding {{ item }}
+    cmd: stow --target="$XDG_CONFIG_HOME"--no-folding {{ item }}
   with_items:
     - gpg
     - bin

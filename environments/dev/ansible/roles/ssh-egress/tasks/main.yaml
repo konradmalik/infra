@@ -22,7 +22,7 @@
 - name: link ssh config
   shell:
     chdir: "{{ repo_path }}/files"
-    cmd: stow --target="$HOME" --no-folding {{ item }}
+    cmd: stow --target="$XDG_CONFIG_HOME"--no-folding {{ item }}
   with_items:
     - ssh
 
@@ -36,7 +36,7 @@
 - name: link private ssh config
   shell:
     chdir: "{{ repo_path }}/private/files"
-    cmd: stow --target="$HOME" --no-folding {{ item }}
+    cmd: stow --target="$XDG_CONFIG_HOME"--no-folding {{ item }}
   with_items:
     - ssh
   when:

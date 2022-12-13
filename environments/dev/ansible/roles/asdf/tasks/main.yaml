@@ -8,9 +8,8 @@
 - name: link asdf and direnv config
   shell:
     chdir: "{{ repo_path }}/files"
-    cmd: stow --target="$HOME" {{ item }}
+    cmd: stow --target="$XDG_CONFIG_HOME"{{ item }}
   with_items:
-    - asdf
     - direnv
 
 - block:
@@ -33,24 +32,3 @@
   shell:
     cmd: asdf plugin-add direnv
     creates: ~/.asdf/plugins/direnv
-
-- name: install asdf python plugin
-  environment:
-    PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
-  shell:
-    cmd: asdf plugin-add python
-    creates: ~/.asdf/plugins/python
-
-- name: install asdf golang plugin
-  environment:
-    PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
-  shell:
-    cmd: asdf plugin-add golang
-    creates: ~/.asdf/plugins/golang
-
-- name: install asdf rust plugin
-  environment:
-    PATH: "{{ home_path }}/.asdf/bin:{{ ansible_env.PATH }}"
-  shell:
-    cmd: asdf plugin-add rust
-    creates: ~/.asdf/plugins/rust

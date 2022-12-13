@@ -21,7 +21,7 @@
 - name: link zsh, starship and bash config
   shell:
     chdir: "{{ repo_path }}/files"
-    cmd: stow --target="$HOME" {{ item }}
+    cmd: stow --target="$XDG_CONFIG_HOME"{{ item }}
   with_items:
     - zsh
     - starship
