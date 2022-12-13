@@ -30,19 +30,3 @@
     cmd: stow --target="$XDG_CONFIG_HOME"{{ item }}
   with_items:
     - nix
-
-- name: build and activate home flake
-  shell:
-    chdir: "{{ repo_path }}"
-    # interactive is required, as nix paths are added in zshrc and bashrc, and those are sourced only for interactive shells
-    cmd: /bin/bash -i -c "nix build '.#homeConfigurations.{{ target_user }}@{{ ansible_hostname }}.activationPackage' && ./result/activate"
-  when:
-    - ansible_system == "Linux"
-
-- name: build and activate nix-darwin flake
-  shell:
-    chdir: "{{ repo_path }}"
-    # interactive is required, as nix paths are added in zshrc and bashrc, and those are sourced only for interactive shells
-    cmd: /bin/bash -i -c "nix build .#darwinConfigurations.{{ target_user }}@{{ ansible_hostname }}.system && ./result/sw/bin/darwin-rebuild switch --flake ."
-  when:
-    - ansible_system == "Darwin"
