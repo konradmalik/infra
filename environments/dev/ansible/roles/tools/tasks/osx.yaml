@@ -48,11 +48,6 @@
       - shfmt
     update_homebrew: yes
 
-- name: install brew casks
-  community.general.homebrew_cask:
-    name:
-      - ngrok
-
 - name: install ripgrep-all and deps
   community.general.homebrew:
     name:

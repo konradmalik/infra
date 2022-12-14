@@ -68,6 +68,6 @@
 - name: link k9s dot files
   shell:
     chdir: "{{ repo_path }}/files"
-    cmd: stow --target="$XDG_CONFIG_HOME"{{ item }}
+    cmd: stow --target="{{ home_path }}/.config/" {{ item }}
   with_items:
     - k9s

@@ -55,12 +55,6 @@
     name:
       - procs
 
-- name: install ngrok from snap (edge)
-  become: true
-  community.general.snap:
-    name: ngrok
-    channel: latest/edge
-
 - name: Install pipx from pip
   pip:
     name: pipx
