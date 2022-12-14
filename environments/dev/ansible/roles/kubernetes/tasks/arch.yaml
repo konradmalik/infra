@@ -1,7 +1,0 @@
-- name: install kubernetes packages from aur
-  become: true
-  become_user: aur_builder
-  kewlfft.aur.aur:
-    use: yay
-    name:
-      - k9s

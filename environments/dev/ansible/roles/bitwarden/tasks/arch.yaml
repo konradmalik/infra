@@ -1,7 +1,0 @@
-- name: install bitwarden-cli
-  become: true
-  become_user: aur_builder
-  kewlfft.aur.aur:
-    use: yay
-    name:
-      - bitwarden-cli

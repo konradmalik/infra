@@ -18,5 +18,7 @@
   kewlfft.aur.aur:
     use: yay
     name:
+      - curl
+      - wget
       - python-pip
       - cmake

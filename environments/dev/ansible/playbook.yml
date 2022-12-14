@@ -15,53 +15,24 @@
     - system
     - role: unattended_upgrades
       when: not is_docker
-    # languages earliest possible (needed later)
-    - python
-    - go
     - rust
     #
-    - tools
     - role: repository
       tags: repository
-    - dotfiles
     - role: nix
       when:
         - not is_docker # it requires systemd
-    - charm
-    - git
-    - role: bitwarden
-      when: private_machine
     - ssh-egress
     - role: ssh-ingress
       when:
         - enable_ssh
         - ansible_system == "Linux"
-    - tmux
-    - neovim
-    - ranger
     - shell
-    - asdf
-    - broot
     # macos should go through app store
     - role: tailscale
       when: ansible_system == "Linux"
     - role: docker
       when: not is_docker
-    # deprecate docker once comfortable with podman
-    - role: podman
-      when: not is_docker
-    - role: kubernetes
-      when: not is_docker
-    - role: ansible
-      when: private_machine
-    - role: cloud
-      when:
-        - private_machine
-        - not is_docker
-    - role: fonts
-      when:
-        - gui_apps
-        - not is_docker
     - role: alacritty
       when:
         - gui_apps

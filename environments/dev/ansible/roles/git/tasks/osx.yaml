@@ -1,9 +1,0 @@
-- name: install git tools
-  community.general.homebrew:
-    name:
-      - git-delta
-      - git-extras
-      - git-crypt
-      - git-lfs
-      - glab
-    update_homebrew: yes

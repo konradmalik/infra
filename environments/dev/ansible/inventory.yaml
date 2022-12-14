@@ -21,18 +21,6 @@ all:
     # if true, will autoreboot at 2 am after automatic updates
     enable_auto_reboot: false
     # versions used mostly by ubuntu tasks that install stuff from github directly
-    git_versions:
-      asdf: 0.10.2
-      dive: 0.10.0
-      dsq: 0.22.0
-      duf: 0.8.1
-      k9s: 0.26.3
-      nerdctl: 0.22.2
-      nvim: 0.8.1
-      shfmt: 3.5.1
-      tee: 0.13.0
-      tinygo: 0.25.0
-      viddy: 0.3.6
     # Mappings from Ansible reported architecture to distro release architecture
     arch_map:
       x86_64: amd64

@@ -1,4 +1,0 @@
-- name: install bitwarden-cli
-  community.general.homebrew_cask:
-    name:
-      - bitwarden-cli

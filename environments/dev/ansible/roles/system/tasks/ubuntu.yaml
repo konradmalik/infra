@@ -12,11 +12,13 @@
   apt:
     name:
       - curl
+      - wget
       - gpg-agent
       - git
       - unzip
       - pip
       - cmake
+      - python-is-python3
     state: latest
     update_cache: yes
     autoclean: yes

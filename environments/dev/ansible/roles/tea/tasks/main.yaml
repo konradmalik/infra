@@ -1,8 +1,0 @@
-- name: install tea from github
-  become: true
-  shell:
-    chdir: /tmp
-    cmd: |
-      curl -L https://github.com/teaxyz/cli/releases/download/v{{ git_versions.tea }}/tea-{{ git_versions.tea }}+{{ ansible_system | lower }}+{{ ansible_architecture | replace('-','_') }}.tar.xz | tar xvfz - \
-      && install tea /usr/local/bin/
-    creates: /usr/local/bin/tea

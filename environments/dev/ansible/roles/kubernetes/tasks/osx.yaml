@@ -1,6 +1,0 @@
-# kubectl installed with docker
-- name: install kubernetes brew packages
-  community.general.homebrew:
-    name:
-      - k9s
-    update_homebrew: yes

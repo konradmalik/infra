@@ -1,9 +1,0 @@
-- name: install python compile-dependendies
-  community.general.homebrew:
-    name:
-      - openssl
-      - readline
-      - sqlite3
-      - xz
-      - zlib
-    update_homebrew: yes

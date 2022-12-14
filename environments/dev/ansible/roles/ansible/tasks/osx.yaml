@@ -1,6 +1,0 @@
-- name: install 'ansible' and tools from brew
-  community.general.homebrew:
-    name:
-      - ansible
-      - ansible-lint
-    update_homebrew: yes

@@ -1,6 +1,0 @@
-- name: install cloud brew packages
-  community.general.homebrew:
-    name:
-      - azure-cli
-      - awscli
-    update_homebrew: yes

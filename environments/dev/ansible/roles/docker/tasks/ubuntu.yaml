@@ -23,24 +23,6 @@
       - docker-compose-plugin
     state: present
 
-- name: install dive from github
-  become: true
-  shell:
-    chdir: /tmp
-    cmd: |
-      curl -o dive.deb -L https://github.com/wagoodman/dive/releases/download/v{{ git_versions.dive }}/dive_{{ git_versions.dive }}_linux_{{ arch_map[ansible_architecture] }}.deb
-      dpkg -i dive.deb
-      rm -rf dive.deb
-    creates: /usr/local/bin/dive
-  when: ansible_architecture == "x86_64"
-
-- name: install edge snap packages (amd64 only)
-  become: true
-  community.general.snap:
-    name: docker-credential-pass
-    channel: latest/edge
-  when: ansible_architecture == "x86_64"
-
 - name: install nerdctl from github
   become: true
   shell:
