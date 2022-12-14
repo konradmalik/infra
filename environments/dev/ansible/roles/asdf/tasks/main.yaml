@@ -5,13 +5,6 @@
       git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v{{ git_versions.asdf }} --depth 1
     creates: ~/.asdf
 
-- name: link asdf and direnv config
-  shell:
-    chdir: "{{ repo_path }}/files"
-    cmd: stow --target="{{ home_path }}/.config/" {{ item }}
-  with_items:
-    - direnv
-
 - block:
     - name: Check that the completion file exists
       stat:

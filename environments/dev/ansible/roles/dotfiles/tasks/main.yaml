@@ -1,8 +1,4 @@
-- name: create config dir (so that it is not linked)
-  file:
-    path: ~/.config
-    state: directory
-
+# we just link all dotfiles here whether we install them later or not, for convenience
 - name: link general dot files
   shell:
     chdir: "{{ repo_path }}/files"
@@ -10,12 +6,84 @@
   with_items:
     - inputrc
     - gdb
+    - xinitrc
+    - Xresources
 
-- name: link no folding general dot files
+- name: create earthly dir
+  file:
+    path: ~/.earthly
+    state: directory
+
+- name: link earthly files
   shell:
     chdir: "{{ repo_path }}/files"
-    cmd: stow --target="$HOME" --no-folding {{ item }}
+    cmd: stow --target="$HOME"/.earthly {{ item }}
   with_items:
-    - gpg
+    - earthly
+
+- name: link starship files
+  shell:
+    chdir: "{{ repo_path }}/files"
+    cmd: stow --target="$HOME"/.config {{ item }}
+  with_items:
+    - starship
+
+- name: create config dirs
+  file:
+    path: ~/.config
+    state: directory
+  with_items:
+    - alacritty
+    - broot
+    - direnv
+    - feh
+    - git
+    - glow
+    - i3
+    - i3status
+    - k9s
+    - neovim
+    - nix
+    - nixpkgs
+    - picom
+    - ranger
+    - rofi
+    - tmux
+    - zsh
+
+- name: link config dirs
+  shell:
+    chdir: "{{ repo_path }}/files"
+    cmd: stow --target="$HOME"/.config/{{ item }} {{ item }}
+  with_items:
+    - alacritty
+    - broot
+    - direnv
+    - feh
+    - git
+    - glow
+    - i3
+    - i3status
+    - k9s
+    - neovim
+    - nix
+    - nixpkgs
+    - picom
+    - ranger
+    - rofi
+    - tmux
+    - zsh
+
+# link our binaries
+- name: create bin dir
+  file:
+    path: ~/.local/bin
+    state: directory
+
+- name: link bin folder
+  shell:
+    chdir: "{{ repo_path }}/files"
+    cmd: stow --target="$HOME"/.local/bin {{ item }}
+  with_items:
     - bin
 

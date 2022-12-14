@@ -50,9 +50,6 @@
     # deprecate docker once comfortable with podman
     - role: podman
       when: not is_docker
-    # earthly requires docker
-    - role: earthly
-      when: not is_docker
     - role: kubernetes
       when: not is_docker
     - role: ansible
@@ -75,11 +72,6 @@
         - gui_apps
         - not is_docker
         - ansible_system == "Linux"
-    - role: vscode
-      when:
-        - gui_apps
-        - not is_docker
-        - ansible_architecture == "x86_64"
     # a backup solution
     - role: restic
       when:

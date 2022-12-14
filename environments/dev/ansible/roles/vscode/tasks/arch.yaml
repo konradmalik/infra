@@ -1,7 +1,0 @@
-- name: install yay packages
-  become: true
-  become_user: aur_builder
-  kewlfft.aur.aur:
-    use: yay
-    name:
-      - visual-studio-code-bin
