@@ -19,7 +19,6 @@
       - pip
       - cmake
       - python-is-python3
-      - stow
     state: latest
     update_cache: yes
     autoclean: yes

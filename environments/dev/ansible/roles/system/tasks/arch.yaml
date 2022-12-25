@@ -22,4 +22,3 @@
       - wget
       - python-pip
       - cmake
-      - stow

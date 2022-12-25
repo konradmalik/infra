@@ -22,7 +22,6 @@
     - role: nix
       when:
         - not is_docker # it requires systemd
-    - ssh-egress
     - role: ssh-ingress
       when:
         - enable_ssh

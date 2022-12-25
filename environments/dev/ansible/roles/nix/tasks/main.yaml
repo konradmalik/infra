@@ -1,19 +1,3 @@
-- name: create config dirs
-  file:
-    path: ~/.config
-    state: directory
-  with_items:
-    - nix
-    - nixpkgs
-
-- name: link config dirs
-  shell:
-    chdir: "{{ repo_path }}/files"
-    cmd: stow --target="$HOME"/.config/{{ item }} {{ item }}
-  with_items:
-    - nix
-    - nixpkgs
-
 - name: install nix from script
   become: true
   args:
