@@ -21,6 +21,8 @@ all:
     # if true, will autoreboot at 2 am after automatic updates
     enable_auto_reboot: false
     # versions used mostly by ubuntu tasks that install stuff from github directly
+    git_versions:
+      nerdctl: 0.22.2
     # Mappings from Ansible reported architecture to distro release architecture
     arch_map:
       x86_64: amd64
