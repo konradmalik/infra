@@ -17,7 +17,6 @@ cd "$(dirname "$0")"
 
 ansible-playbook \
 	-i inventory.yaml \
-	-i ../../../private/environments/dev/ansible/inventory.yaml \
 	./playbook.yml \
 	--extra-vars "variable_host=$TARGET_HOSTS" \
 	--ask-become-pass

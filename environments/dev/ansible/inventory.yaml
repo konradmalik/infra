@@ -74,3 +74,32 @@ docker:
     enable_ssh: false
     gui_apps: false
     private_machine: false
+
+remote:
+  children:
+    edge:
+      children:
+        rpis:
+          hosts:
+            rpi4-1:
+            rpi4-2:
+          vars:
+            is_docker: false
+            enable_auto_reboot: true
+            enable_ssh: true
+            gui_apps: false
+            private_machine: false
+        laptops:
+          hosts:
+            vaio:
+            xps12:
+            m3800:
+              enable_auto_reboot: false
+              gui_apps: true
+              private_machine: true
+          vars:
+            is_docker: false
+            enable_auto_reboot: true
+            enable_ssh: true
+            gui_apps: false
+            private_machine: false
