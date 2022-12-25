@@ -1,4 +1,0 @@
-- name: enable sshd on mac
-  become: true
-  shell:
-    cmd: systemsetup -setremotelogin on

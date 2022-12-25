@@ -1,4 +1,0 @@
-- name: install lima
-  community.general.homebrew_cask:
-    name:
-      - lima
