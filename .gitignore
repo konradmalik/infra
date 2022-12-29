@@ -24,3 +24,5 @@ zfunc
 !/.envrc
 **/.terraform
 **/terraform.tfstate*
+
+.direnv
