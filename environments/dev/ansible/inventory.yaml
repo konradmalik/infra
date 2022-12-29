@@ -8,7 +8,7 @@ all:
     enable_ssh: true
     home_path: "/home/{{ target_user }}"
     # path to dotfiles repository on a host (I assume all hosts are linux machines)
-    repo_path: "{{ home_path }}/Code/dotfiles"
+    repo_path: "{{ home_path }}/Code/github.com/konradmalik/dotfiles"
     # zsh files dir (same as in zshenv)
     zdotdir: "~/.config/zsh"
     # if true - assumes installation in a docker-container
@@ -16,8 +16,6 @@ all:
     is_docker: false
     # if enabled - some gui only apps will be installed as well
     gui_apps: false
-    # if enabled, ssh config will be linked (outbound ssh)
-    private_machine: false
     # if true, will autoreboot at 2 am after automatic updates
     enable_auto_reboot: false
     # versions used mostly by ubuntu tasks that install stuff from github directly
@@ -41,7 +39,6 @@ lima:
     enable_ssh: false
     gui_apps: false
     home_path: "/home/{{ target_user }}.linux"
-    private_machine: true
 
 cicd:
   hosts:
@@ -53,7 +50,6 @@ cicd:
     enable_ssh: false
     gui_apps: false
     home_path: "/home/{{ target_user }}.linux"
-    private_machine: false
 
 local:
   hosts:
@@ -64,7 +60,6 @@ local:
     enable_auto_reboot: false
     enable_ssh: false
     gui_apps: false
-    private_machine: true
 
 docker:
   hosts:
@@ -75,7 +70,6 @@ docker:
     enable_auto_reboot: false
     enable_ssh: false
     gui_apps: false
-    private_machine: false
 
 remote:
   children:
@@ -90,7 +84,6 @@ remote:
             enable_auto_reboot: true
             enable_ssh: true
             gui_apps: false
-            private_machine: false
         laptops:
           hosts:
             vaio:
@@ -98,10 +91,8 @@ remote:
             m3800:
               enable_auto_reboot: false
               gui_apps: true
-              private_machine: true
           vars:
             is_docker: false
             enable_auto_reboot: true
             enable_ssh: true
             gui_apps: false
-            private_machine: false

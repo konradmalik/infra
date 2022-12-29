@@ -1,35 +1,20 @@
 - name: make sure 'Code' exists and belongs to "{{ target_user }}"
   become: true
   ansible.builtin.file:
-    path: "{{ home_path }}/Code"
+    path: "{{ home_path }}/Code/github.com/konradmalik"
     state: directory
     mode: "0755"
     recurse: no
     owner: "{{ target_user }}"
     group: "{{ target_user }}"
 
-- name: Ensure dotfiles repo exists (public)
+- name: Ensure dotfiles repo exists
   become: false
   ansible.builtin.git:
     repo: https://github.com/konradmalik/dotfiles.git
-    dest: "{{ home_path }}/Code/dotfiles"
+    dest: "{{ repo_path }}"
     version: main
     recursive: false
     clone: true
     force: true
     update: true
-  when: not private_machine
-
-- name: Ensure dotfiles repo exists (private)
-  become: false
-  ansible.builtin.git:
-    repo: git@github.com:konradmalik/dotfiles.git
-    dest: "{{ home_path }}/Code/dotfiles"
-    version: main
-    recursive: true
-    clone: true
-    force: true
-    update: true
-    accept_newhostkey: true
-    #key_file: "{{ home_path }}/.ssh/private"
-  when: private_machine

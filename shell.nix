@@ -6,6 +6,7 @@ in
 { pkgs ? lockedNixpkgs }:
 with pkgs;
 mkShell {
+  name = "infra-shell";
   nativeBuildInputs = [
     nil
     nixpkgs-fmt
