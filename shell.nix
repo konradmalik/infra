@@ -13,5 +13,6 @@ mkShell {
     ansible
     ansible-lint
     yaml-language-server
+    earthly
   ];
 }
