@@ -28,6 +28,7 @@ pkgs.mkShell {
     nixpkgs-fmt
     ansible-lint
     yaml-language-server
+    terraform-ls
 
     bitwarden-cli
     jq
