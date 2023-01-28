@@ -3,10 +3,3 @@
 
 - import_tasks: arch.yaml
   when: ansible_distribution == "Archlinux"
-
-- name: change shell to zsh for "{{ target_user }}"
-  become: true
-  user:
-    name: "{{ target_user }}"
-    shell: /bin/zsh
-  when: ansible_system == "Linux"

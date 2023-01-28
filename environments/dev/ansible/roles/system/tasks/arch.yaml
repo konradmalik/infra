@@ -19,6 +19,6 @@
     use: yay
     name:
       - curl
+      - rust
       - wget
-      - python-pip
       - cmake

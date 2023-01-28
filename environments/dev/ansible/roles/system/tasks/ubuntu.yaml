@@ -12,11 +12,11 @@
   apt:
     name:
       - curl
+      - rustc
+      - cargo
       - wget
-      - gpg-agent
       - git
       - unzip
-      - pip
       - cmake
       - python-is-python3
     state: latest

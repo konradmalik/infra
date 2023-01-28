@@ -5,14 +5,14 @@ resource "aws_s3_bucket" "default" {
   tags   = var.custom_tags != null ? merge(var.custom_tags, local.shared_tags) : merge(local.shared_tags)
 }
 
-resource "aws_s3_bucket_versioning" "versioning_example" {
+resource "aws_s3_bucket_versioning" "default" {
   bucket = aws_s3_bucket.default[0].id
   versioning_configuration {
     status = var.versioning
   }
 }
 
-resource "aws_s3_bucket_server_side_encryption_configuration" "example" {
+resource "aws_s3_bucket_server_side_encryption_configuration" "default" {
   bucket = aws_s3_bucket.default[0].bucket
 
   rule {

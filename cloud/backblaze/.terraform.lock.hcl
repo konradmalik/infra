@@ -2,12 +2,13 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.terraform.io/backblaze/b2" {
-  version = "0.7.1"
+  version     = "0.8.1"
+  constraints = "0.8.1"
   hashes = [
-    "h1:9Cf5x0xGsMDpyRbfh/MlncAgB0Q/DBF8Qw+apwsgIkE=",
-    "zh:00badd19f80f5d8793cd2ae73692c433b69f50789ec37099cb59982743991c9e",
-    "zh:2f46aa72bc6292d6a7beaad16f402be72504cd9312c63a3f07ca00a8c47de6e6",
-    "zh:83c44de8e9afb9231e1b42588a593b4aa4e14660a9462c2464a06ae55c1340d7",
-    "zh:9f8f319cd7ae854dc0beb4590ca0a346aeb88f9d2244655524fa512dba48b1b1",
+    "h1:zKK1+ZQR1rHHy6Iy8sBVZW8B9x/kh0CPxZEVkBkwPDA=",
+    "zh:2f4ffb6cbc1bdae18a71a9b9b2b3563c2109a31b409077bf32e0bdc5c1980605",
+    "zh:87395bf0c2951770b9a764b55ccf2ac630d064219c09d6b4fad8ab0c81d6bbe9",
+    "zh:c2cf5f8f349f6484ab19d3b43d9952d299ef6128a9c0b0c81c3d87c0a9bbbd97",
+    "zh:f080728e857503e2dbda3f56f2b3154aae99ef0f0ef9d81163018e59c1313e1b",
   ]
 }

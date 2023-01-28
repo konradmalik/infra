@@ -1,14 +1,15 @@
 terraform {
-  required_version = ">= 1.0.0"
+  required_version = ">= 1.3.6"
   required_providers {
     b2 = {
-      source = "Backblaze/b2"
+      source  = "Backblaze/b2"
+      version = "0.8.1"
     }
   }
 
   backend "s3" {
     bucket = "konradmalik-infra"
-    key    = "private/backblaze"
+    key    = "terraform-state/backblaze"
     region = "eu-central-1"
   }
 }

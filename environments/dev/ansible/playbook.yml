@@ -14,10 +14,7 @@
     - system
     - role: unattended_upgrades
       when: not is_docker
-    - rust
-    #
     - role: repository
-      tags: repository
     - role: nix
       when:
         - not is_docker # it requires systemd
@@ -35,12 +32,6 @@
       when:
         - gui_apps
         - not is_docker
-    - role: window_manager
-      tags: window_manager
-      when:
-        - gui_apps
-        - not is_docker
-        - ansible_system == "Linux"
     # KEEP THIS AT THE VERY END
     - role: aur_builder-cleanup
       when: ansible_distribution == "Archlinux"

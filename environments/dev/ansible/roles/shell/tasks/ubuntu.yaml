@@ -3,27 +3,7 @@
   apt:
     name:
       - zsh
-      - zsh-autosuggestions
-      - zsh-syntax-highlighting
-      - fzf
     state: latest
     update_cache: yes
     autoclean: yes
     autoremove: yes
-
-- name: install zsh-completions from github
-  become: true
-  shell:
-    chdir: /usr/local/share/zsh/
-    cmd: |
-      mkdir -p plugins
-      cd plugins
-      git clone --depth 1 https://github.com/zsh-users/zsh-completions.git
-    creates: /usr/local/share/zsh/plugins/zsh-completions
-
-- name: install 'starship' from cargo
-  environment:
-    PATH: "{{ home_path }}/.cargo/bin:{{ ansible_env.PATH }}"
-  shell:
-    cmd: cargo install --locked starship
-    creates: "~/.cargo/bin/starship"

@@ -1,13 +1,8 @@
 # https://github.com/kewlfft/ansible-aur
-- name: install zsh, plugins and starship using yay
+- name: install zsh
   become: true
   become_user: aur_builder
   kewlfft.aur.aur:
     use: yay
     name:
       - zsh
-      - zsh-autosuggestions
-      - zsh-syntax-highlighting
-      - zsh-completions
-      - fzf
-      - starship
