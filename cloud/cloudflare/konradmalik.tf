@@ -19,3 +19,13 @@ resource "cloudflare_zone_settings_override" "konradmalik-settings" {
     development_mode = "on"
   }
 }
+
+resource "cloudflare_page_rule" "https" {
+  zone_id  = cloudflare_zone.konradmalik.id
+  target   = "konradmalik.com/*"
+  priority = 1
+
+  actions {
+    always_use_https = true
+  }
+}
