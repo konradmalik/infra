@@ -15,6 +15,7 @@
       in
       {
         devShells.default = pkgs.callPackage ./shell.nix { };
+        formatter = pkgs.nixpkgs-fmt;
       }
     );
 }

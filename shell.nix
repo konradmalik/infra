@@ -28,20 +28,21 @@ let
 in
 pkgs.mkShell {
   name = "infra-shell";
-  nativeBuildInputs = with pkgs;[
-    nil
+  packages = with pkgs;[
+    # linters, formatters
     nixpkgs-fmt
     ansible-lint
+    # lanuage servers
+    nil
     yaml-language-server
     terraform-ls
-
-    bitwarden-cli
+    # useful tools
     jq
-
+    #
     ansible
-
-    terraform
-
+    awscli2
+    bitwarden-cli
     earthly
+    terraform
   ];
 }
