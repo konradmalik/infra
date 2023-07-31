@@ -3,7 +3,7 @@ terraform {
   required_providers {
     b2 = {
       source  = "Backblaze/b2"
-      version = "0.8.1"
+      version = "0.8.4"
     }
   }
 
@@ -17,8 +17,8 @@ terraform {
 provider "b2" {
 }
 
-resource "b2_bucket" "devarch" {
-  bucket_name = "devarch"
+resource "b2_bucket" "backups" {
+  bucket_name = "backups-km"
   bucket_type = "allPrivate"
 
   file_lock_configuration {
@@ -36,20 +36,16 @@ resource "b2_bucket" "devarch" {
   }
 }
 
-resource "b2_application_key" "devarch_key" {
-  key_name  = "devarch-key"
-  bucket_id = b2_bucket.devarch.id
+resource "b2_application_key" "backups_key" {
+  key_name  = "backups-key"
+  bucket_id = b2_bucket.backups.id
   capabilities = ["deleteFiles", "listAllBucketNames",
     "listBuckets", "listFiles", "readBucketEncryption",
     "readBuckets", "readFiles", "shareFiles",
   "writeBucketEncryption", "writeFiles"]
 }
 
-data "b2_application_key" "devarch_key" {
-  key_name = b2_application_key.devarch_key.key_name
-}
-
 output "application_key" {
-  value     = b2_application_key.devarch_key
+  value     = b2_application_key.backups_key
   sensitive = true
 }
