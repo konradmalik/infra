@@ -1,9 +1,5 @@
 require("konrad.lsp").setup({
     "ansiblels",
-    efm = {
-        'nixpkgs_fmt',
-        'terraform_fmt'
-    },
     -- "gopls",
     "jsonls",
     -- "lua_ls",
@@ -14,10 +10,3 @@ require("konrad.lsp").setup({
     "terraformls",
     "yamlls",
 })
-
--- require("konrad.dap").setup({
---     "cs",
---     "go",
---     "python",
--- })
-

@@ -42,12 +42,7 @@
               name = "infra-shell";
               packages = with pkgs;[
                 # linters, formatters
-                nixpkgs-fmt
                 ansible-lint
-                # lanuage servers
-                nil
-                yaml-language-server
-                terraform-ls
                 # useful tools
                 jq
                 #
