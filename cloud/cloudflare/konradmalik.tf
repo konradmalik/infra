@@ -1,5 +1,6 @@
 resource "cloudflare_zone" "konradmalik" {
-  zone = "konradmalik.com"
+  zone       = "konradmalik.com"
+  account_id = "60a45beba2022b800a909a71b63cb5c5"
 }
 
 resource "cloudflare_record" "root" {
@@ -14,9 +15,8 @@ resource "cloudflare_zone_settings_override" "konradmalik-settings" {
   zone_id = cloudflare_zone.konradmalik.id
 
   settings {
-    tls_1_3          = "on"
-    ssl              = "strict"
-    development_mode = "on"
+    tls_1_3 = "on"
+    ssl     = "strict"
   }
 }
 
