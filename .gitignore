@@ -1,28 +1,7 @@
-*.log
-.DS_store
-#nvim
-.netrwhist
-**/packer_compiled.vim
-#nix
 result
-#vscode
-.config/Code/*
-!.config/Code/User/
-globalStorage
-workspaceStorage
-vscode/User/sync
-**/.vagrant
-**/.vscode
-**/.metals
-#zsh
-.zcompdump
-.zsh_sessions
-.zcompcache
-zfunc
+.direnv
 
-.envrc
-!/.envrc
 **/.terraform
 **/terraform.tfstate*
 
-.direnv
+.env
