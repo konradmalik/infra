@@ -29,14 +29,9 @@
               {
                 name = "infra";
                 packages = with pkgs;[
-                  # linters, formatters
                   ansible-lint
-                  # useful tools
-                  jq
-                  #
                   ansible
                   awscli2
-                  bitwarden-cli
                   earthly
                   terraform
                 ];
