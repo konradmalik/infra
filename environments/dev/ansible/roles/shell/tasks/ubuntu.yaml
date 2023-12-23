@@ -1,9 +1,0 @@
-- name: install zsh, plugins
-  become: true
-  apt:
-    name:
-      - zsh
-    state: latest
-    update_cache: yes
-    autoclean: yes
-    autoremove: yes

@@ -1,9 +1,0 @@
-- name: install openssh-server
-  become: true
-  apt:
-    name:
-      - openssh-server
-    state: latest
-    update_cache: yes
-    autoclean: yes
-    autoremove: yes

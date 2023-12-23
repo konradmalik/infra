@@ -21,22 +21,16 @@
             }));
     in
     {
-      devShells = forAllSystems
-        (pkgs:
-          with pkgs;
+      devShells = forAllSystems (pkgs: {
+        default = pkgs.mkShell
           {
-            default = pkgs.mkShell
-              {
-                name = "infra";
-                packages = with pkgs;[
-                  ansible-lint
-                  ansible
-                  awscli2
-                  earthly
-                  terraform
-                ];
-              };
-          });
+            name = "infra";
+            packages = with pkgs;[
+              awscli2
+              terraform
+            ];
+          };
+      });
 
       formatter = forAllSystems (pkgs: pkgs.nixpkgs-fmt);
     };

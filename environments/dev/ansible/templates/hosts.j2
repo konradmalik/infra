@@ -1,7 +1,0 @@
-{% for item in groups['all'] %}
-{%- if item != 'localhost' %}
-{%- if hostvars[item].ansible_all_ipv4_addresses is defined %}
-{{ hostvars[item].ansible_all_ipv4_addresses | join(" ") }}      {{ item }}.local      {{ item }}
-{% endif %}
-{% endif %}
-{% endfor %}

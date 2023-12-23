@@ -1,7 +1,0 @@
-- name: install openssh
-  become: true
-  become_user: aur_builder
-  kewlfft.aur.aur:
-    use: yay
-    name:
-      - openssh
