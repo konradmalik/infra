@@ -7,7 +7,7 @@ resource "cloudflare_record" "root" {
   zone_id = cloudflare_zone.konradmalik.id
   name    = "@"
   type    = "CNAME"
-  value   = "konradmalik.github.io"
+  content = "konradmalik.github.io"
   proxied = true
 }
 
