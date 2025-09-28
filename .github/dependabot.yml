@@ -4,3 +4,15 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+  - package-ecosystem: "terraform"
+    directory: "/cloud/aws"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "terraform"
+    directory: "/cloud/backblaze"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "terraform"
+    directory: "/cloud/cloudflare"
+    schedule:
+      interval: "weekly"
