@@ -1,23 +1,29 @@
 resource "cloudflare_zone" "konradmalik" {
-  zone       = "konradmalik.com"
-  account_id = "60a45beba2022b800a909a71b63cb5c5"
+  account = {
+    id = "60a45beba2022b800a909a71b63cb5c5"
+  }
+  name = "konradmalik.com"
 }
 
-resource "cloudflare_record" "root" {
+resource "cloudflare_dns_record" "root" {
   zone_id = cloudflare_zone.konradmalik.id
   name    = "@"
   type    = "CNAME"
   content = "konradmalik.github.io"
+  ttl     = 1 # 1 means automatic
   proxied = true
 }
 
-resource "cloudflare_zone_settings_override" "konradmalik-settings" {
-  zone_id = cloudflare_zone.konradmalik.id
+resource "cloudflare_zone_setting" "konradmalik-tls" {
+  zone_id    = cloudflare_zone.konradmalik.id
+  setting_id = "tls_1_3"
+  value      = "on"
+}
 
-  settings {
-    tls_1_3 = "on"
-    ssl     = "strict"
-  }
+resource "cloudflare_zone_setting" "konradmalik-ssl" {
+  zone_id    = cloudflare_zone.konradmalik.id
+  setting_id = "ssl"
+  value      = "strict"
 }
 
 resource "cloudflare_page_rule" "https" {
@@ -25,7 +31,7 @@ resource "cloudflare_page_rule" "https" {
   target   = "konradmalik.com/*"
   priority = 1
 
-  actions {
+  actions = {
     always_use_https = true
   }
 }
