@@ -5,3 +5,8 @@
 ## Cloud
 
 Just my personal terrafrom.
+
+## Requirements
+
+- aws cli
+    - remember to run `aws login` and `aws configure`
