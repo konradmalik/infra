@@ -4,15 +4,30 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+
   - package-ecosystem: "terraform"
     directory: "/cloud/aws"
     schedule:
       interval: "weekly"
+
   - package-ecosystem: "terraform"
     directory: "/cloud/backblaze"
     schedule:
       interval: "weekly"
+
   - package-ecosystem: "terraform"
     directory: "/cloud/cloudflare"
     schedule:
       interval: "weekly"
+
+  - package-ecosystem: "nix"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "friday"
+      time: "04:00"
+      timezone: "Europe/Warsaw"
+    groups:
+      all:
+        patterns:
+          - "*"
