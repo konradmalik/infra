@@ -4,21 +4,29 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    assignees:
+      - "konradmalik"
 
   - package-ecosystem: "terraform"
     directory: "/cloud/aws"
     schedule:
       interval: "weekly"
+    assignees:
+      - "konradmalik"
 
   - package-ecosystem: "terraform"
     directory: "/cloud/backblaze"
     schedule:
       interval: "weekly"
+    assignees:
+      - "konradmalik"
 
   - package-ecosystem: "terraform"
     directory: "/cloud/cloudflare"
     schedule:
       interval: "weekly"
+    assignees:
+      - "konradmalik"
 
   - package-ecosystem: "nix"
     directory: "/"
@@ -31,3 +39,5 @@ updates:
       flake:
         patterns:
           - "*"
+    assignees:
+      - "konradmalik"
