@@ -46,6 +46,6 @@ resource "b2_application_key" "backups_key" {
 }
 
 output "application_key" {
-  value     = b2_application_key.backups_key
+  value     = b2_application_key.backups_key.application_key
   sensitive = true
 }
