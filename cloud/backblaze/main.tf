@@ -39,10 +39,18 @@ resource "b2_bucket" "backups" {
 resource "b2_application_key" "backups_key" {
   key_name   = "backups-key"
   bucket_ids = [b2_bucket.backups.id]
-  capabilities = ["deleteFiles", "listAllBucketNames",
-    "listBuckets", "listFiles", "readBucketEncryption",
-    "readBuckets", "readFiles", "shareFiles",
-  "writeBucketEncryption", "writeFiles"]
+  capabilities = [
+    "deleteFiles",
+    "listAllBucketNames",
+    "listBuckets",
+    "listFiles",
+    "readBucketEncryption",
+    "readBuckets",
+    "readFiles",
+    "shareFiles",
+    "writeBucketEncryption",
+    "writeFiles",
+  ]
 }
 
 output "application_key" {
