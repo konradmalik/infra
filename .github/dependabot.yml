@@ -4,27 +4,20 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      actions:
+        patterns: ["*"]
     assignees:
       - "konradmalik"
 
   - package-ecosystem: "terraform"
-    directory: "/cloud/aws"
+    directories:
+      - "/cloud/*"
     schedule:
       interval: "weekly"
-    assignees:
-      - "konradmalik"
-
-  - package-ecosystem: "terraform"
-    directory: "/cloud/backblaze"
-    schedule:
-      interval: "weekly"
-    assignees:
-      - "konradmalik"
-
-  - package-ecosystem: "terraform"
-    directory: "/cloud/cloudflare"
-    schedule:
-      interval: "weekly"
+    groups:
+      terraform:
+        patterns: ["*"]
     assignees:
       - "konradmalik"
 
@@ -37,7 +30,6 @@ updates:
       timezone: "Europe/Warsaw"
     groups:
       flake:
-        patterns:
-          - "*"
+        patterns: ["*"]
     assignees:
       - "konradmalik"

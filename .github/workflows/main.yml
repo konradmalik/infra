@@ -19,3 +19,19 @@ jobs:
       - name: Shell build linux
         run: |
           nix build .#devShells.x86_64-linux.default
+
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: cachix/install-nix-action@v31
+
+      - name: Terraform fmt
+        run: nix develop --command terraform fmt -check -recursive cloud
+
+      - name: Terraform validate
+        run: |
+          for d in cloud/*/; do
+            nix develop --command terraform -chdir="$d" init -backend=false -input=false
+            nix develop --command terraform -chdir="$d" validate
+          done

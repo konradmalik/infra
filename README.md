@@ -4,7 +4,7 @@
 
 ## Cloud
 
-Just my personal terrafrom.
+Just my personal terraform.
 
 ## Requirements
 
